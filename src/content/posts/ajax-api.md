@@ -1,6 +1,6 @@
 ---
 title: Ajax 基础知识
-date: 2018-04-23 21:38:29
+pubDate: 2018-04-23 21:38:29
 tags:
     - javascript
     - ajax

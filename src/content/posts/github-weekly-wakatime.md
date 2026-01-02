@@ -1,6 +1,6 @@
 ---
 title: Github-Weekly-WakaTime
-date: 2020-05-14 23:18:12
+pubDate: 2020-05-14 23:18:12
 tags:
     - gist
     - wakatime
@@ -78,7 +78,7 @@ jobs:
 自定义输出格式，与调试<br>
 调试前记得 ``npm install``<br>
 打开``./index.js`` 文件
-```JavaScript
+```javascript
 // line - 5 为方便调试用，不可提交入
 const {
   GIST_ID: gistId = 'Gist-url-key',

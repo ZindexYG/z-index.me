@@ -1,6 +1,6 @@
 ---
 title: Hexo DIY 有感
-date: 2020-05-09 11:14:15
+pubDate: 2020-05-09 11:14:15
 tags:
   - 随记
   - Hexo
@@ -69,13 +69,14 @@ theme 的文件结构，观察其他主题也差不多是这样，可自行新�
 
 ``paginator`` 在 `V3.x` 与 `V4.x` 的区别 会导致 ``hexo server`` 启动不成功
 
-```Javascript
+```javascript
 paginator({
   prev_text: '<div class="paginator-item"><i class="fa fa-angle-left"></i></div>',
   next_text: '<div class="paginator-item"><i class="fa fa-angle-right"></i></div>',
   escape:false // V4 新增, 默认 true ，不渲染 html 标记
 })
 ```
+
 2. 大佬也忙，`layout` 上存在 `fixed` 问题
 
 修改 ``/theme/layout/layout.ejs`` 路径下
@@ -119,6 +120,7 @@ PS：该问题在 文章数量大于或等于 8 的时候，不会出现，仅�
 <% } %>
 
 ```
+
 6. 友链页面无法展示
 
 原因，友链为使用 hexo 新建页面，友情链接内容为资源页面内容
@@ -128,6 +130,7 @@ PS：该问题在 文章数量大于或等于 8 的时候，不会出现，仅�
 - 新建 ``links/index`` (可使用 `` hexo new page --path about/me "About me" ``)
 
 ``_data/links.yml``
+
 ```yml
 XXX:
   link: https://xx.com/     # 地址
@@ -135,7 +138,8 @@ XXX:
 ```
 
 ``links/index``
-```Markdown
+
+```markdown
 ---
 layout: links
 title: links
@@ -143,7 +147,6 @@ date: 2018-05-06 08:08:12
 tags:
 ---
 ```
-
 
 ### 总结
 

@@ -1,6 +1,6 @@
 ---
 title: GitHub Actions 自动化 Node.js 程序
-date: 2020-10-25 17:27:37
+pubDate: 2020-10-25 17:27:37
 tags:
   - GitHub Action
   - node

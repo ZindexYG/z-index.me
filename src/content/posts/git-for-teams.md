@@ -1,6 +1,6 @@
 ---
 title: 关于 Git 二三事
-date: 2022-07-16 19:20:55
+pubDate: 2022-07-16 19:20:55
 tags:
   - git
   - read note

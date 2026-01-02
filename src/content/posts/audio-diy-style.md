@@ -1,6 +1,6 @@
 ---
 title: 关于 Audio 自定义样式
-date: 2021-03-05 19:50:42
+pubDate: 2021-03-05 19:50:42
 tags:
     - JavaScript
     - React
@@ -86,7 +86,7 @@ description: 是的，再不看书，书里的知识就过时了
 
 2.1 准备参数
 
-```JavaScript
+```javascript
 const Audio              = document.querySelector('#audio');
 const contorl            = document.querySelector('#control');
 const contorlDot         = document.querySelector('#control-dot');
@@ -128,7 +128,7 @@ function formatTime(value) {
 
 2.2 播放 && 暂停 && 进度更新
 
-```JavaScript
+```javascript
 contorl.addEventListener('click', e => {
   if (e.target.innerText === '播放') {
     e.target.innerText = '暂停';
@@ -159,7 +159,7 @@ Audio.addEventListener('ended', e => {
 
 2.3 拖动进度条
 
-```JavaScript
+```javascript
 // 鼠标按下
 contorlDot.addEventListener('mousedown', down, false);
 contorlDot.addEventListener('touchstart', down, false);
@@ -230,7 +230,7 @@ const end = () => {
 
 框架加持会让组件更加简单，chch
 
-```JavaScript
+```javascript
 import React, {
   useRef,
   useLayoutEffect,

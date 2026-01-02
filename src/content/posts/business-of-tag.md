@@ -1,6 +1,6 @@
 ---
 title: 管理系统内 Tag 功能的实现
-date: 2019-08-08 00:03:52
+pubDate: 2019-08-08 00:03:52
 tags:
     - 业务
     - react
@@ -58,7 +58,7 @@ description: 是的，再不看书，书里的知识就过时了
 
 操作同归在 `Reduce` 内，方便后续 Tag 内外部交互
 
-```JavaScript
+```javascript
 /*.
 目录：/src/store/index.js
 */
@@ -84,7 +84,7 @@ const appReducer ={
 
 所有内存初始状态，都在 `App.js`->`componentDidUpdate` 生命周期内存操作
 
-```JavaScript
+```javascript
 /*
 目录：/src/App.js
  */
@@ -109,7 +109,7 @@ componentDidUpdate(prevProps, prevState) {
 2. 点击逻辑，切换 Tag
 3. 关闭 Tag
 
-```JavaScript
+```javascript
 
 class App extends Component {
   // 点击侧栏
@@ -209,7 +209,7 @@ class App extends Component {
 
 使用标记符号，或者直接判断一个 key 值是否存在值，来发送请求，demo 内使用 dataSource 是否存在为空来判断是否需要发送请求
 
-```JavaScript
+```javascript
 
 componentDidMount() {
   const { tabListStatus, musicList_query_param, musicList } = this.props
@@ -223,7 +223,7 @@ componentDidMount() {
 ```
 操作更新 `onChange`, `onClear`, `onSubmit` 除了这一些以外还会存在不同的操作，demo 大致分了这几个操作，均使用 reducer 操作，App.js 内监听操作，更改内存，模块内不参与内存更改
 
-```JavaScript
+```javascript
 
 onChange = (tabList, e) => {
   e.persist()

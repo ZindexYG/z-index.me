@@ -1,6 +1,6 @@
 ---
 title: 微信小程序实习记
-date: 2020-06-25 19:23:28
+pubDate: 2020-06-25 19:23:28
 tags:
   - 小程序
   - CSS
@@ -21,7 +21,7 @@ description: 是的，再不看书，书里的知识就过时了
 - 参数是个数组，可以在放大后左右翻动
 - 按钮下载功能，顺序是，先下载文件，然后缓存的图片调用 `saveImageToPhotoAlbum`
 
-```JavaScript
+```javascript
 Page({
   // 放大
   handleExpend: function () {
@@ -64,7 +64,7 @@ Page({
 - 可以是关于具体功能页面的分享（带参数）
 - 可以区分是自定义按钮的分享，或是右上角的分享
 
-```JavaScript
+```javascript
 Page({
   // 相关页面，有这个方法即调用了分享功能
   onShareAppMessage: function (res) {
@@ -93,7 +93,7 @@ Page({
 - 编写相关云函数 api
 - 小程序中初始化云函数，调用相关云函数
 
-```JavaScript
+```javascript
 // 云函数 api
 const request = require('request-promise');
 
@@ -153,7 +153,7 @@ App({
 
 ``<text class="iconfont icon-{{icon}}"></text>``
 
-```JavaScript
+```javascript
 Component({
   options: {
     styleIsolation: 'apply-shared' // 样式可被 page影响

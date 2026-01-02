@@ -1,6 +1,6 @@
 ---
 title: WebSocket + React 的简单 Demo
-date: 2020-11-05 21:49:32
+pubDate: 2020-11-05 21:49:32
 tags:
     - react
     - websocket
@@ -36,7 +36,7 @@ description: 是的，再不看书，书里的知识就过时了
 - 前端仅实现 `启动 WebSocket` 与 `接受会话` 为关键
 - 服务端 node 会实现计时器里实现不断发送信息的任务
 
-```Typescript
+```typescript
 import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
 
 const App = () => {
@@ -74,7 +74,7 @@ const App = () => {
 
 在例子里，组件渲染的时候已经开始了 WebSocket 链接，根据需求是要主动开启 WebSocket 链接的，例子关键 WebSocket 需要提取出来
 
-```TypeScript
+```typescript
 const webSocketInit = useCallback(() => {
     if (!ws.current) {
       ws.current = new WebSocket('ws://localhost:7070');
@@ -86,7 +86,7 @@ React 是喜欢不可变数据的，这里使用了 useCallback 包裹了相关�
 
 在组件生命周期外，或许需要关闭会话，达到浏览器资源释放的问题
 
-```TypeScript
+```typescript
 useLayoutEffect(()=>{
   // do somting
   return ()=>{
@@ -101,7 +101,7 @@ React Hooks Api 内建议这样释放资源，同理可以在 commpoent api 内�
 
 个人认为在最终代码内，最好有日志打印，使用 Hooks api 来监听 WebSocket 的状态去打印日志会显得很费劲且繁琐不堪，得益于 WebSocket 自有的 api 就可以做到很好的日志答应
 
-```TypeScript
+```typescript
 
 import React, { useState, useRef, useLayoutEffect, useCallback } from 'react';
 import Header from './components/header';
@@ -203,7 +203,7 @@ export default App;
 
 可以肯定，在外初始化肯定是更好阅读与理解的，如下例子：
 
-```TypeScript
+```typescript
 import React from 'react';
 
 const ws = new WebSocket('ws://loaclhost:7070');

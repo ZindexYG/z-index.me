@@ -1,6 +1,6 @@
 ---
 title: 关于规范化的二三事情
-date: 2022-05-05 16:35:40
+pubDate: 2022-05-05 16:35:40
 tags:
   - eslint && prettier
   - confing
@@ -60,7 +60,7 @@ echo # Ignore > .prettierignore
 
 TIP: .prettierrrc.json 个人配置
 
-```JSON
+```json
 {
   "printWidth": 80,
   "jsxSingleQuote": true,
@@ -92,7 +92,7 @@ npx husky add .husky/pre-commit "npx lint-staged"
 
 2. 将以下内容添加到您的 package.json:
 
-```JSON
+```json
 {
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
@@ -104,7 +104,7 @@ npx husky add .husky/pre-commit "npx lint-staged"
 
 TIP： 各自判断是否需要强制
 
-```JSON
+```json
 {
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
@@ -134,7 +134,7 @@ echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > comm
 
 使用交互式提交，需要在 package.json 中新增如下配置
 
-```JSON
+```json
 {
   "config": {
     "commitizen": {
@@ -146,7 +146,7 @@ echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > comm
 
 由于是项目内使用，为配合其他同事的使用，需要配合 package.json 中 scripts 或者使用 `yarn git-cz` 来使用
 
-```JSON
+```json
 {
   "scripts": {
     "commit": "git-cz"
@@ -156,7 +156,7 @@ echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > comm
 
 `自定义提交交互信息`
 
-```JavaScript
+```javascript
 module.exports = {
   extends: ['@commitlint/config-conventional'],
   prompt: {

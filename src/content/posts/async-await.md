@@ -1,6 +1,6 @@
 ---
 title: Async/Await 代替 Promise.all()
-date: 2019-08-17 00:37:59
+pubDate: 2019-08-17 00:37:59
 tags:
     - 面试
     - es6

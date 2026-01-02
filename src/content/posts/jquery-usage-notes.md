@@ -1,6 +1,6 @@
 ---
 title: jQuery的使用心得
-date: 2017-12-18 00:43:19
+pubDate: 2017-12-18 00:43:19
 tags:
     - jQuery
     - 读书笔记
@@ -18,28 +18,28 @@ description: 是的，再不看书，书里的知识就过时了
 
 1. 对于同一个对象不超过三个操作直接一行显示；
 2. 对于同一个对象的较多操作，每个操作一行；
-```JavaScript
+```javascript
 //例子
 $(this).removerClass('add')
        .addClass('remove')
 ```
 3. 对于多个对象的少量操作，每个对象一行，其中涉及子元素的可做缩进处理；
-```JavaScript
+```javascript
 //例子
 $(this).addClass('add')
        .childe.show().
 siblings().removerClass('remove')
 ```
 4. 如果获取 JQ 对象，在变量前面加上 `$` 符号
-```JavaScript
+```javascript
 var $var = $(this)
 ```
 5. 如果获取的 DOM 对象，则不需要
-```JavaScript
+```javascript
 var v = $(this)[0]
 ```
 6. JQ 对象和 DOM 对象之间的转换
-```JavaScript
+```javascript
 //1.[index]方法
 var $cr = $('#cr')
 var cr = $cr[0]
@@ -49,7 +49,7 @@ var $cr = $('#cr')
 var cr = $cr.get(0)
 ```
 7. $('className Or ID') 获取的永远是对象，即便网页上没有，即当 jQ 检索某个元素是否存在时候，需根据长度或转化为 dom 对象来判断对象是否存在
-```JavaScript
+```javascript
 if($('#tt')){//do something} X
 
 if($('#tt').length > 0){//do somthing}  ✓
@@ -59,7 +59,7 @@ if($('#tt').length > 0){//do somthing}  ✓
 
 在 jQ.1.7 中，`on()` 是首选绑定事件，
 
-```JavaScript
+```javascript
 $(document).on('click','.btn',function(){
   event.preventDefault();
   //do somthing
@@ -71,7 +71,7 @@ $(document).on('click','.btn',function(){
 
 #### 阻止冒泡行为
 
-```JavaScript
+```javascript
 
 // 如果事件可取消，则取消该事件，而不停止事件的进一步传播
 event.preventDefault();
@@ -91,7 +91,7 @@ $('element').click(function () {
 
 #### 解析
 
-```jQuey
+```js
   $.ajax({
     url: '', // 接口地址
     type: '',//请求方式
@@ -126,7 +126,7 @@ $('element').click(function () {
 
 为以后要用到的Ajax请求设置默认的值,使用 `名称/值` 对来规定 AJAX 请求的设置。
 
-```JavaScript
+```javascript
 $.ajaxSetup({
   url:'url',
   dataType:post,
@@ -137,7 +137,7 @@ $.ajaxSetup({
 
 #### 1. 禁用页面的右键菜单
 
-```JavaScript
+```javascript
 $(document).ready(function(){
     $(document).bind("contextmenu", function(){
         return false
@@ -147,7 +147,7 @@ $(document).ready(function(){
 
 #### 2. 新窗口的开页面
 
-```JavaScript
+```javascript
 $(document).ready(function() {
     //1.
     $('a[href^="http://"]').attr("target", "_blank")
@@ -163,7 +163,7 @@ $(document).ready(function() {
 
 PS:**JQ1.3 后，官方贵贱使用$.supper 来代替 $.browser**
 
-```JavaScript
+```javascript
 $(document).ready(function() {
     //firefox 2 and above
     if($.browse.mozilla && $.browser.version >="1.8") {
@@ -194,7 +194,7 @@ $(document).ready(function() {
 
 #### 4. 输入框文字获取焦点
 
-```JavaScript
+```javascript
 $(document).ready(function() {
     $('input.text').val('点击回车即可搜索')
     textFill($('input.text'))
@@ -216,7 +216,7 @@ function textFill(input) {
 ```
 #### 5. 返回头部滑动动画
 
-```JavaScript
+```javascript
 jQuery.fn.scrollTo =function (speed) {
     var targetOffset = $(this).offset().top
     $('html, body').stop().animate({scrollTop: targetOffset}, speed)
@@ -231,7 +231,7 @@ $('#button').click(function(){
 
 #### 6. 获取鼠标位置
 
-```JavaScript
+```javascript
 $(document).ready(function() {
     $(document).mousemove(function(e){
         $('#XY').html("X:"+e.pageX + "| Y:" + e.pageY)
@@ -242,7 +242,7 @@ $(document).ready(function() {
 
 #### 7. 判断元素是否存在
 
-```JavaScript
+```javascript
 $(document).ready(function(){
     if($('#id').length){
         //do something
@@ -252,7 +252,7 @@ $(document).ready(function(){
 
 #### 8. 点击 div 也可以跳转
 
-```JavaScript
+```javascript
 $('div').click(function(){
     window.location = $(this).find('a').attr('href')
     return false
@@ -261,7 +261,7 @@ $('div').click(function(){
 
 #### 9. 根据浏览器大小添加样式
 
-```JavaScript
+```javascript
 $(document).ready(function() {
     function checkWindowSize() {
         if($(window).width > 1200){
@@ -276,7 +276,7 @@ $(window).resize(checkWindowSize)
 
 #### 10. 设置 div 在屏幕中央
 
-```JavaScript
+```javascript
 $(document).ready(function(){
     jQuery.fn.center = function (){
         this.css('position','absolute')
@@ -289,7 +289,7 @@ $(document).ready(function(){
 
 #### 11. 创建自己的选择器
 
-```JavaScript
+```javascript
 $(document).ready(function () {
     $.extend($.expr[':'], {
         moreThen500px: function(a) {
@@ -304,7 +304,7 @@ $(document).ready(function () {
 
 #### 12. 关闭所有动画效果
 
-```JavaScript
+```javascript
 $(document).ready(function() {
     jQuery.fx.off = true
 })
@@ -312,7 +312,7 @@ $(document).ready(function() {
 
 #### 13. 检测鼠标的左右键
 
-```JavaScript
+```javascript
 $(document).ready(function() {
     $('#xy').mousedown(function(e){
         alert(e.which)
@@ -323,7 +323,7 @@ $(document).ready(function() {
 
 #### 14. 回车提交表单
 
-```JavaScript
+```javascript
 $(document).ready(function() {
     $('input').keyup(function(e){
         if(e.which === '13'){
@@ -335,7 +335,7 @@ $(document).ready(function() {
 
 #### 15. 设置全局 ajax 参数
 
-```JavaScript
+```javascript
 $('#load').ajaxStart(function(){
     showLoading();
     disableButtons();
@@ -348,14 +348,14 @@ $('#load').ajaxCompleta(function(){
 
 #### 16. 获取选中的下拉框
 
-```JavaScript
+```javascript
 $('#someElement').find('option:selected')
 $('#someElement option:selected')
 ```
 
 #### 17. 切换复选框
 
-```JavaScript
+```javascript
 var tog =false
 $('button').click(function(){
     $('input[type=checkbox]').attr('checked',!tog)
@@ -365,7 +365,7 @@ $('button').click(function(){
 
 #### 18. 使用 siblings() 来选择同辈元素
 
-```JavaScript
+```javascript
 $('#nav li').click(function(){
     $(this).addClass('active')
             .siblings().removeClass('active')
@@ -374,7 +374,7 @@ $('#nav li').click(function(){
 
 #### 19. 个性化链接
 
-```JavaScript
+```javascript
 $(document).ready(function(){
     $('a[href$=pdf]').addClass('pdf')
 })
@@ -382,7 +382,7 @@ $(document).ready(function(){
 
 #### 20. 一段时间后自动关闭或者隐藏元素
 
-```JavaScript
+```javascript
 setTimeout(function() {
     $('div').fadeIn(400)
 }, 3000)

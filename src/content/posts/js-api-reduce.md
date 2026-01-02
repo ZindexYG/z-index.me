@@ -1,6 +1,6 @@
 ---
 title: 理解 JavaScript 中 Reduce()
-date: 2020-10-25 20:51:01
+pubDate: 2020-10-25 20:51:01
 tags:
   - JavaScript
 cover: /images/accessible-js-Library-Development.jpg
@@ -19,7 +19,7 @@ description: 是的，再不看书，书里的知识就过时了
 
 `reduce()` 的一般用法：
 
-```JavaScript
+```javascript
 const array1 = [1, 2, 3, 4];
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
@@ -36,7 +36,7 @@ console.log(array1.reduce(reducer, 5));
 
 最为常见的用法，即是返回数组中所值的总和，如：
 
-```JavaScript
+```javascript
 const input = [1, 100, 1000, 10000]
 const sum = input.reduce((accumulator, item) => {
   return accumulator + item
@@ -47,7 +47,7 @@ const sum = input.reduce((accumulator, item) => {
 
 返回新数组
 
-```JavaScript
+```javascript
 const numbers = [1, 10, 100]
 
 const map_squared = numbers.map(item => Math.pow(item, 2))  // [1, 100, 10000]
@@ -62,7 +62,7 @@ const reduce_squared = numbers.reduce((acc, number) => {
 
 返回过滤数组
 
-```JavaScript
+```javascript
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 const filter_evenNumbers = numbers.filter(number => number % 2 === 0)
 // [2, 4, 6, 8, 10]
@@ -80,7 +80,7 @@ const reduce_evenNumbers = numbers.reduce((acc, number) => {
 
 需求：需要从数组中统计数据，并最终返回该数据对象
 
-```JavaScript
+```javascript
 const voters = [
   { name: "Bob", age: 30, voted: true },
   { name: "Jake", age: 32, voted: true },

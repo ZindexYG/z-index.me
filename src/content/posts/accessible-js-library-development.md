@@ -1,6 +1,6 @@
 ---
 title: 愈发简单的 JS 库开发
-date: 2025-08-07 14:34:41
+pubDate: 2025-08-07 14:34:41
 tags:
     - javascript
     - vite
@@ -98,7 +98,7 @@ npm install --save-dev  @rollup/plugin-node-resolve
 
 #### 古法打包逻辑代码
 
-```JS
+```js
 // config/rollup.js
 const {
   babel,
@@ -173,7 +173,7 @@ exports.getCompiler = getCompiler
 ```
 
 
-```JS
+```js
 // config/rollup.config.js
 const common = require('./rollup.js')
 
@@ -188,7 +188,7 @@ module.exports = {
 }
 ```
 
-```JS
+```js
 
 // config/rollup.config.esm.js
 const common = require('./rollup.js')
@@ -205,7 +205,7 @@ module.exports = {
 
 ```
 
-```JS
+```js
 // config/rollup.config.aio.js
 const commonjs = require('@rollup/plugin-commonjs')
 const nodeResolve = require('@rollup/plugin-node-resolve')

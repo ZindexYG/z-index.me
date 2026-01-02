@@ -1,6 +1,6 @@
 ---
 title: Sublime 配置与使用
-date: 2017-12-17 10:05:11
+pubDate: 2017-12-17 10:05:11
 tags:
     - Sublime
     - 工具
@@ -19,7 +19,7 @@ description: 是的，再不看书，书里的知识就过时了
 
 `Preferences – Distraction-Settings` 打开；
 
-```JavaScript
+```javascript
 
 "trim_trailing_white_space_on_save": true, //是否自动移除多余空格
 "ensure_newline_at_eof_on_save": true,//是否在结束符号上换行
@@ -98,7 +98,7 @@ import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe0
 
 加上这个配置可以在编辑文件时候，按 `F5` 可以直接用浏览器打开该文件，同理可以配置其他浏览器；
 
-```JavaScript
+```javascript
  // chrome
 {
   "keys": ["F5"],
@@ -114,7 +114,7 @@ import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe0
 
 详细看过 `QutoHTML` 文档的应该会发现它，有好几种模式，我这里只列举 `single` 和 `double`，即转变一行，和多行的字符串；
 
-```JavaScript
+```javascript
 {
     "keys": ["ctrl+alt+`"],
     "command": "quote_html",

@@ -1,6 +1,6 @@
 ---
 title: webpack学习笔记
-date: 2017-12-21 22:22:59
+pubDate: 2017-12-21 22:22:59
 tags:
     - webpack
     - JavaScript

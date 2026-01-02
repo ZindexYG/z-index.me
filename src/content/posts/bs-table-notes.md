@@ -1,6 +1,6 @@
 ---
 title: bs-table入坑记
-date: 2017-12-28 22:00:48
+pubDate: 2017-12-28 22:00:48
 tags:
     - bootstrap
     - 笔记

@@ -1,6 +1,6 @@
 ---
 title: Hexo配置随记之NexT配置
-date: 2018-04-09 22:31:24
+pubDate: 2018-04-09 22:31:24
 tags:
     - 随记
     - Hexo

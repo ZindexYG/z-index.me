@@ -1,6 +1,6 @@
 ---
 title: parcel 游记
-date: 2018-01-09 23:57:59
+pubDate: 2018-01-09 23:57:59
 tags:
     - 打包工具
     - ES6
@@ -31,7 +31,7 @@ description: 是的，再不看书，书里的知识就过时了
 
 #### 全局下载 parcel
 
-```git
+```bash
 npm install -g parcel-bundler
 ```
 
@@ -46,27 +46,32 @@ npm init -y
 #### 下载与配置所需依赖
 
 `babel-preset-env` 用于转换 es6 语法；
-```git
+
+```bash
 npm install --save-dev babel-preset-env
 echo {"presets": ["env"]} > .babelrc
 ```
 
 `node-sass` 用于转换 scss 语法；
-```git
+
+```bash
 npm install --save-dev node-sass
 ```
 
 `PostCSS` 使用插件转换 CSS 的工具，``.postcssrc`` 文件里面的 `modules` 设置为 `false` 的话，打包出来的 css 就不会带 hash 值；
-```git
+
+```bash
 npm install --save-dev postcss-modules autoprefixer
 echo {"modules": true,"plugins": {"autoprefixer": {"grid": true}}}>.postcssrc
 ```
 
 `PostHTML` 通过插件转换 HTML 的工具
-```git
+
+```bash
 npm install --save-de posthtml-img-autosize
 echo {"plugins": {"posthtml-img-autosize": {"root": "./images"}}}>.posthtmlrc
 ```
+
 #### npm 指令配置
 
 打开项目里面的 ``package.json`` 文件，找到 `scripts` 这个字段，配置如下；
@@ -83,7 +88,8 @@ echo {"plugins": {"posthtml-img-autosize": {"root": "./images"}}}>.posthtmlrc
 ```
 
 `start` 指令 HMR 的配置指令 这个指令不需要任何附带操作，也不需要关系文件之间的路径，打开 `http://localhost:1234` 即可
-```git
+
+```bash
 parcel index.html
 ```
 

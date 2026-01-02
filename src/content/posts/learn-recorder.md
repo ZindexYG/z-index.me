@@ -1,6 +1,6 @@
 ---
 title: 关于录音 Recorder.js
-date: 2021-09-21 15:51:57
+pubDate: 2021-09-21 15:51:57
 tags:
     - js
 cover: /images/accessible-js-Library-Development.jpg
@@ -30,7 +30,7 @@ description: 是的，再不看书，书里的知识就过时了
 
 首要必须是获取客户端录音权限，并给予一些错误提示
 
-```JavaScript
+```javascript
 /*
   @type           constraints = { audio: true, video: true }
   @description    一个 MediaStreamConstraints 对象，
@@ -82,7 +82,7 @@ navigator.mediaDevices.getUserMedia([constraints])
 
 #### 对象初始化
 
-```JavaScript
+```javascript
 
 class Recorder{
   // 初始化 config 与需要的数据流
@@ -119,7 +119,7 @@ class Recorder{
 - compress（） 压缩算法
 - encode（） 输出格式，可自行百度获取
 
-```JavaScript
+```javascript
 class Recorder{
   /* ... */
   /* 清空数据 */
@@ -157,7 +157,7 @@ class Recorder{
 
 `这里也是网上拿下来的`
 
-```JavaScript
+```javascript
 class Recorder {
   encodeWAV(){
     const sampleRate = Math.min(this.inputSampleRate, this.outputSampleRate);
@@ -238,7 +238,7 @@ class Recorder {
 - stop() 停止记录录音数据
 - getAudioUrl() 获取录音数据
 
-```JavaScript
+```javascript
 class Recorder {
   /* ... */
   // 开始
@@ -272,7 +272,7 @@ class Recorder {
 - 需要进行一次压缩
 - 需要一个回调函数
 
-```JavaScript
+```javascript
 class Recorder {
   /* ... */
   sendData(){
