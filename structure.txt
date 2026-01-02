@@ -1,0 +1,50 @@
+// 项目结构概览（由 Copilot 添加）
+// 说明：此文件列出仓库顶层目录与文件
+// 更新日期：2026-01-02
+// 文档目录：表示目录（文件夹），其下缩进项为该目录的内容
+// 文件：表示普通文件，通常以扩展名结尾（如 .md / .js / .ts / .astro）
+.
+├── LICENSE                                     // MIT 的开源协议
+├── README.md                                   // 项目说明（如何运行、部署与设计理念）
+├── astro.config.mjs                             // Astro 框架的构建与路由配置
+├── package.json                                // 项目依赖、脚本与元数据
+├── pnpm-lock.yaml                              // pnpm 锁定依赖树，确保可重复安装
+├── public                                       // 公共静态资源（构建时直接拷贝到站点根目录）
+│   ├── favicon.svg                              // 网站使用的 favicon
+│   ├── fonts                                    // 自定义字体文件
+│   │   ├── geist-mono-variable.woff2
+│   │   └── geist-variable.woff2
+│   └── static                                   // 站点使用的静态图片与占位资源
+│       ├── blog-placeholder.webp
+│       └── blog-placeholder.svg
+├── src                                          // 源代码目录（页面、组件、样式与内容）
+│   ├── components                               // 可复用 UI 组件
+│   │   ├── Header.astro                         // 站点头部组件
+│   │   └── ThemeToggle.astro                    // 主题切换开关组件
+│   ├── consts.ts                                // 全局常量（站点元信息等）
+│   ├── content                                  // 博客内容源（Markdown / 配置）
+│   │   ├── config.ts                            // 内容配置（分类、元信息等）
+│   │   └── posts                                // 博文文件夹（Markdown 格式）
+│   │       ├── customizing-z-index.me.md
+│   │       ├── lorem-ipsum.md
+│   │       ├── making-z-index.me.md
+│   │       └── markdown-style-guide.md
+│   ├── env.d.ts                                 // 环境变量及类型声明（TypeScript）
+│   ├── layouts                                  // 页面布局组件（包裹页面结构）
+│   │   └── Layout.astro                         // 全站通用布局
+│   ├── lib                                      // 项目内部工具库与辅助函数
+│   │   └── utils.ts                             // 通用工具函数
+│   ├── pages                                    // 页面路由（由 Astro 渲染）
+│   │   ├── index.astro                          // 网站首页
+│   │   ├── posts                                // 文章列表与单页路由
+│   │   │   ├── [...slug].astro                  // 动态文章页面（按 slug 渲染）
+│   │   │   └── index.astro                      // 文章列表页
+│   │   ├── robots.txt.ts                        // 生成 robots.txt 的路由
+│   │   └── rss.xml.js                           // 生成 RSS feed 的脚本
+│   └── styles                                   // 全局样式文件
+│       └── global.css                           // Tailwind / 自定义全局 CSS
+├── structure.txt                                // 更详细的项目结构说明（手动维护）
+├── tailwind.config.ts                           // Tailwind CSS 配置
+└── tsconfig.json                                // TypeScript 编译与路径配置
+
+13 directories, 30 files

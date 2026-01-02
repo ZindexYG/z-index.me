@@ -1,0 +1,33 @@
+{
+  "name": "z-index.me",
+  "type": "module",
+  "version": "0.0.3",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format:md": "remark . -o",
+    "format": "pnpm run lint:fix && pnpm run format:md"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/rss": "^4.0.14",
+    "@astrojs/sitemap": "^3.6.0",
+    "astro": "^5.16.6",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.4.0",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^6.7.3",
+    "@tailwindcss/postcss": "^4.1.18",
+    "eslint": "^9.39.2"
+  },
+  "packageManager": "pnpm@10.27.0+sha512.72d699da16b1179c14ba9e64dc71c9a40988cbdc65c264cb0e489db7de917f20dcf4d64d8723625f2969ba52d4b7e2a1170682d9ac2a5dcaeaab732b7e16f04a"
+}
