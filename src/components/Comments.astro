@@ -1,213 +1,246 @@
 ---
-declare const Astro: any; // 忽略 Astro 的类型报错
+declare const Astro: any // 忽略 Astro 的类型报错
 // 当前页 URL（用于 like 计数）
-const currentUrl = encodeURIComponent(Astro.url.toString());
+const currentUrl = encodeURIComponent(Astro.url.toString())
 // 文件名（用于埋点）
-const fileName = Astro.url.pathname.split('/').pop().split('.').shift();
+const fileName = Astro.url.pathname.split('/').pop().split('.').shift()
 ---
 
-<div class="post-comments">
+<div class='post-comments'>
   <!-- Like -->
-  <div class="like">
-    <script src="https://unpkg.com/open-heart-element" type="module"></script>
-    <open-heart href={`https://likepost.asyncx0806.workers.dev/${currentUrl}/like`} data-umami-event=`${fileName}-Like` emoji="♥">♥</open-heart>
+  <div class='like'>
+    <script src='https://unpkg.com/open-heart-element' type='module'></script>
+    <open-heart
+      href={`https://likepost.asyncx0806.workers.dev/${currentUrl}/like`}
+      data-umami-event=`${fileName}-Like`
+      emoji='♥'>♥</open-heart
+    >
   </div>
 
   <!-- Tabs（初始不选中，点击才显示内容） -->
-  <div class="tabs">
-    <input type="radio" class="hidden-radio" name="comment-provider" id="by-twikoo" autocomplete="off" data-umami-event="Comment-Twikoo">
-    <label class="tab" for="by-twikoo">Twikoo</label>
+  <div class='tabs'>
+    <input
+      type='radio'
+      class='hidden-radio'
+      name='comment-provider'
+      id='by-twikoo'
+      autocomplete='off'
+      data-umami-event='Comment-Twikoo'
+    />
+    <label class='tab' for='by-twikoo'>Twikoo</label>
 
-    <input type="radio" class="hidden-radio" name="comment-provider" id="by-giscus" autocomplete="off" data-umami-event="Comment-Giscus">
-    <label class="tab" for="by-giscus">Giscus</label>
+    <input
+      type='radio'
+      class='hidden-radio'
+      name='comment-provider'
+      id='by-giscus'
+      autocomplete='off'
+      data-umami-event='Comment-Giscus'
+    />
+    <label class='tab' for='by-giscus'>Giscus</label>
   </div>
 
   <!-- 内容区：初始全部隐藏；点击对应 Tab 后才显示 & 初始化 -->
-  <div class="post-comments-content twikoo" id="twikoo-box" hidden>
-    <div id="twikoo-comments"></div>
+  <div class='post-comments-content twikoo' id='twikoo-box' hidden>
+    <div id='twikoo-comments'></div>
   </div>
 
-  <div class="post-comments-content giscus" id="giscus-box" hidden>
-    <div id="giscus"></div>
+  <div class='post-comments-content giscus' id='giscus-box' hidden>
+    <div id='giscus'></div>
   </div>
 </div>
 
 <script is:inline data-astro-rerun>
-(() => {
-  const ready = (fn) => {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', fn, { once: true });
-    } else fn();
-  };
-
-  /* ---------------- Twikoo（保持你现有逻辑） ---------------- */
-
-  function hasTwikooStyle() {
-    return [...document.head.querySelectorAll('style')]
-      .some(s => /twikoo|tk-/i.test(s.textContent || ''));
-  }
-
-  function loadTwikooFresh() {
-    return new Promise((resolve, reject) => {
-      const s = document.createElement('script');
-      s.src = 'https://cdn.jsdelivr.net/npm/twikoo@1.6.31/dist/twikoo.all.min.js?v=' + Date.now();
-      s.async = true;
-      s.onload = () => resolve(window.twikoo);
-      s.onerror = reject;
-      document.head.appendChild(s);
-    });
-  }
-
-  async function ensureTwikooFreshAndInit() {
-    const el = document.getElementById('twikoo-comments');
-    if (el) el.innerHTML = '';
-    if (!hasTwikooStyle() || !window.twikoo) {
-      await loadTwikooFresh();
+  ;(() => {
+    const ready = fn => {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fn, { once: true })
+      } else fn()
     }
-    window.twikoo?.init?.({
-      envId: 'https://twikoo.asyncx.top/',
-      el: '#twikoo-comments',
-    });
-  }
 
-  /* ---------------- Giscus（关键改动：每次都重新渲染） ---------------- */
+    /* ---------------- Twikoo（保持你现有逻辑） ---------------- */
 
-  const GISCUS_CFG = {
-    repo: 'A5yncX/DG',
-    repoId: 'R_kgDOLPfagg',
-    category: 'General',
-    categoryId: 'DIC_kwDOLPfags4CdlA4',
-    mapping: 'pathname',
-    strict: '0',
-    reactions: '1',
-    emitMetadata: '0',
-    inputPosition: 'top',
-    lang: 'zh-CN',
-    crossOrigin: 'anonymous',
-  };
+    function hasTwikooStyle() {
+      return [...document.head.querySelectorAll('style')].some(s =>
+        /twikoo|tk-/i.test(s.textContent || ''),
+      )
+    }
 
-  function currentGiscusTheme() {
-    return document.documentElement.classList.contains('dark')
-      ? 'dark_tritanopia'
-      : 'light_tritanopia';
-  }
+    function loadTwikooFresh() {
+      return new Promise((resolve, reject) => {
+        const s = document.createElement('script')
+        s.src =
+          'https://cdn.jsdelivr.net/npm/twikoo@1.6.31/dist/twikoo.all.min.js?v=' +
+          Date.now()
+        s.async = true
+        s.onload = () => resolve(window.twikoo)
+        s.onerror = reject
+        document.head.appendChild(s)
+      })
+    }
 
-  /** 每次调用都清空容器并重新注入 <script data-*>，确保映射到当前 pathname */
-  function renderGiscus() {
-    const container = document.getElementById('giscus');
-    if (!container) return;
-    container.innerHTML = '';
-
-    const s = document.createElement('script');
-    s.src = 'https://giscus.app/client.js';
-    s.async = true;
-
-    s.setAttribute('data-repo', GISCUS_CFG.repo);
-    s.setAttribute('data-repo-id', GISCUS_CFG.repoId);
-    s.setAttribute('data-category', GISCUS_CFG.category);
-    s.setAttribute('data-category-id', GISCUS_CFG.categoryId);
-    s.setAttribute('data-mapping', GISCUS_CFG.mapping);
-    s.setAttribute('data-strict', GISCUS_CFG.strict);
-    s.setAttribute('data-reactions-enabled', GISCUS_CFG.reactions);
-    s.setAttribute('data-emit-metadata', GISCUS_CFG.emitMetadata);
-    s.setAttribute('data-input-position', GISCUS_CFG.inputPosition);
-    s.setAttribute('data-theme', currentGiscusTheme());
-    s.setAttribute('data-lang', GISCUS_CFG.lang);
-    s.setAttribute('crossorigin', GISCUS_CFG.crossOrigin);
-
-    container.appendChild(s);
-  }
-
-  /** 主题切换联动 Giscus（不重建，直接 postMessage 切主题） */
-  function updateGiscusTheme() {
-    const iframe = document.querySelector('iframe.giscus-frame');
-    if (!iframe) return;
-    iframe.contentWindow?.postMessage(
-      { giscus: { setConfig: { theme: currentGiscusTheme() } } },
-      'https://giscus.app'
-    );
-  }
-
-  /* ---------------- 交互与生命周期 ---------------- */
-
-  function boot() {
-    // open-heart 计数
-    window.customElements?.whenDefined?.('open-heart')?.then(() => {
-      document.querySelectorAll('open-heart').forEach(oh => oh.getCount?.());
-    });
-    const recount = (e) => e?.target?.getCount?.();
-    window.removeEventListener('open-heart', recount);
-    window.addEventListener('open-heart', recount, { passive: true });
-
-    const radios = document.querySelectorAll('input[name="comment-provider"]');
-    const twikooBox = document.getElementById('twikoo-box');
-    const giscusBox = document.getElementById('giscus-box');
-
-    const show = (el) => el && el.removeAttribute('hidden');
-    const hide = (el) => el && el.setAttribute('hidden', '');
-
-    async function handleChange() {
-      const label = document.querySelector('input[name="comment-provider"]:checked + .tab');
-      const name = label?.textContent?.toLowerCase().trim();
-
-      if (name === 'twikoo') {
-        hide(giscusBox); show(twikooBox);
-        await ensureTwikooFreshAndInit();
-      } else if (name === 'giscus') {
-        hide(twikooBox); show(giscusBox);
-        renderGiscus(); // ⭐ 关键：每次点击都重建，映射到当前 pathname
-      } else {
-        hide(twikooBox); hide(giscusBox);
+    async function ensureTwikooFreshAndInit() {
+      const el = document.getElementById('twikoo-comments')
+      if (el) el.innerHTML = ''
+      if (!hasTwikooStyle() || !window.twikoo) {
+        await loadTwikooFresh()
       }
+      window.twikoo?.init?.({
+        envId: 'https://twikoo.asyncx.top/',
+        el: '#twikoo-comments',
+      })
     }
 
-    // 绑定/去重
-    radios.forEach(r => r.removeEventListener('change', handleChange));
-    radios.forEach(r => r.addEventListener('change', handleChange));
+    /* ---------------- Giscus（关键改动：每次都重新渲染） ---------------- */
 
-    // 事件委托兜底某些浏览器对隐藏 radio 的行为
-    document.querySelector('.tabs')?.addEventListener('click', (e) => {
-      const lab = e.target.closest('.tab'); if (!lab) return;
-      const forId = lab.getAttribute('for');
-      if (forId) document.getElementById(forId).checked = true;
-      handleChange();
-    });
+    const GISCUS_CFG = {
+      repo: 'A5yncX/DG',
+      repoId: 'R_kgDOLPfagg',
+      category: 'General',
+      categoryId: 'DIC_kwDOLPfags4CdlA4',
+      mapping: 'pathname',
+      strict: '0',
+      reactions: '1',
+      emitMetadata: '0',
+      inputPosition: 'top',
+      lang: 'zh-CN',
+      crossOrigin: 'anonymous',
+    }
 
-    // 主题变化时，联动更新 Giscus theme
-    const themeObserver = new MutationObserver(() => updateGiscusTheme());
-    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    function currentGiscusTheme() {
+      return document.documentElement.classList.contains('dark')
+        ? 'dark_tritanopia'
+        : 'light_tritanopia'
+    }
 
-    // 初始不显示
-    radios.forEach(r => { r.checked = false; });
-    hide(twikooBox); hide(giscusBox);
-  }
+    /** 每次调用都清空容器并重新注入 <script data-*>，确保映射到当前 pathname */
+    function renderGiscus() {
+      const container = document.getElementById('giscus')
+      if (!container) return
+      container.innerHTML = ''
 
-  // 首次 & 每次客户端导航后都运行
-  ready(boot);
-  document.addEventListener('astro:page-load', boot);
-})();
+      const s = document.createElement('script')
+      s.src = 'https://giscus.app/client.js'
+      s.async = true
+
+      s.setAttribute('data-repo', GISCUS_CFG.repo)
+      s.setAttribute('data-repo-id', GISCUS_CFG.repoId)
+      s.setAttribute('data-category', GISCUS_CFG.category)
+      s.setAttribute('data-category-id', GISCUS_CFG.categoryId)
+      s.setAttribute('data-mapping', GISCUS_CFG.mapping)
+      s.setAttribute('data-strict', GISCUS_CFG.strict)
+      s.setAttribute('data-reactions-enabled', GISCUS_CFG.reactions)
+      s.setAttribute('data-emit-metadata', GISCUS_CFG.emitMetadata)
+      s.setAttribute('data-input-position', GISCUS_CFG.inputPosition)
+      s.setAttribute('data-theme', currentGiscusTheme())
+      s.setAttribute('data-lang', GISCUS_CFG.lang)
+      s.setAttribute('crossorigin', GISCUS_CFG.crossOrigin)
+
+      container.appendChild(s)
+    }
+
+    /** 主题切换联动 Giscus（不重建，直接 postMessage 切主题） */
+    function updateGiscusTheme() {
+      const iframe = document.querySelector('iframe.giscus-frame')
+      if (!iframe) return
+      iframe.contentWindow?.postMessage(
+        { giscus: { setConfig: { theme: currentGiscusTheme() } } },
+        'https://giscus.app',
+      )
+    }
+
+    /* ---------------- 交互与生命周期 ---------------- */
+
+    function boot() {
+      // open-heart 计数
+      window.customElements?.whenDefined?.('open-heart')?.then(() => {
+        document.querySelectorAll('open-heart').forEach(oh => oh.getCount?.())
+      })
+      const recount = e => e?.target?.getCount?.()
+      window.removeEventListener('open-heart', recount)
+      window.addEventListener('open-heart', recount, { passive: true })
+
+      const radios = document.querySelectorAll('input[name="comment-provider"]')
+      const twikooBox = document.getElementById('twikoo-box')
+      const giscusBox = document.getElementById('giscus-box')
+
+      const show = el => el && el.removeAttribute('hidden')
+      const hide = el => el && el.setAttribute('hidden', '')
+
+      async function handleChange() {
+        const label = document.querySelector(
+          'input[name="comment-provider"]:checked + .tab',
+        )
+        const name = label?.textContent?.toLowerCase().trim()
+
+        if (name === 'twikoo') {
+          hide(giscusBox)
+          show(twikooBox)
+          await ensureTwikooFreshAndInit()
+        } else if (name === 'giscus') {
+          hide(twikooBox)
+          show(giscusBox)
+          renderGiscus() // ⭐ 关键：每次点击都重建，映射到当前 pathname
+        } else {
+          hide(twikooBox)
+          hide(giscusBox)
+        }
+      }
+
+      // 绑定/去重
+      radios.forEach(r => r.removeEventListener('change', handleChange))
+      radios.forEach(r => r.addEventListener('change', handleChange))
+
+      // 事件委托兜底某些浏览器对隐藏 radio 的行为
+      document.querySelector('.tabs')?.addEventListener('click', e => {
+        const lab = e.target.closest('.tab')
+        if (!lab) return
+        const forId = lab.getAttribute('for')
+        if (forId) document.getElementById(forId).checked = true
+        handleChange()
+      })
+
+      // 主题变化时，联动更新 Giscus theme
+      const themeObserver = new MutationObserver(() => updateGiscusTheme())
+      themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class'],
+      })
+
+      // 初始不显示
+      radios.forEach(r => {
+        r.checked = false
+      })
+      hide(twikooBox)
+      hide(giscusBox)
+    }
+
+    // 首次 & 每次客户端导航后都运行
+    ready(boot)
+    document.addEventListener('astro:page-load', boot)
+  })()
 </script>
 
 <style>
   open-heart {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
     border: 1px solid #8585a5;
-    border-radius: .4em;
-    padding: .4em;
-    transition: .5s all;
+    border-radius: 0.4em;
+    padding: 0.4em;
+    transition: 0.5s all;
   }
   open-heart:not([disabled]):hover,
   open-heart:not([disabled]):focus {
     border-color: #00000030;
-    transition: .5s all;
+    transition: 0.5s all;
     cursor: pointer;
   }
   open-heart[disabled] {
     cursor: not-allowed;
     border-color: #00000030;
-    transition: .5s all;
+    transition: 0.5s all;
   }
-  open-heart[count]:not([count="0"])::after {
+  open-heart[count]:not([count='0'])::after {
     content: attr(count);
     font-family: var(--font-family-mono);
   }
@@ -229,10 +262,10 @@ const fileName = Astro.url.pathname.split('/').pop().split('.').shift();
     border-radius: 10px;
     padding: 0.25rem;
     color: #a6adba;
-    transition: all .5s;
+    transition: all 0.5s;
     border: #00000030 solid 1px;
   }
-  .tabs:hover{
+  .tabs:hover {
     border: #e6e1dc solid 1px;
   }
   .hidden-radio {
@@ -250,13 +283,15 @@ const fileName = Astro.url.pathname.split('/').pop().split('.').shift();
     justify-content: center;
     align-items: center;
     height: 2rem;
-    font-size: .875rem;
+    font-size: 0.875rem;
     cursor: pointer;
     line-height: 2;
     padding-left: 1rem;
     padding-right: 1rem;
     flex: 1;
-    transition: all .2s cubic-bezier(.4,0,.2,1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  .like { margin-bottom: 1rem; }
+  .like {
+    margin-bottom: 1rem;
+  }
 </style>
