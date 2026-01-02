@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   # 监听 main 分支的 push 事件（如果你的主分支叫 master，请修改这里）
   push:
-    branches: [ main ]
+    branches: [main]
   # 允许手动触发部署
   workflow_dispatch:
 
@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       # 3. 安装 pnpm (因为你的项目用的是 pnpm)
       - name: Setup pnpm
@@ -50,4 +50,7 @@ jobs:
           # 提交信息
           commit_message: "deploy: ${{ github.event.head_commit.message }}"
           # 如果你有自定义域名 (z-index.me)，需要在这里配置，否则每次部署 CNAME 会丢失
-          cname: z-index.me
+          cname:
+            z-index.me
+            # 强制覆盖历史记录（相当于 git push -f），清除旧的 Hexo 历史
+          force_orphan: true
