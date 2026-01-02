@@ -4,7 +4,6 @@ import defaultTheme from 'tailwindcss/defaultTheme'
 const config: Config = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   darkMode: 'class',
-  safelist: ['dark:bg-default'], // 防止动态生成的类被移除
   theme: {
     extend: {
       fontFamily: {
