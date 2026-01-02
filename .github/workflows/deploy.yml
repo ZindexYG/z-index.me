@@ -1,0 +1,53 @@
+name: Deploy to GitHub Pages
+
+on:
+  # 监听 main 分支的 push 事件（如果你的主分支叫 master，请修改这里）
+  push:
+    branches: [ main ]
+  # 允许手动触发部署
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 拉取当前仓库代码
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. 安装 Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 3. 安装 pnpm (因为你的项目用的是 pnpm)
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9
+
+      # 4. 安装依赖
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 5. 构建 Astro 项目
+      - name: Build
+        run: pnpm run build
+
+      # 6. 部署到目标仓库 (ZindexYG.github.io)
+      - name: Deploy to External Repository
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          # 使用我们刚才设置的 Token
+          personal_token: ${{ secrets.DEPLOY_TOKEN }}
+          # 目标仓库地址
+          external_repository: ZindexYG/ZindexYG.github.io
+          # 推送到目标仓库的哪个分支 (Hexo 配置里是 master，这里保持一致)
+          publish_branch: master
+          # Astro 构建生成的目录 (默认是 dist)
+          publish_dir: ./dist
+          # 提交信息
+          commit_message: "deploy: ${{ github.event.head_commit.message }}"
+          # 如果你有自定义域名 (z-index.me)，需要在这里配置，否则每次部署 CNAME 会丢失
+          cname: z-index.me
