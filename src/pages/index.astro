@@ -6,33 +6,19 @@ import Layout from '../layouts/Layout.astro'
 <Layout
   title={SITE_TITLE}
   description={SITE_DESCRIPTION}
-  className='flex h-svh max-w-sm flex-col justify-center'>
+  className='flex h-svh max-w-2xl flex-col justify-center'>
   <main class='space-y-4'>
-    <p>
-      z-index.me is an opinionated and extremely minimal blogging template
-      built with <a
-        href='https://astro.build/'
-        target='_blank'
-        class='text-blue-500 underline'>Astro</a
-      > and <a
-        href='https://tailwindcss.com/'
-        target='_blank'
-        class='text-blue-500 underline'>Tailwind</a
-      >.
-    </p>
-    <p>
-      Design heavily inspired by <a
-        href='https://jrmyphlmn.com/'
-        target='_blank'
-        class='text-blue-500 underline'>jrmyphlmn.com</a
-      >.
-    </p>
-    <p>
-      To use this template, check out the <a
-        href='https://github.com/ZindexYG/z-index.me?tab=readme-ov-file'
-        target='_blank'
-        class='text-blue-500 underline'>GitHub repository</a
-      >.
-    </p>
+    <img src='/logo.png' class='mx-auto w-3/4' />
+    <div
+      id='statuscafe'
+      class='ml-auto w-fit rounded-md border-bgdefault dark:border-fontdefault p-3 transition-colors duration-300'>
+      <div class='text-center'>
+        --- <div
+          id='statuscafe-content'
+          class='inline text-sm font-mono leading-relaxed text-zinc-900 dark:text-zinc-100'>
+          👋 hi，今日饮点咩呀
+        </div>
+      </div>
+    </div>
   </main>
 </Layout>
