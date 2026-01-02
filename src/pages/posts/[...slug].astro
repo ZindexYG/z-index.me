@@ -1,36 +1,204 @@
 ---
-import type { CollectionEntry } from 'astro:content'
-import { getCollection } from 'astro:content'
-import Layout from '../../layouts/Layout.astro'
-import { formatDate } from '../../lib/utils'
+import { type CollectionEntry, getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { formatDate } from "../../lib/utils";
+import Comments from "../../components/Comments.astro";
+import Toc from "../../components/Toc.astro";
+import Random from "../../components/Random.astro";
 
 export async function getStaticPaths() {
-  const posts = await getCollection('posts')
-  return posts.map(post => ({
+  const posts = await getCollection("posts");
+  return posts.map((post) => ({
     params: { slug: post.slug },
     props: post,
-  }))
+  }));
 }
-type Props = CollectionEntry<'posts'>
+type Props = CollectionEntry<"posts">;
 
-const post = Astro.props
-const { Content } = await post.render();
+const post = Astro.props;
+const { Content, headings } = await post.render();
 ---
 
 <Layout
   title={post.data.title}
   description={post.data.description}
   image={post.data.image}
+  className="max-w-2xl"
 >
   <main>
-    <h1 class="mb-5 text-xl font-medium">
-      {post.data.title}
-    </h1>
-    <p class="mb-1 font-medium text-zinc-500">
-      {formatDate(post.data.date)}
-    </p>
-    <article>
+    <div class="mb-5 flex items-center justify-between">
+      <h1 class="text-xl font-heading font-bold text-zinc-900 dark:text-zinc-100">
+        {post.data.title}
+      </h1>
+      <p class="ml-4 text-sm font-medium text-zinc-500">
+        {formatDate(post.data.pubDate)}
+      </p>
+    </div>
+
+    {/* 标签 */}
+    {post.data.tags.length > 0 && (
+      <div class="mb-5" data-pagefind-ignore="all">
+        <ul class="flex flex-wrap gap-2">
+          {post.data.tags.map((tag) => (
+            <li>
+              <a
+                href={`/tags/${tag}/`}
+                class="group flex justify-between gap-3 rounded px-2 py-1 text-sm bg-bgdefault text-fontdefault dark:bg-fontdefault dark:text-bgdefault"
+              >
+                #{tag}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {/* TOC（组件内处理移动端/桌面、显隐与高亮） */}
+    <Toc headings={headings} />
+
+    <article data-pagefind-body>
       <Content />
     </article>
   </main>
+
+  <Random />
+  <Comments />
+
+  <!-- Lightbox（原样保留） -->
+  <script is:inline data-astro-rerun>
+    (() => {
+      if (window.__lightboxInstalled) return;
+      window.__lightboxInstalled = true;
+
+      const prefersReduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+      const D = prefersReduced ? 0 : 180;
+      const state = { overlay: null };
+
+      const close = () => {
+        const overlay = state.overlay;
+        if (!overlay) return;
+        const img = overlay.querySelector(".lightbox-img");
+
+        const fade = overlay.animate([{ opacity: 1 }, { opacity: 0 }], { duration: D, easing: "ease-in", fill: "forwards" });
+        const shrink = img?.animate([{ transform: "scale(1)" }, { transform: "scale(0.96)" }], { duration: D, easing: "ease-in", fill: "forwards" });
+
+        Promise.allSettled([fade?.finished ?? Promise.resolve(), shrink?.finished ?? Promise.resolve()]).finally(() => {
+          overlay.remove();
+          state.overlay = null;
+          document.body.style.overflow = "";
+          document.body.style.paddingRight = "";
+          document.removeEventListener("keydown", onKeydown);
+        });
+      };
+
+      const onKeydown = (e) => { if (e.key === "Escape") close(); };
+
+      const openFrom = (thumb) => {
+        if (state.overlay) return;
+
+        const overlay = document.createElement("div");
+        overlay.className = "lightbox-overlay";
+        overlay.dataset.armed = "0";
+        setTimeout(() => { if (overlay.isConnected) overlay.dataset.armed = "1"; }, D || 120);
+
+        const big = thumb.cloneNode(true);
+        big.classList.add("lightbox-img");
+        big.removeAttribute("width");
+        big.removeAttribute("height");
+        big.style.maxWidth = "";
+        big.style.maxHeight = "";
+        big.draggable = false;
+
+        overlay.appendChild(big);
+        document.body.appendChild(overlay);
+        state.overlay = overlay;
+
+        const pad = window.innerWidth - document.documentElement.clientWidth;
+        if (pad > 0) document.body.style.paddingRight = pad + "px";
+        document.body.style.overflow = "hidden";
+
+        overlay.animate([{ opacity: 0 }, { opacity: 1 }], { duration: D, easing: "ease-out", fill: "forwards" });
+        big.animate([{ transform: "scale(0.96)" }, { transform: "scale(1)" }], { duration: D, easing: "ease-out", fill: "forwards" });
+
+        overlay.addEventListener("click", () => { if (overlay?.dataset.armed === "1") close(); });
+        document.addEventListener("keydown", onKeydown);
+      };
+
+      const onDocClick = (e) => {
+        const target = e.target;
+        if (!(target instanceof Element)) return;
+        const article = target.closest("article[data-pagefind-body]");
+        if (!article) return;
+        const img = target.closest("img");
+        if (!img) return;
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+        openFrom(img);
+      };
+
+      document.addEventListener("click", onDocClick, { passive: false });
+      document.addEventListener("astro:before-swap", close);
+    })();
+  </script>
+
+  <style is:global>
+    /* 文章内图片可点击（配合 Lightbox） */
+    article[data-pagefind-body] img { cursor: pointer; }
+
+    /* ====== 新增：悬停微缩放 ====== */
+    article[data-pagefind-body] img {
+      transition: transform 180ms ease, filter 180ms ease;
+      transform-origin: center center;
+      will-change: transform;
+      backface-visibility: hidden; /* 提升渲染质量，避免锯齿 */
+    }
+    article[data-pagefind-body] img:hover {
+      transform: scale(1.01); /* 轻微放大 */
+    }
+    /* Lightbox 中的大图不需要 hover 放大，避免叠加 */
+    .lightbox-img:hover { transform: none !important; }
+
+    /* 视动偏好：减少动画 */
+    @media (prefers-reduced-motion: reduce) {
+      article[data-pagefind-body] img {
+        transition: none;
+      }
+    }
+
+    .lightbox-overlay {
+      position: fixed; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0, 0, 0, 0.6);
+      cursor: zoom-out; z-index: 1000; opacity: 0;
+      touch-action: none; -webkit-tap-highlight-color: transparent;
+    }
+    .dark .lightbox-overlay { background: rgba(0, 0, 0, 0.7); }
+
+    .lightbox-img {
+      max-width: 92vw; max-height: 92vh;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.4);
+      will-change: transform;
+    }
+    .dark .lightbox-img { box-shadow: 0 10px 40px rgba(0,0,0,.7); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .lightbox-overlay, .lightbox-img { animation: none !重要; transition: none !重要; }
+    }
+
+
+    .expressive-code .frame {
+    all: unset;
+    position: relative;
+    display: block;
+    --header-border-radius: calc(var(--ec-brdRad) + var(--ec-brdWd));
+    --tab-border-radius: calc(var(--ec-frm-edTabBrdRad) + var(--ec-brdWd));
+    --button-spacing: 0.4rem;
+    --code-background: var(--ec-frm-edBg);
+    border-radius: var(--header-border-radius);
+    box-shadow: 0 0 0 var(--ec-brdWd) var(--ec-frm-edBrdClr)!important;
+}
+  </style>
 </Layout>
