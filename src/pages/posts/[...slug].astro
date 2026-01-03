@@ -2,7 +2,7 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { formatDate } from "../../lib/utils";
-import Comments from "../../components/Comments.astro";
+// import Comments from "../../components/Comments.astro";
 import Toc from "../../components/Toc.astro";
 import Random from "../../components/Random.astro";
 
@@ -62,7 +62,9 @@ const { Content, headings } = await post.render();
   </main>
 
   <Random />
-  <Comments />
+
+  {/* 评论区（已移除） */}
+  {/* <Comments pageID={post.slug} pageTitle={post.data.title} /> */}
 
   <!-- Lightbox（原样保留） -->
   <script is:inline data-astro-rerun>
