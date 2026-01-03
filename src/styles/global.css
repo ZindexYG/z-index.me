@@ -301,7 +301,10 @@ a.db-card-subject:hover {
 
 .expressive-code pre {
   overflow-y: auto !important;
+  overflow-x: hidden !important;
   max-height: 500px !important;
+  white-space: pre-wrap !important;
+  word-break: break-all !important;
 }
 
 /* 特效标题 (注意：这可能会影响全局 h1，如果只想在特定地方使用，建议加个类名) */
