@@ -18,21 +18,29 @@
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.0",
+    "@microflash/remark-figure-caption": "^2.0.2",
     "astro": "^5.16.6",
+    "astro-expressive-code": "^0.41.5",
     "astro-pagefind": "^1.8.5",
     "clsx": "^2.1.1",
     "markdown-it": "^14.1.0",
+    "remark-directive": "^4.0.0",
     "sanitize-html": "^2.17.0",
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "unist-util-visit": "^5.0.0",
     "@antfu/eslint-config": "^6.7.3",
     "@tailwindcss/postcss": "^4.1.18",
     "axios": "^1.13.2",
     "cheerio": "^1.1.2",
-    "eslint": "^9.39.2"
+    "child_process": "^1.0.2",
+    "eslint": "^9.39.2",
+    "hast-util-to-html": "^9.0.5",
+    "hastscript": "^9.0.1",
+    "mdast-util-from-markdown": "^2.0.2"
   },
   "packageManager": "pnpm@10.27.0+sha512.72d699da16b1179c14ba9e64dc71c9a40988cbdc65c264cb0e489db7de917f20dcf4d64d8723625f2969ba52d4b7e2a1170682d9ac2a5dcaeaab732b7e16f04a"
 }
