@@ -1,4 +1,3 @@
-import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import pagefind from "astro-pagefind";
 
@@ -22,6 +21,14 @@ export default defineConfig({
       // Replace the default themes with a custom set of bundled themes:
       // "dracula" (a dark theme) and "solarized-light"
       themes: ['andromeeda', 'dracula'],
+      wrap: true,
+      styleOverrides: {
+        // 2. 设置代码块最大宽度为 80ch (约 80 个字符宽度)
+        // 如果你希望它在窄屏下自适应，但在宽屏下限制宽度，可以使用这个设置
+        codeMaxWidth: '80ch',
+        // 也可以设置字体大小以确保 80ch 的视觉效果
+        codeFontSize: '0.875rem',
+      },
     }),
     sitemap(),
     pagefind()
