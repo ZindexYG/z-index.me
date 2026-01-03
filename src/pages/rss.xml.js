@@ -1,16 +1,34 @@
-import rss from '@astrojs/rss'
-import { getCollection } from 'astro:content'
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts'
+import rss from '@astrojs/rss';
+import { getCollection } from 'astro:content';
+import sanitizeHtml from 'sanitize-html';
+import MarkdownIt from 'markdown-it';
+const parser = new MarkdownIt();
+
+// 移除 XML 不允许的控制字符，防止 RSS 报错 (PCDATA invalid Char value)
+const removeInvalidChars = (str) => {
+  return str.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
+};
 
 export async function GET(context) {
-  const posts = await getCollection('posts')
+  const posts = await getCollection("posts");
+
+  // 按日期降序排序（最新的在前）
+  const sortedPosts = posts.sort((a, b) => new Date(b.data.pubDate) - new Date(a.data.pubDate));
+
   return rss({
-    title: SITE_TITLE,
-    description: SITE_DESCRIPTION,
+    title: 'z-index | 👋 hi，今日饮点咩呀~',
+    description: '这里是 YiGe 的时之物语。',
     site: context.site,
-    items: posts.map(post => ({
+    items: sortedPosts.map((post) => ({
+      title: post.data.title,
+      link: `/posts/${post.slug.split('/').pop()}`,
+      content: removeInvalidChars(sanitizeHtml(parser.render(post.body), {
+        allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']), //渲染组件
+      })),
       ...post.data,
-      link: `/posts/${post.slug}/`,
     })),
-  })
+    customData: `
+    <language>zh-CN</language>
+    `
+  });
 }
