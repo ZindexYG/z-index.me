@@ -1,3 +1,5 @@
+![logo](public/logo.png)
+
 # z-index.me
 
 **z-index.me** 是一个有明确设计倾向且极简的博客模板，使用 [Astro](https://astro.build/) 和 [Tailwind CSS](https://tailwindcss.com/) 构建，设计风格深受 [jrmyphlmn.com](https://jrmyphlmn.com/) 的启发。

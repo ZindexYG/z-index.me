@@ -1,5 +1,5 @@
 
-![blog-placeholder](public/static/blog-placeholder.webp)
+![logo](public/logo.png)
 
 # z-index.me
 
