@@ -5,11 +5,11 @@ tags:
     - javascript
     - ajax
     - ES6
-cover: /images/accessible-js-Library-Development.jpg
+cover: /posts//accessible-js-Library-Development.jpg
 description: 是的，再不看书，书里的知识就过时了
 ---
 
-![](/images/ajax-banner.jpg)
+![](/posts//ajax-banner.jpg)
 
 >代码一把梭,快来人教我做菜吧
 

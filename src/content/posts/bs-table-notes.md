@@ -5,10 +5,10 @@ tags:
     - bootstrap
     - 笔记
     - plugs
-cover: /images/accessible-js-Library-Development.jpg
+cover: /posts//accessible-js-Library-Development.jpg
 description: 是的，再不看书，书里的知识就过时了
 ---
-![](/images/BTable-banner.jpg)
+![](/posts//BTable-banner.jpg)
 
 > 本文旨在记录我使用 bootstrap-table 时候的一些记录,和与部分需求结合的使用情况
 

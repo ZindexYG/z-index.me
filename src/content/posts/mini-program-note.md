@@ -5,11 +5,11 @@ tags:
   - 小程序
   - CSS
   - Note
-cover: /images/accessible-js-Library-Development.jpg
+cover: /posts//accessible-js-Library-Development.jpg
 description: 是的，再不看书，书里的知识就过时了
 ---
 
-![](/images/MiniProgram.png)
+![](/posts//MiniProgram.png)
 
 > 看起来还算有趣
 
@@ -168,7 +168,7 @@ Component({
 
 该项目属于一次个人的体验，也算是给自己接触小程序开发的一个契机，目前感觉还是很良好的
 
-![](/images/MiniProgram_Wallpaper.jpg)
+![](/posts//MiniProgram_Wallpaper.jpg)
 
 欢迎各位关注一下我的小程序，没有复杂的功能，也不需要账号信息，希望得到大佬的指点一二
 

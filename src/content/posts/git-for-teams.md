@@ -4,11 +4,11 @@ pubDate: 2022-07-16 19:20:55
 tags:
   - git
   - read note
-cover: /images/accessible-js-Library-Development.jpg
+cover: /posts//accessible-js-Library-Development.jpg
 description: 是的，再不看书，书里的知识就过时了
 ---
 
-![banner](/images/git-for-teams.jpg)
+![banner](/posts//git-for-teams.jpg)
 
 > 工具往往需要反复检验
 
@@ -26,7 +26,7 @@ description: 是的，再不看书，书里的知识就过时了
 
 > 一图胜千言
 
-![git-status-module](/images/git-for-teams/git-status-module.png)
+![git-status-module](/posts//git-for-teams/git-status-module.png)
 
 例子： 选择正确的撤销方法
 
@@ -47,7 +47,7 @@ description: 是的，再不看书，书里的知识就过时了
 
 #### Q：文件删除造成的变基冲突
 
-![git-rebase](/images/git-for-teams/git-rebase.png)
+![git-rebase](/posts//git-for-teams/git-rebase.png)
 
 ```bash
 First, rewinding head to replay your work on top of it...
@@ -168,7 +168,7 @@ git reset --merge ORIG_HEAD
 
 若没有意识到这是个错误合并，已经继续提交了，那么可以开始头脑风暴了
 
-![unmerge](/images/git-for-teams/unmerge.png)
+![unmerge](/posts//git-for-teams/unmerge.png)
 
 ```bash
 # 稳健的创建一个分支

@@ -5,11 +5,11 @@ tags:
   - 随记
   - Hexo
   - EJS
-cover: /images/accessible-js-Library-Development.jpg
+cover: /posts//accessible-js-Library-Development.jpg
 description: 是的，再不看书，书里的知识就过时了
 ---
 
-![](/images/hexo-banner.jpg)
+![](/posts//hexo-banner.jpg)
 
 > 开启，新世界的旅程 ~
 

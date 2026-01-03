@@ -5,11 +5,11 @@ tags:
     - webpack
     - ES6
     - plugs
-cover: /images/accessible-js-Library-Development.jpg
+cover: /posts//accessible-js-Library-Development.jpg
 description: 是的，再不看书，书里的知识就过时了
 ---
 
-![](/images/amap-banner.jpg)
+![](/posts//amap-banner.jpg)
 
 > 一个练手项目的总结，其中感觉最有趣的就是高德地图的文档了（简直不要太友好了~）
 

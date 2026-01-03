@@ -5,11 +5,11 @@ tags:
     - 业务
     - react
     - vue
-cover: /images/accessible-js-Library-Development.jpg
+cover: /posts//accessible-js-Library-Development.jpg
 description: 是的，再不看书，书里的知识就过时了
 ---
 
-![](/images/tagImage-banner.jpg)
+![](/posts//tagImage-banner.jpg)
 
 > 愈发纯熟的业务代码——开始做菜
 

@@ -4,10 +4,10 @@ pubDate: 2018-04-01 11:40:05
 tags:
     - 随记
     - Hexo
-cover: /images/accessible-js-Library-Development.jpg
+cover: /posts//accessible-js-Library-Development.jpg
 description: 是的，再不看书，书里的知识就过时了
 ---
-![](/images/hexo-banner.jpg)
+![](/posts//hexo-banner.jpg)
 
 > 你看起来不错，来做我的菜吧 ~
 

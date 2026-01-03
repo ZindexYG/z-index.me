@@ -5,11 +5,11 @@ tags:
     - JavaScript
     - React
     - css
-cover: /images/accessible-js-Library-Development.jpg
+cover: /posts//accessible-js-Library-Development.jpg
 description: 是的，再不看书，书里的知识就过时了
 ---
 
-![](/images/Audio_Diy_Style.png)
+![](/posts//Audio_Diy_Style.png)
 
 > 菜还是那道菜，料不一样了
 

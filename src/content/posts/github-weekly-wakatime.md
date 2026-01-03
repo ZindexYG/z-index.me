@@ -4,11 +4,11 @@ pubDate: 2020-05-14 23:18:12
 tags:
     - gist
     - wakatime
-cover: /images/accessible-js-Library-Development.jpg
+cover: /posts//accessible-js-Library-Development.jpg
 description: 是的，再不看书，书里的知识就过时了
 ---
 
-![](/images/github-week-wakatime-banner.png)
+![](/posts//github-week-wakatime-banner.png)
 
 > 今天，你摸鱼了吗？
 
@@ -18,7 +18,7 @@ description: 是的，再不看书，书里的知识就过时了
 
 想要自己的 ``Github -> Overview`` 上出现好看的 ``Weekly development breakdown``
 
-![](/images/github-week-wakatime-dg.png)
+![](/posts//github-week-wakatime-dg.png)
 
 
 ### 预备

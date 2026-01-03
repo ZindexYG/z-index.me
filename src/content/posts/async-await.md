@@ -5,10 +5,10 @@ tags:
     - 面试
     - es6
     - es7
-cover: /images/accessible-js-Library-Development.jpg
+cover: /posts//accessible-js-Library-Development.jpg
 description: 是的，再不看书，书里的知识就过时了
 ---
-![](/images/async-await.jpg)
+![](/posts//async-await.jpg)
 
 >新调料，新味道
 

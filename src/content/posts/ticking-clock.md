@@ -3,11 +3,11 @@ title: 时针滴答一下，响了
 pubDate: 2017-12-22 21:53:14
 tags:
     - 随记
-cover: /images/accessible-js-Library-Development.jpg
+cover: /posts//accessible-js-Library-Development.jpg
 description: 是的，再不看书，书里的知识就过时了
 ---
 
-![](/images/2017-banner.jpg)
+![](/posts//2017-banner.jpg)
 
 >一些唠叨
 

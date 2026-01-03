@@ -3,11 +3,11 @@ title: 理解 JavaScript 中 Reduce()
 pubDate: 2020-10-25 20:51:01
 tags:
   - JavaScript
-cover: /images/accessible-js-Library-Development.jpg
+cover: /posts//accessible-js-Library-Development.jpg
 description: 是的，再不看书，书里的知识就过时了
 ---
 
-![](/images/js-api-reduce.png)
+![](/posts//js-api-reduce.png)
 
 > 新鲜的调料，与从前不同的是？
 

@@ -5,11 +5,11 @@ tags:
     - bootstrap
     - plugs
     - 读书笔记
-cover: /images/accessible-js-Library-Development.jpg
+cover: /posts//accessible-js-Library-Development.jpg
 description: 是的，再不看书，书里的知识就过时了
 ---
 
-![](/images/boot-banner.jpg)
+![](/posts//boot-banner.jpg)
 
 > 本文介绍的是 [bootstrap中文网](http://www.bootcss.com/) 里的一些插件与模板 以及 [《bootstrap实战》](https://book.douban.com/subject/26376363/)里面介绍的一些工具
 

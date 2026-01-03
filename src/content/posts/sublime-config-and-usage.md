@@ -5,11 +5,11 @@ tags:
     - Sublime
     - 工具
     - 语言环境
-cover: /images/accessible-js-Library-Development.jpg
+cover: /posts//accessible-js-Library-Development.jpg
 description: 是的，再不看书，书里的知识就过时了
 ---
 
-![](/images/sublime-index.jpg)
+![](/posts//sublime-index.jpg)
 
 > 工具只是工具，本文只是本人的一点心得，无意引战
 

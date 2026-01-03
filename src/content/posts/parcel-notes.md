@@ -5,11 +5,11 @@ tags:
     - 打包工具
     - ES6
     - jQuery
-cover: /images/accessible-js-Library-Development.jpg
+cover: /posts//accessible-js-Library-Development.jpg
 description: 是的，再不看书，书里的知识就过时了
 ---
 
-![](/images/parcel-banner.jpg)
+![](/posts//parcel-banner.jpg)
 
 > 本文是记录着两天使用 parcel 的情况，以及遇到的坑（犯过的傻...
 
@@ -69,7 +69,7 @@ echo {"modules": true,"plugins": {"autoprefixer": {"grid": true}}}>.postcssrc
 
 ```bash
 npm install --save-de posthtml-img-autosize
-echo {"plugins": {"posthtml-img-autosize": {"root": "./images"}}}>.posthtmlrc
+echo {"plugins": {"posthtml-img-autosize": {"root": "./posts/"}}}>.posthtmlrc
 ```
 
 #### npm 指令配置
