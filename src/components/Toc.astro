@@ -2,79 +2,79 @@
 import type { MarkdownHeading } from 'astro'
 
 type Props = { headings: MarkdownHeading[] }
-type HeadingWithSubheadings = MarkdownHeading & {
-  subheadings: MarkdownHeading[]
+
+interface TocItem extends MarkdownHeading {
+  children: TocItem[]
 }
 
 const { headings }: Props = Astro.props
 
-/** 按 h2 / h3 分组 */
-const grouped: HeadingWithSubheadings[] = headings.reduce<
-  HeadingWithSubheadings[]
->((arr, h) => {
-  if (h.depth === 2) arr.push({ ...h, subheadings: [] })
-  else if (h.depth === 3) arr.at(-1)?.subheadings.push(h)
-  return arr
-}, [])
+/**
+ * 将扁平的 headings 数组转换为树状结构
+ * 支持 h1 - h5 任意层级
+ */
+function buildToc(headings: MarkdownHeading[]) {
+  const root: TocItem = { depth: 0, text: '', slug: '', children: [] }
+  const stack = [root]
 
-const has = grouped.length > 0
+  for (const h of headings) {
+    // 只要当前标题深度小于或等于栈顶深度，就出栈，直到找到父节点
+    while (stack[stack.length - 1].depth >= h.depth) {
+      stack.pop()
+    }
+    const newItem = { ...h, children: [] }
+    stack[stack.length - 1].children.push(newItem)
+    stack.push(newItem)
+  }
+  return root.children
+}
+
+const tocTree = buildToc(headings)
+const has = tocTree.length > 0
+
+/** 辅助函数：递归渲染树 */
+function renderToc(items: TocItem[]): string {
+  if (!items.length) return ''
+  return `
+    <ul class="space-y-1 ${items[0].depth > 1 ? 'pl-4' : ''}">
+      ${items
+        .map(
+          item => `
+        <li class="text-sm leading-tight">
+          <a href="#${item.slug}" class="toc-link toc-h${item.depth}" data-depth="${item.depth}">
+            ${item.text}
+          </a>
+          ${renderToc(item.children)}
+        </li>
+      `,
+        )
+        .join('')}
+    </ul>
+  `
+}
 ---
 
 {
   has && (
     <div class='toc-root'>
-      {/* 移动端：内嵌（<1200 显示） */}
+      {/* 移动端：内嵌 */}
       <nav class='toc toc-inline' aria-label='Table Of Contents'>
         <details open>
           <summary class='text-sm font-semibold'>Table of Contents</summary>
-          <ul class='space-y-1 ml-8 mt-4'>
-            {grouped.map(h => (
-              <li class='text-sm leading-tight'>
-                <a href={`#${h.slug}`} class='toc-link toc-h2'>
-                  {h.text}
-                </a>
-                {h.subheadings.length > 0 && (
-                  <ul class='space-y-1 pl-4'>
-                    {h.subheadings.map(s => (
-                      <li class='text-sm leading-tight'>
-                        <a href={`#${s.slug}`} class='toc-link toc-h3'>
-                          {s.text}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
+          <div class='mt-4 ml-4'>
+            <Fragment set:html={renderToc(tocTree)} />
+          </div>
         </details>
       </nav>
 
-      {/* 桌面端：右侧浮动（≥1200 显示） */}
+      {/* 桌面端：右侧浮动 */}
       <aside class='toc-float'>
         <nav class='toc' aria-label='Table Of Contents'>
           <details open>
             <summary class='text-sm font-semibold'>Table of Contents</summary>
-            <ul class='space-y-1'>
-              {grouped.map(h => (
-                <li class='text-sm leading-tight'>
-                  <a href={`#${h.slug}`} class='toc-link toc-h2'>
-                    {h.text}
-                  </a>
-                  {h.subheadings.length > 0 && (
-                    <ul class='space-y-1 pl-4'>
-                      {h.subheadings.map(s => (
-                        <li class='text-sm leading-tight'>
-                          <a href={`#${s.slug}`} class='toc-link toc-h3'>
-                            {s.text}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
-            </ul>
+            <div class='mt-2'>
+              <Fragment set:html={renderToc(tocTree)} />
+            </div>
           </details>
         </nav>
       </aside>
@@ -94,26 +94,24 @@ const has = grouped.length > 0
       const root = document.querySelector('.toc-root')
       if (!root) return
 
-      // 右侧浮动 TOC：顶端淡出 / 下滚淡入
       const float = root.querySelector('.toc-float')
       const atTop = () => window.scrollY <= 2
       const onScroll = () => {
         float?.classList.toggle('at-top', atTop())
       }
       onScroll()
-      window.removeEventListener('scroll', onScroll)
       window.addEventListener('scroll', onScroll, { passive: true })
 
-      // 自动高亮（两份 TOC 同步）
       const article = document.querySelector('article[data-pagefind-body]')
       if (!article) return
 
-      const heads = [...article.querySelectorAll('h2[id], h3[id]')]
+      // 更新选择器：支持 h1 到 h5
+      const heads = [
+        ...article.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id]'),
+      ]
       if (!heads.length) return
 
       const allLinks = [...root.querySelectorAll('.toc a.toc-link')]
-
-      // 映射：id -> 对应的所有链接
       const map = new Map()
       for (const a of allLinks) {
         const href = a.getAttribute('href') || ''
@@ -155,7 +153,6 @@ const has = grouped.length > 0
 
       heads.forEach(h => io.observe(h))
 
-      // 平滑滚动
       const onClick = e => {
         const a = e.target.closest('.toc a.toc-link')
         if (!a) return
@@ -169,7 +166,6 @@ const has = grouped.length > 0
       }
       root.addEventListener('click', onClick)
 
-      // 清理
       const cleanup = () => {
         window.removeEventListener('scroll', onScroll)
         io.disconnect()
@@ -183,15 +179,15 @@ const has = grouped.length > 0
   })()
 </script>
 
-<!-- 全局：避免锚点被粘性头部挡住 -->
 <style is:global>
-  article[data-pagefind-body] :is(h2[id], h3[id]) {
+  /* 确保所有层级的锚点都有偏移 */
+  article[data-pagefind-body] :is(h1[id], h2[id], h3[id], h4[id], h5[id]) {
     scroll-margin-top: 96px;
   }
 </style>
 
 <style>
-  /* ===== 显示规则：<1200 只显示内嵌；≥1200 显示浮动 ===== */
+  /* ...原有显示规则保持不变... */
   .toc-root .toc-inline {
     display: block;
   }
@@ -207,36 +203,21 @@ const has = grouped.length > 0
     }
   }
 
-  /* ===== 基础结构 ===== */
   .toc-root .toc details {
     padding: 1rem;
     border-radius: 10px;
     border: 1px solid #83838330;
     margin-bottom: 1rem;
-    transition:
-      box-shadow 0.2s ease,
-      border-color 0.2s ease;
-  }
-  .toc-root .toc summary {
-    cursor: pointer;
-  }
-  .toc-root .toc ul li {
-    list-style: none;
   }
 
   .toc-root .toc-float {
     position: fixed;
-    top: 84px; /* 预留 header */
+    top: 84px;
     right: max(12px, env(safe-area-inset-right));
     width: 260px;
     max-height: 78vh;
     overflow: auto;
-    background: transparent;
     z-index: 40;
-
-    opacity: 1;
-    pointer-events: auto;
-    transform: none;
     transition:
       opacity 0.25s ease,
       transform 0.25s ease;
@@ -247,51 +228,51 @@ const has = grouped.length > 0
     transform: translateY(-4px);
   }
 
-  /* ===== 颜色规范（纯 CSS） ===== */
-  /* 非激活：灰色 */
+  /* 链接基础样式 */
   .toc-root .toc a.toc-link {
     position: relative;
     display: block;
     padding: 0.125rem 0;
-    color: #6b7280; /* zinc-500 */
+    color: #6b7280;
     text-decoration: none;
     transition: color 0.15s ease;
   }
   .dark .toc-root .toc a.toc-link {
-    color: #a1a1aa; /* zinc-400 */
+    color: #a1a1aa;
   }
+
   .toc-root .toc a.toc-link:hover {
     color: #3f3f46;
-  } /* zinc-700 */
+  }
   .dark .toc-root .toc a.toc-link:hover {
     color: #e4e4e7;
-  } /* zinc-200 */
-  .toc-root .toc a.toc-h3 {
-    opacity: 0.9;
   }
 
-  /* 高亮指示点 */
+  /* 激活状态指示点 */
   .toc-root .toc a.toc-link.is-active::before {
-    color: #a1a1aa;
     content: '';
     position: absolute;
-    left: -10px;
+    left: -12px;
     top: 0.6em;
-    width: 6px;
-    height: 6px;
-    border-radius: 9999px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
     background: currentColor;
   }
-  .toc-root .toc a.toc-h3.is-active::before {
-    width: 4px;
-    height: 4px;
-    top: 0.55em;
+
+  /* 不同深度的微调 */
+  .toc-root .toc a[data-depth='1'] {
+    font-weight: 600;
+  }
+  .toc-root .toc a[data-depth='3'],
+  .toc-root .toc a[data-depth='4'],
+  .toc-root .toc a[data-depth='5'] {
+    opacity: 0.8;
+    font-size: 0.9em;
   }
 
-  /* 浮动卡片浅底与边框（可按需调整/移除） */
   .toc-root .toc-float .toc details {
     padding: 0.75rem;
-    border-radius: 0.5rem;
     border: 1px solid rgba(0, 0, 0, 0.08);
     background-color: rgba(0, 0, 0, 0.03);
   }
