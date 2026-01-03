@@ -2,10 +2,10 @@
 import Layout from '../../layouts/Layout.astro'
 
 // 本地 JSON
-import movieData from './data/douban/movie.json'
-import bookData from './data/douban/book.json'
-import gameData from './data/douban/game.json'
-import recentData from './data/douban/recent.json'
+import movieData from '../../data/douban/movie.json'
+import bookData from '../../data/douban/book.json'
+import gameData from '../../data/douban/game.json'
+import recentData from '../../data/douban/recent.json'
 
 // —— 工具：把不同 JSON 结构“规范化”为统一字段 ——
 function normalizeRows(cat: string, jsonData: any) {
@@ -90,7 +90,12 @@ const mergedRecentItems = recentData
   .sort((a, b) => (new Date(b._created) as any) - (new Date(a._created) as any))
 
 const tabs = [
-  { id: 'recent', label: 'Last Month', items: mergedRecentItems, checked: true },
+  {
+    id: 'recent',
+    label: 'Last Month',
+    items: mergedRecentItems,
+    checked: true,
+  },
   { id: 'movie', label: '影', items: grouped.movie },
   { id: 'tv', label: '剧', items: grouped.tv, hideTab: true },
   { id: 'book', label: '书', items: grouped.book },
@@ -105,78 +110,85 @@ const getLink = (entry: any) =>
 <Layout title='书影音档案' description='我的精神食粮'>
   <div class='container mx-auto'>
     <div class='tabset mb-6'>
-      {tabs.map(tab => (
-        <input
-          id={`tab-${tab.id}`}
-          type='radio'
-          name='neoTabs'
-          class='tab-input'
-          checked={tab.checked}
-        />
-      ))}
+      {
+        tabs.map(tab => (
+          <input
+            id={`tab-${tab.id}`}
+            type='radio'
+            name='neoTabs'
+            class='tab-input'
+            checked={tab.checked}
+          />
+        ))
+      }
 
-      <div class='tabs flex flex-wrap gap-2 md:gap-3 border-b border-black/10 dark:border-white/10 pb-2'>
-        {tabs.filter(t => !t.hideTab).map(tab => (
-          <label
-            for={`tab-${tab.id}`}
-            class='group flex justify-between gap-3 text-sm px-2 py-1 rounded bg-bgdefault dark:bg-fontdefault text-fontdefault dark:text-bgdefault cursor-pointer'
-          >
-            {tab.label}
-          </label>
-        ))}
+      <div
+        class='tabs flex flex-wrap gap-2 md:gap-3 border-b border-black/10 dark:border-white/10 pb-2'>
+        {
+          tabs
+            .filter(t => !t.hideTab)
+            .map(tab => (
+              <label
+                for={`tab-${tab.id}`}
+                class='group flex justify-between gap-3 text-sm px-2 py-1 rounded bg-bgdefault dark:bg-fontdefault text-fontdefault dark:text-bgdefault cursor-pointer'>
+                {tab.label}
+              </label>
+            ))
+        }
       </div>
 
       <div class='panels mt-6'>
-        {tabs.map(tab => (
-          <section id={`panel-${tab.id}`} class='tab-panel'>
-            {tab.items?.length ? (
-              <div class='grid grid-cols-2 md:grid-cols-5 gap-3'>
-                {tab.items.map(entry => (
-                  <div class="block group">
-                    <a
-                      href={getLink(entry)}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      class="block"
-                    >
-                      <div class='relative rounded overflow-hidden bg-zinc-100 dark:bg-zinc-800 aspect-[2/3]'>
-                        <img
-                          src={entry._cover}
-                          alt={entry._title}
-                          loading='lazy'
-                          decoding='async'
-                          referrerpolicy='no-referrer'
-                          class='w-full h-full object-cover block transition-opacity duration-300'
-                          onerror="this.style.opacity='0'; this.nextElementSibling.style.display='flex';"
-                        />
-                        <div
-                          class="hidden absolute inset-0 flex-col items-center justify-center bg-zinc-100 dark:bg-zinc-800 cursor-pointer"
-                          onclick="event.preventDefault(); const img = this.previousElementSibling; img.src = img.src.split('?')[0] + '?t=' + Date.now(); img.style.opacity='1'; this.style.display='none';"
-                        >
-                          <span class="text-xs text-gray-400">加载失败</span>
-                          <span class="text-xs text-blue-500">点击重试</span>
+        {
+          tabs.map(tab => (
+            <section id={`panel-${tab.id}`} class='tab-panel'>
+              {tab.items?.length ? (
+                <div class='grid grid-cols-2 md:grid-cols-5 gap-3'>
+                  {tab.items.map(entry => (
+                    <div class='block group'>
+                      <a
+                        href={getLink(entry)}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        class='block'>
+                        <div class='relative rounded overflow-hidden bg-zinc-100 dark:bg-zinc-800 aspect-[2/3]'>
+                          <img
+                            src={entry._cover}
+                            alt={entry._title}
+                            loading='lazy'
+                            decoding='async'
+                            referrerpolicy='no-referrer'
+                            class='w-full h-full object-cover block transition-opacity duration-300'
+                            onerror="this.style.opacity='0'; this.nextElementSibling.style.display='flex';"
+                          />
+                          <div
+                            class='hidden absolute inset-0 flex-col items-center justify-center bg-zinc-100 dark:bg-zinc-800 cursor-pointer'
+                            onclick="event.preventDefault(); const img = this.previousElementSibling; img.src = img.src.split('?')[0] + '?t=' + Date.now(); img.style.opacity='1'; this.style.display='none';">
+                            <span class='text-xs text-gray-400'>加载失败</span>
+                            <span class='text-xs text-blue-500'>点击重试</span>
+                          </div>
                         </div>
-                      </div>
-                      <p
-                        class='mt-2 text-sm text-center text-gray-500 dark:text-gray-500 truncate w-full px-1'
-                        title={entry._title}
-                      >
-                        {entry._title}
-                      </p>
-                    </a>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p class='text-gray-500'>{tab.id === 'recent' ? '最近 1 个月暂无数据' : '暂无数据'}</p>
-            )}
-            {tab.id === 'recent' && (
-              <p class='mt-10 text-sm text-gray-400 text-center'>
-                ⚠️偶尔会对之前看过的内容进行查漏补缺
-              </p>
-            )}
-          </section>
-        ))}
+                        <p
+                          class='mt-2 text-sm text-center text-gray-500 dark:text-gray-500 truncate w-full px-1'
+                          title={entry._title}>
+                          {entry._title}
+                        </p>
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p class='text-gray-500'>
+                  {tab.id === 'recent' ? '最近 1 个月暂无数据' : '暂无数据'}
+                </p>
+              )}
+              {tab.id === 'recent' && (
+                <p class='mt-10 text-sm text-gray-400 text-center'>
+                  ⚠️偶尔会对之前看过的内容进行查漏补缺
+                </p>
+              )}
+            </section>
+          ))
+        }
       </div>
     </div>
   </div>
