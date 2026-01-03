@@ -7,33 +7,7 @@ import bookData from './data/douban/book.json'
 import gameData from './data/douban/game.json'
 import recentData from './data/douban/recent.json'
 
-// 本地数据映射
-const localData = {
-  movie: movieData,
-  tv: movieData, // TV 和电影共用
-  game: gameData,
-  book: bookData,
-}
-
-// 中文短名（用于标题/标签）
-const categoryMap = {
-  movie: '影',
-  // tv: '剧',
-  game: '游',
-  book: '书'
-}
-
-// 归集
-const grouped: Record<string, any[]> = {} // 各分类全部（已排序，不限数量）
-let mergedRecentItems: any[] = [] // 近 1 个月
-
-// 时间窗口：近 1 个月
-const now = new Date()
-const oneMonthAgo = new Date(now)
-oneMonthAgo.setMonth(now.getMonth() - 1)
-
 // —— 工具：把不同 JSON 结构“规范化”为统一字段 ——
-// 期望输出形态：{ _title, _cover, _uuid, _created, _item, category }
 function normalizeRows(cat: string, jsonData: any) {
   const rows = Array.isArray(jsonData)
     ? jsonData
@@ -96,19 +70,15 @@ function normalizeRows(cat: string, jsonData: any) {
 }
 
 // 处理本地数据
-Object.entries(localData).forEach(([cat, jsonData]) => {
-  const normalized = normalizeRows(cat, jsonData)
-
-  // 分类页：全部，按时间降序
-  grouped[cat] = normalized
-    .slice()
-    .sort(
-      (a, b) => (new Date(b._created) as any) - (new Date(a._created) as any),
-    )
-})
+const grouped = {
+  movie: normalizeRows('movie', movieData),
+  tv: normalizeRows('tv', movieData), // 目前共用
+  book: normalizeRows('book', bookData),
+  game: normalizeRows('game', gameData),
+}
 
 // 使用 recentData 作为最近一个月的数据
-mergedRecentItems = recentData
+const mergedRecentItems = recentData
   .map((raw: any) => ({
     ...raw,
     _title: raw.title,
@@ -119,225 +89,94 @@ mergedRecentItems = recentData
   }))
   .sort((a, b) => (new Date(b._created) as any) - (new Date(a._created) as any))
 
-// 跳转链接（使用本地 link）
+const tabs = [
+  { id: 'recent', label: 'Last Month', items: mergedRecentItems, checked: true },
+  { id: 'movie', label: '影', items: grouped.movie },
+  { id: 'tv', label: '剧', items: grouped.tv, hideTab: true },
+  { id: 'book', label: '书', items: grouped.book },
+  { id: 'game', label: '游', items: grouped.game },
+]
+
+// 跳转链接
 const getLink = (entry: any) =>
   entry.link || `https://neodb.social/${entry.category}/${entry._uuid}`
 ---
 
 <Layout title='书影音档案' description='我的精神食粮'>
   <div class='container mx-auto'>
-    <!-- 把 radio 放在 panels 之前，保证 ~ 兄弟选择器可用 -->
     <div class='tabset mb-6'>
-      <input
-        id='tab-recent'
-        type='radio'
-        name='neoTabs'
-        class='tab-input'
-        checked
-      />
-      <input id='tab-movie' type='radio' name='neoTabs' class='tab-input' />
-      <input id='tab-tv' type='radio' name='neoTabs' class='tab-input' />
-      <input id='tab-book' type='radio' name='neoTabs' class='tab-input' />
-      <input id='tab-game' type='radio' name='neoTabs' class='tab-input' />
+      {tabs.map(tab => (
+        <input
+          id={`tab-${tab.id}`}
+          type='radio'
+          name='neoTabs'
+          class='tab-input'
+          checked={tab.checked}
+        />
+      ))}
 
-      <div
-        class='tabs flex flex-wrap gap-2 md:gap-3 border-b border-black/10 dark:border-white/10 pb-2'>
-        <label
-          for='tab-recent'
-          class='group flex justify-between gap-3 text-sm px-2 py-1 rounded bg-bgdefault dark:bg-fontdefault text-fontdefault dark:text-bgdefault'
-          >Last Month</label
-        >
-        <label
-          for='tab-movie'
-          class='group flex justify-between gap-3 text-sm px-2 py-1 rounded bg-bgdefault dark:bg-fontdefault text-fontdefault dark:text-bgdefault'
-          >{categoryMap.movie}</label
-        >
-        <!-- <label
-          for='tab-tv'
-          class='group flex justify-between gap-3 text-sm px-2 py-1 rounded bg-bgdefault dark:bg-fontdefault text-fontdefault dark:text-bgdefault'
-          >{categoryMap.tv}</label
-        > -->
-        <label
-          for='tab-book'
-          class='group flex justify-between gap-3 text-sm px-2 py-1 rounded bg-bgdefault dark:bg-fontdefault text-fontdefault dark:text-bgdefault'
-          >{categoryMap.book}</label
-        >
-        <label
-          for='tab-game'
-          class='group flex justify-between gap-3 text-sm px-2 py-1 rounded bg-bgdefault dark:bg-fontdefault text-fontdefault dark:text-bgdefault'
-          >{categoryMap.game}</label
-        >
+      <div class='tabs flex flex-wrap gap-2 md:gap-3 border-b border-black/10 dark:border-white/10 pb-2'>
+        {tabs.filter(t => !t.hideTab).map(tab => (
+          <label
+            for={`tab-${tab.id}`}
+            class='group flex justify-between gap-3 text-sm px-2 py-1 rounded bg-bgdefault dark:bg-fontdefault text-fontdefault dark:text-bgdefault cursor-pointer'
+          >
+            {tab.label}
+          </label>
+        ))}
       </div>
 
-      <!-- 面板：默认 display:none，由 radio:checked ~ .panels #panel-xxx 控制显示 -->
       <div class='panels mt-6'>
-        <!-- 最近（近 1 个月） -->
-        <section id='panel-recent' class='tab-panel'>
-          {
-            mergedRecentItems?.length ? (
+        {tabs.map(tab => (
+          <section id={`panel-${tab.id}`} class='tab-panel'>
+            {tab.items?.length ? (
               <div class='grid grid-cols-2 md:grid-cols-5 gap-3'>
-                {mergedRecentItems.map(entry => (
-                  <a
-                    href={getLink(entry)}
-                    class='block'
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    <div class='rounded overflow-hidden bg-zinc-100 dark:bg-zinc-800'>
-                      <img
-                        src={entry._cover}
-                        alt={entry._title}
-                        loading='lazy'
-                        decoding='async'
-                        referrerpolicy='no-referrer'
-                        class='w-full h-48 object-cover'
-                      />
-                    </div>
-                    <p class='mt-2 text-sm text-center text-gray-500 dark:text-gray-500'>
-                      {entry._title}
-                    </p>
-                  </a>
+                {tab.items.map(entry => (
+                  <div class="block group">
+                    <a
+                      href={getLink(entry)}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      class="block"
+                    >
+                      <div class='relative rounded overflow-hidden bg-zinc-100 dark:bg-zinc-800 aspect-[2/3]'>
+                        <img
+                          src={entry._cover}
+                          alt={entry._title}
+                          loading='lazy'
+                          decoding='async'
+                          referrerpolicy='no-referrer'
+                          class='w-full h-full object-cover block transition-opacity duration-300'
+                          onerror="this.style.opacity='0'; this.nextElementSibling.style.display='flex';"
+                        />
+                        <div
+                          class="hidden absolute inset-0 flex-col items-center justify-center bg-zinc-100 dark:bg-zinc-800 cursor-pointer"
+                          onclick="event.preventDefault(); const img = this.previousElementSibling; img.src = img.src.split('?')[0] + '?t=' + Date.now(); img.style.opacity='1'; this.style.display='none';"
+                        >
+                          <span class="text-xs text-gray-400">加载失败</span>
+                          <span class="text-xs text-blue-500">点击重试</span>
+                        </div>
+                      </div>
+                      <p
+                        class='mt-2 text-sm text-center text-gray-500 dark:text-gray-500 truncate w-full px-1'
+                        title={entry._title}
+                      >
+                        {entry._title}
+                      </p>
+                    </a>
+                  </div>
                 ))}
               </div>
             ) : (
-              <p class='text-gray-500'>最近 1 个月暂无数据</p>
-            )
-          }
-          <p class='mt-10 text-sm text-gray-400 text-center'>
-            ⚠️偶尔会对之前看过的内容进行查漏补缺
-          </p>
-        </section>
-
-        <!-- 影 -->
-        <section id='panel-movie' class='tab-panel'>
-          {
-            grouped.movie?.length ? (
-              <div class='grid grid-cols-2 md:grid-cols-5 gap-3'>
-                {grouped.movie.map(entry => (
-                  <a
-                    href={getLink(entry)}
-                    class='block'
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    <div class='rounded overflow-hidden bg-zinc-100 dark:bg-zinc-800'>
-                      <img
-                        src={entry._cover}
-                        alt={entry._title}
-                        loading='lazy'
-                        decoding='async'
-                        referrerpolicy='no-referrer'
-                        class='w-full h-48 object-cover'
-                      />
-                    </div>
-                    <p class='mt-2 text-sm text-center text-gray-500 dark:text-gray-500'>
-                      {entry._title}
-                    </p>
-                  </a>
-                ))}
-              </div>
-            ) : (
-              <p class='text-gray-500'>暂无数据</p>
-            )
-          }
-        </section>
-
-        <!-- 剧 -->
-        <section id='panel-tv' class='tab-panel'>
-          {
-            grouped.tv?.length ? (
-              <div class='grid grid-cols-2 md:grid-cols-5 gap-3'>
-                {grouped.tv.map(entry => (
-                  <a
-                    href={getLink(entry)}
-                    class='block'
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    <div class='rounded overflow-hidden bg-zinc-100 dark:bg-zinc-800'>
-                      <img
-                        src={entry._cover}
-                        alt={entry._title}
-                        loading='lazy'
-                        decoding='async'
-                        referrerpolicy='no-referrer'
-                        class='w-full h-48 object-cover'
-                      />
-                    </div>
-                    <p class='mt-2 text-sm text-center text-gray-500 dark:text-gray-500'>
-                      {entry._title}
-                    </p>
-                  </a>
-                ))}
-              </div>
-            ) : (
-              <p class='text-gray-500'>暂无数据</p>
-            )
-          }
-        </section>
-
-        <!-- 书 -->
-        <section id='panel-book' class='tab-panel'>
-          {
-            grouped.book?.length ? (
-              <div class='grid grid-cols-2 md:grid-cols-5 gap-3'>
-                {grouped.book.map(entry => (
-                  <a
-                    href={getLink(entry)}
-                    class='block'
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    <div class='rounded overflow-hidden bg-zinc-100 dark:bg-zinc-800'>
-                      <img
-                        src={entry._cover}
-                        alt={entry._title}
-                        loading='lazy'
-                        decoding='async'
-                        referrerpolicy='no-referrer'
-                        class='w-full h-48 object-cover'
-                      />
-                    </div>
-                    <p class='mt-2 text-sm text-center text-gray-500 dark:text-gray-500'>
-                      {entry._title}
-                    </p>
-                  </a>
-                ))}
-              </div>
-            ) : (
-              <p class='text-gray-500'>暂无数据</p>
-            )
-          }
-        </section>
-
-        <!-- 游 -->
-        <section id='panel-game' class='tab-panel'>
-          {
-            grouped.game?.length ? (
-              <div class='grid grid-cols-2 md:grid-cols-5 gap-3'>
-                {grouped.game.map(entry => (
-                  <a
-                    href={getLink(entry)}
-                    class='block'
-                    target='_blank'
-                    rel='noopener noreferrer'>
-                    <div class='rounded overflow-hidden bg-zinc-100 dark:bg-zinc-800'>
-                      <img
-                        src={entry._cover}
-                        alt={entry._title}
-                        loading='lazy'
-                        decoding='async'
-                        referrerpolicy='no-referrer'
-                        class='w-full h-48 object-cover'
-                      />
-                    </div>
-                    <p class='mt-2 text-sm text-center text-gray-500 dark:text-gray-500'>
-                      {entry._title}
-                    </p>
-                  </a>
-                ))}
-              </div>
-            ) : (
-              <p class='text-gray-500'>暂无数据</p>
-            )
-          }
-        </section>
+              <p class='text-gray-500'>{tab.id === 'recent' ? '最近 1 个月暂无数据' : '暂无数据'}</p>
+            )}
+            {tab.id === 'recent' && (
+              <p class='mt-10 text-sm text-gray-400 text-center'>
+                ⚠️偶尔会对之前看过的内容进行查漏补缺
+              </p>
+            )}
+          </section>
+        ))}
       </div>
     </div>
   </div>
