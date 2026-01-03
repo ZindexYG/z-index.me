@@ -4,7 +4,7 @@ pubDate: 2017-12-22 21:53:14
 tags:
     - 随记
 cover: /posts/2017-banner.jpg
-description:一些唠叨
+description: 一些唠叨
 ---
 
 ![](/posts/2017-banner.jpg)
