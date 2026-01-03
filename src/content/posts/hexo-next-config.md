@@ -4,11 +4,11 @@ pubDate: 2018-04-09 22:31:24
 tags:
     - 随记
     - Hexo
-cover: /posts//accessible-js-Library-Development.jpg
-description: 是的，再不看书，书里的知识就过时了
+cover: /posts/NexT-banner.jpg
+description: 你看起来很适合我，来喂饱我吧~
 ---
 
-![](/posts//NexT-banner.jpg)
+![](/posts/NexT-banner.jpg)
 
 > 你看起来很适合我，来喂饱我吧~
 

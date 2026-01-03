@@ -4,11 +4,11 @@ pubDate: 2020-05-14 23:18:12
 tags:
     - gist
     - wakatime
-cover: /posts//accessible-js-Library-Development.jpg
-description: 是的，再不看书，书里的知识就过时了
+cover: /posts/github-week-wakatime-banner.jpg
+description: 今天，你摸鱼了吗？
 ---
 
-![](/posts//github-week-wakatime-banner.png)
+![](/posts/github-week-wakatime-banner.png)
 
 > 今天，你摸鱼了吗？
 

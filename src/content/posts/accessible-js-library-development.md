@@ -5,7 +5,7 @@ tags:
     - javascript
     - vite
     - rollup
-cover: /posts//accessible-js-Library-Development.jpg
+cover: /posts/accessible-js-Library-Development.jpg
 description: 是的，再不看书，书里的知识就过时了
 ---
 

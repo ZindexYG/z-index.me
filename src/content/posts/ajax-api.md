@@ -5,8 +5,8 @@ tags:
     - javascript
     - ajax
     - ES6
-cover: /posts//accessible-js-Library-Development.jpg
-description: 是的，再不看书，书里的知识就过时了
+cover: /posts/ajax-banner.jpg
+description: 代码一把梭,快来人教我做菜吧
 ---
 
 ![](/posts//ajax-banner.jpg)

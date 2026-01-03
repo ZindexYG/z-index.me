@@ -5,11 +5,11 @@ tags:
     - 打包工具
     - ES6
     - jQuery
-cover: /posts//accessible-js-Library-Development.jpg
-description: 是的，再不看书，书里的知识就过时了
+cover: /posts/parcel-banner.jpg
+description: 本文是记录着两天使用 parcel 的情况，以及遇到的坑（犯过的傻...
 ---
 
-![](/posts//parcel-banner.jpg)
+![](/posts/parcel-banner.jpg)
 
 > 本文是记录着两天使用 parcel 的情况，以及遇到的坑（犯过的傻...
 

@@ -6,11 +6,11 @@ tags:
     - CSS
     - Post_css
     - layout
-cover: /posts//accessible-js-Library-Development.jpg
-description: 是的，再不看书，书里的知识就过时了
+cover: /posts//CSS-Evolution-banner.jpg
+description: 这技巧，为何你会那么熟练 ？
 ---
 
-![](/posts//CSS-Evolution-banner.jpg)
+![](/posts/CSS-Evolution-banner.jpg)
 
 > 这技巧，为何你会那么熟练 ？
 

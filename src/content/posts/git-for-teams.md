@@ -4,11 +4,11 @@ pubDate: 2022-07-16 19:20:55
 tags:
   - git
   - read note
-cover: /posts//accessible-js-Library-Development.jpg
-description: 是的，再不看书，书里的知识就过时了
+cover: /posts/git-for-teams.jpg
+description: 工具往往需要反复检验
 ---
 
-![banner](/posts//git-for-teams.jpg)
+![banner](/posts/git-for-teams.jpg)
 
 > 工具往往需要反复检验
 

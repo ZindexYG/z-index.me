@@ -4,11 +4,11 @@ pubDate: 2017-12-18 00:43:19
 tags:
     - jQuery
     - 读书笔记
-cover: /posts//accessible-js-Library-Development.jpg
-description: 是的，再不看书，书里的知识就过时了
+cover: /posts/jquery-banner.jpg
+description: 是读书笔记哇
 ---
 
-![](/posts//jquery-banner.jpg)
+![](/posts/jquery-banner.jpg)
 
 > 本文大部分都在参考 [《锋利的jQuery》](https://book.douban.com/subject/10792216/) 一书，几乎可以说是读书笔记
 

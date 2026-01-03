@@ -5,11 +5,11 @@ tags:
     - react
     - websocket
     - node
-cover: /posts//accessible-js-Library-Development.jpg
-description: 是的，再不看书，书里的知识就过时了
+cover: /posts/newWebSocket.png
+description: 或许别人也有，这里也不见得更好
 ---
 
-![](/posts//newWebSocket.png)
+![](/posts/newWebSocket.png)
 
 > 或许别人也有，这里也不见得更好
 

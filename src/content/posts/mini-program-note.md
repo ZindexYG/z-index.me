@@ -5,11 +5,11 @@ tags:
   - 小程序
   - CSS
   - Note
-cover: /posts//accessible-js-Library-Development.jpg
-description: 是的，再不看书，书里的知识就过时了
+cover: /posts/MiniProgram.png
+description: 看起来还算有趣
 ---
 
-![](/posts//MiniProgram.png)
+![](/posts/MiniProgram.png)
 
 > 看起来还算有趣
 

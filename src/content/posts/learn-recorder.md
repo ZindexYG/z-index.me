@@ -3,11 +3,11 @@ title: 关于录音 Recorder.js
 pubDate: 2021-09-21 15:51:57
 tags:
     - js
-cover: /posts//accessible-js-Library-Development.jpg
-description: 是的，再不看书，书里的知识就过时了
+cover: /posts/Recorder-js.png
+description: 看看，学学，又做做
 ---
 
-![](/posts//Recorder-js.png)
+![](/posts/Recorder-js.png)
 
 > 看，学，做
 
