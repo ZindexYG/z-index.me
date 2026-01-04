@@ -102,12 +102,28 @@ const tabs = [
   { id: 'game', label: '游', items: grouped.game },
 ]
 
-// 跳转链接
-const getLink = (entry: any) =>
-  entry.link || `https://neodb.social/${entry.category}/${entry._uuid}`
+// 跳转链接（优先使用原始 link；否则构建到豆瓣的对应页面）
+const getLink = (entry: any) => {
+  if (entry.link) return entry.link
+  const id = entry._uuid || ''
+  if (!id) return '#'
+
+  switch (entry.category) {
+    case 'movie':
+    case 'tv':
+      return `https://movie.douban.com/subject/${id}`
+    case 'book':
+      return `https://book.douban.com/subject/${id}`
+    case 'game':
+      // 通用豆瓣条目页面，游戏在部分场景下没有独立二级域名
+      return `https://www.douban.com/subject/${id}`
+    default:
+      return `https://douban.com/subject/${id}`
+  }
+}
 ---
 
-<Layout title='书影音档案' description='我的精神食粮'>
+<Layout title='书影游档案' description='YG 的精神食粮'>
   <div class='container mx-auto'>
     <div class='tabset mb-6'>
       {
