@@ -5,7 +5,7 @@ import MarkdownIt from 'markdown-it';
 const parser = new MarkdownIt();
 
 const FEED_ID = '230918040866381824';
-const USER_ID = 56922066987581440';
+const USER_ID = 56922066987581440;
 
 // 移除 XML 不允许的控制字符，防止 RSS 报错 (PCDATA invalid Char value)
 const removeInvalidChars = (str) => {
