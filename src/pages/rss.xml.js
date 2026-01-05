@@ -4,6 +4,9 @@ import sanitizeHtml from 'sanitize-html';
 import MarkdownIt from 'markdown-it';
 const parser = new MarkdownIt();
 
+const FEED_ID = '230918040866381824';
+const USER_ID = 56922066987581440';
+
 // 移除 XML 不允许的控制字符，防止 RSS 报错 (PCDATA invalid Char value)
 const removeInvalidChars = (str) => {
   return str.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
@@ -28,7 +31,13 @@ export async function GET(context) {
       ...post.data,
     })),
     customData: `
-    <language>zh-CN</language>
+      <language>zh-CN</language>
+      <generator>Astro</generator>
+      <follow_challenge>
+        <feedId>${FEED_ID}</feedId>
+        <userId>${USER_ID}</userId>
+      </follow_challenge>
+
     `
   });
 }
