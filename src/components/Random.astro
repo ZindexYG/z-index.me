@@ -18,26 +18,28 @@ const randomPosts = await getRandomPosts(3) // 随机获取 3 篇文章
 ---
 
 <div class='random'>
-  <div class="w-full h-1 bg-gray-600 mb-4 dark:bg-gray-300"></div>
+  <div class='w-full h-1 bg-gray-600 mb-4 dark:bg-gray-300'></div>
   <h1
     class='mb-4 text-xl font-heading font-bold text-zinc-900 dark:text-zinc-100'>
     Random Read
   </h1>
   <ul class='flex flex-col gap-1.5'>
     {
-      randomPosts.map((post: { fileName: any; data: { title: unknown; pubDate: Date } }) => (
-        <li>
-          <a
-            href={`${post.fileName}`}
-            class='group flex justify-between gap-3 text-sm'
-            data-umami-event='Random-article'>
-            <span class='group-hover:underline'>{post.data.title}</span>
-            <span class='text-nowrap text-zinc-500 font-mono'>
-              {formatDate(post.data.pubDate)}
-            </span>
-          </a>
-        </li>
-      ))
+      randomPosts.map(
+        (post: { fileName: any; data: { title: unknown; pubDate: Date } }) => (
+          <li>
+            <a
+              href={`/posts/${post.fileName}`}
+              class='group flex justify-between gap-3 text-sm'
+              data-umami-event='Random-article'>
+              <span class='group-hover:underline'>{post.data.title}</span>
+              <span class='text-nowrap text-zinc-500 font-mono'>
+                {formatDate(post.data.pubDate)}
+              </span>
+            </a>
+          </li>
+        ),
+      )
     }
   </ul>
 </div>
