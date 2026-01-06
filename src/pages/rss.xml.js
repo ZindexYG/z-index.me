@@ -15,6 +15,10 @@ const removeInvalidChars = (str) => {
 export async function GET(context) {
   const posts = await getCollection("posts");
 
+  // 构造站点与 favicon 的绝对 URL（RSS 要求 image 使用绝对 URL）
+  const siteUrl = context?.site ? String(context.site) : '';
+  const faviconUrl = siteUrl ? new URL('/favicon.svg', siteUrl).toString() : '/favicon.svg';
+
   // 按日期降序排序（最新的在前）
   const sortedPosts = posts.sort((a, b) => new Date(b.data.pubDate) - new Date(a.data.pubDate));
 
@@ -31,6 +35,11 @@ export async function GET(context) {
       ...post.data,
     })),
     customData: `
+      <image>
+        <url>${faviconUrl}</url>
+        <title>z-index</title>
+        <link>${siteUrl}</link>
+      </image>
       <language>zh-CN</language>
       <generator>Astro</generator>
       <follow_challenge>
