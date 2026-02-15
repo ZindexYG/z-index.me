@@ -64,7 +64,7 @@ function normalizeRows(cat: string, jsonData: any) {
       _title: title,
       _cover: cover,
       _uuid: uuid,
-      category: cat,
+      category: raw.category || cat,
     }
   })
 }
@@ -77,16 +77,8 @@ const grouped = {
   game: normalizeRows('game', gameData),
 }
 
-// 使用 recentData 作为最近一个月的数据
-const mergedRecentItems = recentData
-  .map((raw: any) => ({
-    ...raw,
-    _title: raw.title,
-    _cover: raw.cover,
-    _created: raw.date,
-    _uuid: raw.link ? raw.link.split('/')[4] : '',
-    category: raw.category || 'unknown',
-  }))
+// 使用 normalizeRows 处理最近一个月的数据，并按时间排序
+const mergedRecentItems = normalizeRows('recent', recentData)
   .sort((a, b) => (new Date(b._created) as any) - (new Date(a._created) as any))
 
 const tabs = [
@@ -172,7 +164,6 @@ const getLink = (entry: any) => {
                             alt={entry._title}
                             loading='lazy'
                             decoding='async'
-                            referrerpolicy='no-referrer'
                             class='w-full h-full object-cover block transition-opacity duration-300'
                             onerror="this.style.opacity='0'; this.nextElementSibling.style.display='flex';"
                           />
