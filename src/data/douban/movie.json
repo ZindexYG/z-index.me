@@ -1,12 +1,29 @@
 [
   {
+    "title": "讲话没有在听 / 講話沒有在聽 / Can You Hear Me?",
+    "link": "https://movie.douban.com/subject/35606197/",
+    "cover": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2714600740.webp",
+    "date": "2026-02-12",
+    "rating": 4,
+    "comment": "",
+    "category": "movie"
+  },
+  {
+    "title": "创：战神 / Tron: Ares / 创：战纪3 / 创战纪：战神降临(港)",
+    "link": "https://movie.douban.com/subject/30246476/",
+    "cover": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2925021518.webp",
+    "date": "2026-01-20",
+    "rating": 2,
+    "comment": "",
+    "category": "movie"
+  },
+  {
     "title": "寻秦记 / 尋秦記 / A Step Into The Past",
     "link": "https://movie.douban.com/subject/2983389/",
     "cover": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2515285368.webp",
     "date": "2025-12-31",
     "rating": 4,
-    "comment": "",
-    "category": "movie"
+    "comment": ""
   },
   {
     "title": "寻秦记 / 尋秦記 / 寻秦记(电影版) / Back to the Past",
@@ -14,8 +31,7 @@
     "cover": "https://img2.doubanio.com/view/photo/s_ratio_poster/public/p2928387071.webp",
     "date": "2025-12-31",
     "rating": 3,
-    "comment": "它告诉我，原来已经过去那么长时间了。",
-    "category": "movie"
+    "comment": "它告诉我，原来已经过去那么长时间了。"
   },
   {
     "title": "宋家皇朝 / 宋家三姐妹 / 宋氏三姐妹",
@@ -23,8 +39,7 @@
     "cover": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2417829396.webp",
     "date": "2025-12-28",
     "rating": 4,
-    "comment": "",
-    "category": "movie"
+    "comment": ""
   },
   {
     "title": "至暗时刻 / Darkest Hour / 黑暗对峙(港) / 最黑暗的时刻(台)",
@@ -32,8 +47,7 @@
     "cover": "https://img2.doubanio.com/view/photo/s_ratio_poster/public/p2504277551.webp",
     "date": "2025-12-14",
     "rating": 3,
-    "comment": "差点笑出声的一段。\n国王：丘同志，你得到群众中去。",
-    "category": "movie"
+    "comment": "差点笑出声的一段。\n国王：丘同志，你得到群众中去。"
   },
   {
     "title": "捕风追影 / 极盗跟踪 / 跟踪(中国内地版)",
@@ -580,7 +594,7 @@
     "comment": "看不懂剧情，但对画面大为震撼"
   },
   {
-    "title": "鬼灭之刃：上弦集结，前往锻刀村 / 鬼滅の刃 上弦集結、そして刀鍛冶の里ヘ / 鬼滅之刃 上弦集結，前進刀匠村(港/台) / Demon Slayer: Kimetsu No Yaiba - To the Swordsmith Village",
+    "title": "鬼灭之刃：上弦集结，前往锻刀村 / 鬼滅の刃 上弦集結、そして刀鍛冶の里ヘ / 鬼灭之刃：上弦集结，前进刀匠村(港/台) / Demon Slayer: Kimetsu No Yaiba - To the Swordsmith Village",
     "link": "https://movie.douban.com/subject/36188879/",
     "cover": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2885250473.webp",
     "date": "2025-03-21",
@@ -588,7 +602,7 @@
     "comment": ""
   },
   {
-    "title": "鬼灭之刃 兄妹的羁绊 / 鬼滅の刃 兄妹の絆 / 鬼灭之刃 兄妹之绊 / Demon Slayer: Brother and Sister's Bond",
+    "title": "鬼灭之刃：兄妹的羁绊 / 鬼滅の刃 兄妹の絆 / 鬼灭之刃：兄妹之绊 / Demon Slayer: Brother and Sister's Bond",
     "link": "https://movie.douban.com/subject/33393167/",
     "cover": "https://img2.doubanio.com/view/photo/s_ratio_poster/public/p2619534841.webp",
     "date": "2025-03-21",
@@ -596,7 +610,7 @@
     "comment": ""
   },
   {
-    "title": "鬼灭之刃 柱众会议·蝶屋敷篇 / 鬼滅の刃 柱合会議・蝶屋敷編 / 鬼灭之刃 柱众会议·蝶屋敷篇 / Demon Slayer: Kimetsu no Yaiba - The Hashira Meeting Arc",
+    "title": "鬼灭之刃：柱众会议·蝶屋敷篇 / 鬼滅の刃 柱合会議・蝶屋敷編 / Demon Slayer: Kimetsu no Yaiba - The Hashira Meeting Arc",
     "link": "https://movie.douban.com/subject/35327724/",
     "cover": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2632682629.webp",
     "date": "2025-03-21",
@@ -604,7 +618,7 @@
     "comment": ""
   },
   {
-    "title": "鬼灭之刃 那田蜘蛛山篇 / 鬼滅の刃 那田蜘蛛山編 / Demon Slayer: Kimetsu no Yaiba - Mt. Natagumo Arc",
+    "title": "鬼灭之刃：那田蜘蛛山篇 / 鬼滅の刃 那田蜘蛛山編 / Demon Slayer: Kimetsu no Yaiba - Mt. Natagumo Arc",
     "link": "https://movie.douban.com/subject/35231832/",
     "cover": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2623518158.webp",
     "date": "2025-03-21",
@@ -612,7 +626,7 @@
     "comment": ""
   },
   {
-    "title": "鬼灭之刃 鼓屋敷篇 / 鬼滅の刃 鼓屋敷編 / 鬼滅之刃 鼓之宅院篇(台) / Demon Slayer: Kimetsu no Yaiba - Tsuzumi Mansion Arc",
+    "title": "鬼灭之刃：鼓屋敷篇 / 鬼滅の刃 鼓屋敷編 / 鬼滅之刃：鼓之宅院篇(台) / Demon Slayer: Kimetsu no Yaiba - Tsuzumi Mansion Arc",
     "link": "https://movie.douban.com/subject/35651911/",
     "cover": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2727626416.webp",
     "date": "2025-03-21",
@@ -620,7 +634,7 @@
     "comment": ""
   },
   {
-    "title": "鬼灭之刃 浅草篇 / 鬼滅の刃 浅草編 / Demon Slayer: Kimetsu No Yaiba - Asakusa Arc",
+    "title": "鬼灭之刃：浅草篇 / 鬼滅の刃 浅草編 / Demon Slayer: Kimetsu No Yaiba - Asakusa Arc",
     "link": "https://movie.douban.com/subject/35691909/",
     "cover": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2770879108.webp",
     "date": "2025-03-21",
@@ -628,7 +642,7 @@
     "comment": ""
   },
   {
-    "title": "鬼灭之刃 锻刀村篇 / 鬼滅の刃 刀鍛冶の里編 / 鬼灭之刃 刀匠村篇 / Demon Slayer: Kimetsu no Yaiba - Swordsmith Village Arc",
+    "title": "鬼灭之刃：锻刀村篇 / 鬼滅の刃 刀鍛冶の里編 / 鬼灭之刃：刀匠村篇 / Demon Slayer: Kimetsu no Yaiba - Swordsmith Village Arc",
     "link": "https://movie.douban.com/subject/35769236/",
     "cover": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2888671774.webp",
     "date": "2025-03-21",
@@ -636,7 +650,7 @@
     "comment": ""
   },
   {
-    "title": "鬼灭之刃 柱训练篇 / 鬼滅の刃 柱稽古編 / 鬼灭之刃 九柱集训篇 / Demon Slayer: Kimetsu no Yaiba - Hashira Training Arc",
+    "title": "鬼灭之刃：柱训练篇 / 鬼滅の刃 柱稽古編 / 鬼灭之刃：九柱集训篇 / Demon Slayer: Kimetsu no Yaiba - Hashira Training Arc",
     "link": "https://movie.douban.com/subject/36449810/",
     "cover": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2905477008.webp",
     "date": "2025-03-21",
@@ -742,7 +756,7 @@
   {
     "title": "凤姐 / 鳳姐 / A Girl out of the Country",
     "link": "https://movie.douban.com/subject/36070803/",
-    "cover": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2925265080.webp",
+    "cover": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2929175584.webp",
     "date": "2025-03-01",
     "rating": 3,
     "comment": ""
@@ -1734,7 +1748,7 @@
   {
     "title": "假面骑士创骑 / 仮面ライダービルド / 假面骑士Build / Kamen Rider Build",
     "link": "https://movie.douban.com/subject/27073290/",
-    "cover": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2497465172.webp",
+    "cover": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2595802899.webp",
     "date": "2023-01-19",
     "rating": 4,
     "comment": "说这是女性向的我都信，be the one 引来看完了全局"
@@ -2564,15 +2578,7 @@
     "comment": "合家欢"
   },
   {
-    "title": "86 -不存在的战区- Part.2 / 86―エイティシックス― 第2クール / 86 Eighty-Six: Part 2",
-    "link": "https://movie.douban.com/subject/35510433/",
-    "cover": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2870076930.webp",
-    "date": "2022-03-02",
-    "rating": 5,
-    "comment": "原著似乎并没有想的那么好，导演把这部剧升华了"
-  },
-  {
-    "title": "鬼灭之刃 无限列车篇 / 鬼滅の刃 無限列車編 / 鬼灭之刃 无限列车篇 TV版 / Demon Slayer: Kimetsu no Yaiba - Mugen Train Arc",
+    "title": "鬼灭之刃：无限列车篇 / 鬼滅の刃 無限列車編 / 鬼灭之刃：无限列车篇 TV版 / Demon Slayer: Kimetsu no Yaiba - Mugen Train Arc",
     "link": "https://movie.douban.com/subject/35620761/",
     "cover": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2694561204.webp",
     "date": "2022-03-02",
@@ -2580,7 +2586,7 @@
     "comment": ""
   },
   {
-    "title": "鬼灭之刃 游郭篇 / 鬼滅の刃 遊郭編 / 鬼灭之刃 花街篇 / Demon Slayer: Kimetsu no Yaiba - Entertainment District Arc",
+    "title": "鬼灭之刃：游郭篇 / 鬼滅の刃 遊郭編 / 鬼灭之刃：花街篇 / Demon Slayer: Kimetsu no Yaiba - Entertainment District Arc",
     "link": "https://movie.douban.com/subject/34813210/",
     "cover": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2851359433.webp",
     "date": "2022-03-02",
@@ -2900,7 +2906,7 @@
     "comment": ""
   },
   {
-    "title": "猎魔人：狼之噩梦 / The Witcher: Nightmare of the Wolf / 巫师：狼之噩梦",
+    "title": "猎魔人：狼之噩梦 / The Witcher: Nightmare of the Wolf / 巫师：狼之噩梦 / 猎魔士：狼之恶梦(台)",
     "link": "https://movie.douban.com/subject/34955909/",
     "cover": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2675863739.webp",
     "date": "2021-08-30",
@@ -3114,14 +3120,6 @@
     "date": "2021-06-20",
     "rating": 5,
     "comment": "有没有好评价，值得细品"
-  },
-  {
-    "title": "86 -不存在的战区- / 86―エイティシックス― / 86 Eighty-Six",
-    "link": "https://movie.douban.com/subject/33392923/",
-    "cover": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2641162269.webp",
-    "date": "2021-06-20",
-    "rating": 4,
-    "comment": "精细作品，导演的分镜很巧妙，观看串联的细节会感觉很舒服"
   },
   {
     "title": "浪客剑心 最终章 人诛篇 / るろうに剣心 最終章 The Final / 浪客剑心 真人版4 / 神剑闯江湖：The Final",

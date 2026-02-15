@@ -1,209 +1,65 @@
 [
   {
-    "title": "英雄传说 闪之轨迹 英雄伝説 閃の軌跡",
-    "link": "https://www.douban.com/game/21356790/",
-    "cover": "https://img2.doubanio.com/lpic/s28397151.jpg",
-    "date": "2026-01-04",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "英雄传说 空之轨迹SC 英雄伝説：空の軌跡 SC",
-    "link": "https://www.douban.com/game/25872405/",
-    "cover": "https://img3.doubanio.com/lpic/s29073642.jpg",
-    "date": "2026-01-04",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "英雄传说 空之轨迹FC 英雄伝説：空の軌跡 FC",
-    "link": "https://www.douban.com/game/10735050/",
-    "cover": "https://img1.doubanio.com/lpic/s28104499.jpg",
-    "date": "2026-01-04",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "马力欧卡丁车8 豪华版 マリオカート8 デラックス",
-    "link": "https://www.douban.com/game/26954660/",
-    "cover": "https://img1.doubanio.com/lpic/s29281298.jpg",
-    "date": "2026-01-03",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "牧场物语 重聚矿石镇 牧場物語 再会のミネラルタウン",
-    "link": "https://www.douban.com/game/34457418/",
-    "cover": "https://img2.doubanio.com/lpic/s33317301.jpg",
-    "date": "2026-01-03",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "塞尔达传说 旷野之息 - 试炼的霸者 ゼルダの伝説 ブレス オブ ザ ワイルド 試練の覇者",
-    "link": "https://www.douban.com/game/27609961/",
-    "cover": "https://img9.doubanio.com/lpic/s29663616.jpg",
-    "date": "2026-01-03",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "健身拳击 Fit Boxing",
-    "link": "https://www.douban.com/game/30340866/",
-    "cover": "https://img3.doubanio.com/lpic/s29884227.jpg",
-    "date": "2026-01-03",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "异度神剑2 ゼノブレイド 2",
-    "link": "https://www.douban.com/game/26954563/",
-    "cover": "https://img3.doubanio.com/lpic/s29543792.jpg",
-    "date": "2026-01-03",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "塞尔达传说 旷野之息 Nintendo Switch 2 Edition ゼルダの伝説 ブレス オブ ザ ワイルド Nintendo Switch 2 Edition",
-    "link": "https://www.douban.com/game/37304766/",
-    "cover": "https://img9.doubanio.com/lpic/s35120755.jpg",
-    "date": "2026-01-03",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "星之卡比 探索发现 Nintendo Switch 2 Edition + 星耀世界 星のカービィ ディスカバリー Nintendo Switch 2 Edition + スターリーワールド",
-    "link": "https://www.douban.com/game/37304271/",
-    "cover": "https://img2.doubanio.com/lpic/s35135571.jpg",
-    "date": "2026-01-03",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "塞尔达传说 王国之泪 Nintendo Switch 2 Edition ゼルダの伝説 ティアーズ オブ ザ キングダム Nintendo Switch 2 Edition",
-    "link": "https://www.douban.com/game/37304767/",
-    "cover": "https://img9.doubanio.com/lpic/s35120756.jpg",
-    "date": "2026-01-03",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "闪电十一人 英雄们的胜利之路 イナズマイレブン 英雄たちのヴィクトリーロード",
-    "link": "https://www.douban.com/game/27184261/",
-    "cover": "https://img3.doubanio.com/lpic/s35126183.jpg",
-    "date": "2026-01-03",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "符文工房 龙之天地 龍の国 ルーンファクトリー",
-    "link": "https://www.douban.com/game/36854098/",
-    "cover": "https://img1.doubanio.com/lpic/s35124148.jpg",
-    "date": "2026-01-03",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "宝可梦传说 阿尔宙斯 Pokémon Legends アルセウス",
-    "link": "https://www.douban.com/game/35377547/",
-    "cover": "https://img1.doubanio.com/lpic/s33907460.jpg",
-    "date": "2026-01-03",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "宝可梦 黑 ポケットモンスターブラック",
-    "link": "https://www.douban.com/game/11480262/",
-    "cover": "https://img9.doubanio.com/lpic/s28394036.jpg",
-    "date": "2026-01-03",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "宝可梦 剑 ポケットモンスター ソード",
-    "link": "https://www.douban.com/game/30474617/",
-    "cover": "https://img9.doubanio.com/lpic/s32756386.jpg",
-    "date": "2026-01-03",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "宝可梦传说 Z-A Pokémon Legends: Z-A",
-    "link": "https://www.douban.com/game/36790045/",
-    "cover": "https://img2.doubanio.com/lpic/s35165781.jpg",
-    "date": "2026-01-03",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "宝可梦 紫 ポケットモンスター バイオレット",
-    "link": "https://www.douban.com/game/35784222/",
-    "cover": "https://img2.doubanio.com/lpic/s34233931.jpg",
-    "date": "2026-01-03",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "寻秦记 / 尋秦記 / A Step Into The Past",
-    "link": "https://movie.douban.com/subject/2983389/",
-    "cover": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2515285368.webp",
-    "date": "2025-12-31",
+    "title": "讲话没有在听 / 講話沒有在聽 / Can You Hear Me?",
+    "link": "https://movie.douban.com/subject/35606197/",
+    "cover": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2714600740.webp",
+    "date": "2026-02-12",
     "rating": 4,
     "comment": "",
     "category": "movie"
   },
   {
-    "title": "寻秦记 / 尋秦記 / 寻秦记(电影版) / Back to the Past",
-    "link": "https://movie.douban.com/subject/26389539/",
-    "cover": "https://img2.doubanio.com/view/photo/s_ratio_poster/public/p2928387071.webp",
-    "date": "2025-12-31",
-    "rating": 3,
-    "comment": "它告诉我，原来已经过去那么长时间了。",
-    "category": "movie"
+    "title": "生化危机：村庄 温特斯家的传续 バイオハザード ヴィレッジ ウィンターズ エクスパンション",
+    "link": "https://www.douban.com/game/35928878/",
+    "cover": "https://img9.doubanio.com/lpic/s34269624.jpg",
+    "date": "2026-01-25",
+    "rating": 0,
+    "comment": "",
+    "category": "game"
   },
   {
-    "title": "宋家皇朝 / 宋家三姐妹 / 宋氏三姐妹",
-    "link": "https://movie.douban.com/subject/1302455/",
-    "cover": "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2417829396.webp",
-    "date": "2025-12-28",
-    "rating": 4,
+    "title": "生化危机：村庄 バイオハザード ヴィレッジ",
+    "link": "https://www.douban.com/game/27074009/",
+    "cover": "https://img9.doubanio.com/lpic/s33811096.jpg",
+    "date": "2026-01-25",
+    "rating": 0,
     "comment": "",
-    "category": "movie"
+    "category": "game"
   },
   {
-    "title": "邓小平（一部平民视角的伟人全传！写尽90余年精彩人生，纵览20世纪历史风云！）",
-    "link": "https://book.douban.com/subject/35350375/",
-    "cover": "https://img1.doubanio.com/cuphead/book-static/pics/book-default-lpic.gif",
-    "date": "2025-12-23",
-    "rating": 3,
+    "title": "生化危机7 バイオハザード7 レジデント イービル",
+    "link": "https://www.douban.com/game/26579258/",
+    "cover": "https://img9.doubanio.com/lpic/s29294334.jpg",
+    "date": "2026-01-25",
+    "rating": 0,
     "comment": "",
+    "category": "game"
+  },
+  {
+    "title": "如何了解一个人 : 看见与被看见的艺术",
+    "link": "https://book.douban.com/subject/37568143/",
+    "cover": "https://img1.doubanio.com/view/subject/s/public/s35277700.jpg",
+    "date": "2026-01-22",
+    "rating": 2,
+    "comment": "大约不太可能去看第二次的书，老套的作者，引用多过内容的书籍，阅读体验实在很一般。\n\n“作者庞大的阅读量，竟然只写出这些引用他人的话语，老套的例子描述，不成框架的理论体系，反复赘述那些曾经的记忆，令人感动可惜”",
     "category": "book"
   },
   {
-    "title": "至暗时刻 / Darkest Hour / 黑暗对峙(港) / 最黑暗的时刻(台)",
-    "link": "https://movie.douban.com/subject/26761416/",
-    "cover": "https://img2.doubanio.com/view/photo/s_ratio_poster/public/p2504277551.webp",
-    "date": "2025-12-14",
-    "rating": 3,
-    "comment": "差点笑出声的一段。\n国王：丘同志，你得到群众中去。",
+    "title": "创：战神 / Tron: Ares / 创：战纪3 / 创战纪：战神降临(港)",
+    "link": "https://movie.douban.com/subject/30246476/",
+    "cover": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2925021518.webp",
+    "date": "2026-01-20",
+    "rating": 2,
+    "comment": "",
     "category": "movie"
+  },
+  {
+    "title": "大力出奇迹 : 张一鸣的创业心路与算法思维",
+    "link": "https://book.douban.com/subject/36452668/",
+    "cover": "https://img1.doubanio.com/view/subject/s/public/s34902959.jpg",
+    "date": "2026-01-18",
+    "rating": 4,
+    "comment": "这本书最有意思的地方，是作者在前半部分对张一鸣思维模式形成过程的描摹。",
+    "category": "book"
   }
 ]
