@@ -1,65 +1,56 @@
 [
   {
-    "title": "讲话没有在听 / 講話沒有在聽 / Can You Hear Me?",
-    "link": "https://movie.douban.com/subject/35606197/",
-    "cover": "/library/movie/p2714600740.webp",
-    "date": "2026-02-12",
-    "rating": 4,
-    "comment": "",
+    "title": "挽救计划 / Project Hail Mary / 极限返航(台) / 末日圣母号(港)",
+    "link": "https://movie.douban.com/subject/35010610/",
+    "cover": "/library/movie/p2930195706.webp",
+    "date": "2026-04-04",
+    "rating": 5,
+    "comment": "好看！",
     "category": "movie"
   },
   {
-    "title": "生化危机：村庄 温特斯家的传续 バイオハザード ヴィレッジ ウィンターズ エクスパンション",
-    "link": "https://www.douban.com/game/35928878/",
-    "cover": "/library/game/s34269624.jpg",
-    "date": "2026-01-25",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "生化危机：村庄 バイオハザード ヴィレッジ",
-    "link": "https://www.douban.com/game/27074009/",
-    "cover": "/library/game/s33811096.jpg",
-    "date": "2026-01-25",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "生化危机7 バイオハザード7 レジデント イービル",
-    "link": "https://www.douban.com/game/26579258/",
-    "cover": "/library/game/s29294334.jpg",
-    "date": "2026-01-25",
-    "rating": 0,
-    "comment": "",
-    "category": "game"
-  },
-  {
-    "title": "如何了解一个人 : 看见与被看见的艺术",
-    "link": "https://book.douban.com/subject/37568143/",
-    "cover": "/library/book/s35277700.jpg",
-    "date": "2026-01-22",
-    "rating": 2,
-    "comment": "大约不太可能去看第二次的书，老套的作者，引用多过内容的书籍，阅读体验实在很一般。\n\n“作者庞大的阅读量，竟然只写出这些引用他人的话语，老套的例子描述，不成框架的理论体系，反复赘述那些曾经的记忆，令人感动可惜”",
-    "category": "book"
-  },
-  {
-    "title": "创：战神 / Tron: Ares / 创：战纪3 / 创战纪：战神降临(港)",
-    "link": "https://movie.douban.com/subject/30246476/",
-    "cover": "/library/movie/p2925021518.webp",
-    "date": "2026-01-20",
-    "rating": 2,
-    "comment": "",
+    "title": "【我推的孩子】 第三季 / 【推しの子】 第3期 / Oshi no Ko Season 3",
+    "link": "https://movie.douban.com/subject/37066636/",
+    "cover": "/library/movie/p2926807379.webp",
+    "date": "2026-03-26",
+    "rating": 4,
+    "comment": "还是很推荐的，这种叙事结构里暗含着艺术作品制作过程的真实写照。另外cp相认的场景还差那么点意思，可能是86场景太上头了。",
     "category": "movie"
   },
   {
-    "title": "大力出奇迹 : 张一鸣的创业心路与算法思维",
-    "link": "https://book.douban.com/subject/36452668/",
-    "cover": "/library/book/s34902959.jpg",
-    "date": "2026-01-18",
-    "rating": 4,
-    "comment": "这本书最有意思的地方，是作者在前半部分对张一鸣思维模式形成过程的描摹。",
-    "category": "book"
+    "title": "街角魔族 / まちかドまぞく / Machikado Mazoku / The Demon Girl Next Door",
+    "link": "https://movie.douban.com/subject/30446565/",
+    "cover": "/library/movie/p2917628245.webp",
+    "date": "2026-03-24",
+    "rating": 5,
+    "comment": "平平淡淡才是真",
+    "category": "movie"
+  },
+  {
+    "title": "鹬 / Piper / 小鹬初登场(台) / 派珀历险记",
+    "link": "https://movie.douban.com/subject/26766869/",
+    "cover": "/library/movie/p2388018826.webp",
+    "date": "2026-03-23",
+    "rating": 5,
+    "comment": "原来你叫yù-鹬",
+    "category": "movie"
+  },
+  {
+    "title": "命运/奇异赝品 / Fate/strange Fake",
+    "link": "https://movie.douban.com/subject/36464284/",
+    "cover": "/library/movie/p2926891106.webp",
+    "date": "2026-03-22",
+    "rating": 3,
+    "comment": "台词太多了点。",
+    "category": "movie"
+  },
+  {
+    "title": "河狸变身计划 / Hoppers / 狸想奇兵(港) / 狸想世界(台)",
+    "link": "https://movie.douban.com/subject/36999793/",
+    "cover": "/library/movie/p2929759261.webp",
+    "date": "2026-03-21",
+    "rating": 5,
+    "comment": "好看的。",
+    "category": "movie"
   }
 ]
