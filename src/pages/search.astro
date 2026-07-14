@@ -1,20 +1,14 @@
 ---
-import { getCollection } from 'astro:content'
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts'
 import Layout from '../layouts/Layout.astro'
-import PageSearch from "astro-pagefind/components/Search";
-const collection = await getCollection('posts')
-const posts = collection.sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-)
+import PageSearch from 'astro-pagefind/components/Search.astro'
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <main>
     <PageSearch
-      id='search'
       className='pagefind-ui'
-      uiOptions={{ showImages: false }}
+      searchboxOptions={{ showImages: false }}
     />
   </main>
   <style is:global>

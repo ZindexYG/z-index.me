@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import { formatDate } from "../../lib/utils";
 // import Comments from "../../components/Comments.astro";
@@ -9,14 +9,14 @@ import Random from "../../components/Random.astro";
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: post,
   }));
 }
 type Props = CollectionEntry<"posts">;
 
 const post = Astro.props;
-const { Content, headings } = await post.render();
+const { Content, headings } = await render(post);
 ---
 
 <Layout
@@ -64,7 +64,7 @@ const { Content, headings } = await post.render();
   <Random />
 
   {/* 评论区（已移除） */}
-  {/* <Comments pageID={post.slug} pageTitle={post.data.title} /> */}
+  {/* <Comments pageID={post.id} pageTitle={post.data.title} /> */}
 
   <!-- Lightbox（原样保留） -->
   <script is:inline data-astro-rerun>
@@ -187,7 +187,7 @@ const { Content, headings } = await post.render();
     .dark .lightbox-img { box-shadow: 0 10px 40px rgba(0,0,0,.7); }
 
     @media (prefers-reduced-motion: reduce) {
-      .lightbox-overlay, .lightbox-img { animation: none !重要; transition: none !重要; }
+      .lightbox-overlay, .lightbox-img { animation: none !important; transition: none !important; }
     }
 
 

@@ -28,7 +28,7 @@ export async function GET(context) {
     site: context.site,
     items: sortedPosts.map((post) => ({
       title: post.data.title,
-      link: `/posts/${post.slug.split('/').pop()}`,
+      link: `/posts/${post.id.split('/').pop()}`,
       content: removeInvalidChars(sanitizeHtml(parser.render(post.body), {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']), //渲染组件
       })),

@@ -6,8 +6,8 @@ module.exports = antfu(
     astro: true,
     // 启用 TypeScript 支持
     typescript: true,
-    // 启用 Markdown 支持
-    markdown: true,
+    // 暂停 Markdown lint，避免 @eslint/markdown 8 在 ESLint 10 下的运行时错误
+    markdown: false,
   },
   {
     // 针对所有文件的自定义规则

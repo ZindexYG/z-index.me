@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss/index.css";
 @import "https://unpkg.com/open-props/easings.min.css";
 
 /* 新增：在 @theme 中定义自定义颜色和字体 */
