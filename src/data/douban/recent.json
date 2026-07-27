@@ -1,56 +1,83 @@
 [
   {
-    "title": "挽救计划 / Project Hail Mary / 极限返航(台) / 末日圣母号(港)",
-    "link": "https://movie.douban.com/subject/35010610/",
-    "cover": "/library/movie/p2930195706.webp",
-    "date": "2026-04-04",
-    "rating": 5,
-    "comment": "好看！",
-    "category": "movie"
-  },
-  {
-    "title": "【我推的孩子】 第三季 / 【推しの子】 第3期 / Oshi no Ko Season 3",
-    "link": "https://movie.douban.com/subject/37066636/",
-    "cover": "/library/movie/p2926807379.webp",
-    "date": "2026-03-26",
+    "title": "数码宝贝：最后的进化 / デジモンアドベンチャー LAST EVOLUTION 絆 / 数码宝贝大冒险 最后的进化·羁绊 / 数码宝贝大冒险剧场版",
+    "link": "https://movie.douban.com/subject/30482645/",
+    "cover": "/library/movie/p2623955494.webp",
+    "date": "2026-07-26",
     "rating": 4,
-    "comment": "还是很推荐的，这种叙事结构里暗含着艺术作品制作过程的真实写照。另外cp相认的场景还差那么点意思，可能是86场景太上头了。",
+    "comment": "",
     "category": "movie"
   },
   {
-    "title": "街角魔族 / まちかドまぞく / Machikado Mazoku / The Demon Girl Next Door",
-    "link": "https://movie.douban.com/subject/30446565/",
-    "cover": "/library/movie/p2917628245.webp",
-    "date": "2026-03-24",
+    "title": "禁闭岛 / Shutter Island / 不赦岛(港) / 隔离岛(台)",
+    "link": "https://movie.douban.com/subject/2334904/",
+    "cover": "/library/movie/p450262388.webp",
+    "date": "2026-07-19",
+    "rating": 4,
+    "comment": "",
+    "category": "movie"
+  },
+  {
+    "title": "八仙！ / 八仙之瞒天过海 / All Wishes Come True!",
+    "link": "https://movie.douban.com/subject/36882191/",
+    "cover": "/library/movie/p2934074566.webp",
+    "date": "2026-07-19",
+    "rating": 4,
+    "comment": "上价值部分还得学学。",
+    "category": "movie"
+  },
+  {
+    "title": "我在北京送快递",
+    "link": "https://book.douban.com/subject/36150423/",
+    "cover": "/library/book/s34522268.jpg",
+    "date": "2026-07-17",
     "rating": 5,
-    "comment": "平平淡淡才是真",
+    "comment": "这本书很有趣，文笔流畅，就像作者说的，他写得很开心，读者读得也很开心。",
+    "category": "book"
+  },
+  {
+    "title": "血钻 / Blood Diamond / 血钻石(台) / 血腥钻石",
+    "link": "https://movie.douban.com/subject/1428175/",
+    "cover": "/library/movie/p1244017073.webp",
+    "date": "2026-07-13",
+    "rating": 4,
+    "comment": "挺有意思的",
     "category": "movie"
   },
   {
-    "title": "鹬 / Piper / 小鹬初登场(台) / 派珀历险记",
-    "link": "https://movie.douban.com/subject/26766869/",
-    "cover": "/library/movie/p2388018826.webp",
-    "date": "2026-03-23",
+    "title": "奥本海默 / Oppenheimer",
+    "link": "https://movie.douban.com/subject/35593344/",
+    "cover": "/library/movie/p2876555451.webp",
+    "date": "2026-07-12",
     "rating": 5,
-    "comment": "原来你叫yù-鹬",
+    "comment": "看不懂，但是我大为震惊",
     "category": "movie"
   },
   {
-    "title": "命运/奇异赝品 / Fate/strange Fake",
-    "link": "https://movie.douban.com/subject/36464284/",
-    "cover": "/library/movie/p2926891106.webp",
-    "date": "2026-03-22",
+    "title": "盗梦空间 / Inception / 潜行凶间(港) / 全面启动(台)",
+    "link": "https://movie.douban.com/subject/3541415/",
+    "cover": "/library/movie/p513344864.webp",
+    "date": "2026-07-12",
+    "rating": 5,
+    "comment": "",
+    "category": "movie"
+  },
+  {
+    "title": "冰鉴",
+    "link": "https://book.douban.com/subject/1968882/",
+    "cover": "/library/book/s5804582.jpg",
+    "date": "2026-07-03",
     "rating": 3,
-    "comment": "台词太多了点。",
-    "category": "movie"
+    "comment": "",
+    "category": "book"
   },
   {
-    "title": "河狸变身计划 / Hoppers / 狸想奇兵(港) / 狸想世界(台)",
-    "link": "https://movie.douban.com/subject/36999793/",
-    "cover": "/library/movie/p2929759261.webp",
-    "date": "2026-03-21",
-    "rating": 5,
-    "comment": "好看的。",
-    "category": "movie"
+    "title": "Claude Code橙皮书 : AI编程实战",
+    "link": "https://book.douban.com/subject/38532607/",
+    "cover": "/library/book/s35546689.jpg",
+    "date": "2026-06-29",
+    "rating": 3,
+    "comment": "",
+    "category": "book"
   }
 ]
