@@ -163,19 +163,15 @@
     syncControls(theme)
   }
 
-  function transitionRadius(x: number, y: number) {
-    const farthestX = Math.max(x, window.innerWidth - x)
-    const farthestY = Math.max(y, window.innerHeight - y)
-    return Math.hypot(farthestX, farthestY)
-  }
-
   function finishTransition(button: HTMLButtonElement) {
     isTransitioning = false
     delete root.dataset.themeTransition
     button.removeAttribute('data-theme-transition-trigger')
-    root.style.removeProperty('--theme-transition-x')
-    root.style.removeProperty('--theme-transition-y')
-    root.style.removeProperty('--theme-transition-radius')
+    root.style.removeProperty('--theme-transition-top')
+    root.style.removeProperty('--theme-transition-right')
+    root.style.removeProperty('--theme-transition-bottom')
+    root.style.removeProperty('--theme-transition-left')
+    root.style.removeProperty('--theme-transition-corner-radius')
     syncControls(currentTheme())
   }
 
@@ -185,9 +181,6 @@
 
     const nextTheme: Theme = currentTheme() === 'dark' ? 'light' : 'dark'
     const rect = button.getBoundingClientRect()
-    const x = rect.left + rect.width / 2
-    const y = rect.top + rect.height / 2
-    const radius = transitionRadius(x, y)
     const startViewTransition = document.startViewTransition?.bind(document)
 
     isTransitioning = true
@@ -200,9 +193,11 @@
     }
 
     root.dataset.themeTransition = `to-${nextTheme}`
-    root.style.setProperty('--theme-transition-x', `${x}px`)
-    root.style.setProperty('--theme-transition-y', `${y}px`)
-    root.style.setProperty('--theme-transition-radius', `${radius}px`)
+    root.style.setProperty('--theme-transition-top', `${Math.max(0, rect.top)}px`)
+    root.style.setProperty('--theme-transition-right', `${Math.max(0, window.innerWidth - rect.right)}px`)
+    root.style.setProperty('--theme-transition-bottom', `${Math.max(0, window.innerHeight - rect.bottom)}px`)
+    root.style.setProperty('--theme-transition-left', `${Math.max(0, rect.left)}px`)
+    root.style.setProperty('--theme-transition-corner-radius', getComputedStyle(button).borderRadius)
     button.setAttribute('data-theme-transition-trigger', '')
 
     const transition = startViewTransition(() => applyTheme(nextTheme, true))
