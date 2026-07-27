@@ -1,6 +1,5 @@
 <div class='flex justify-end space-x-2'>
   <button
-    id='search'
     class='inline-flex items-center rounded-md border p-1 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800 [&_svg]:text-zinc-500 [&_svg]:hover:text-zinc-900 [&_svg]:dark:hover:text-zinc-100'
     aria-label='Search'
     onclick="window.location.href='/search'"
@@ -21,7 +20,6 @@
   </button>
 
   <button
-    id='rss'
     class='inline-flex items-center rounded-md border p-1 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800 [&_svg]:text-zinc-500 [&_svg]:hover:text-zinc-900 [&_svg]:dark:hover:text-zinc-100'
     aria-label='RSS Feed'
     onclick="window.location.href='/rss.xml'"
@@ -42,7 +40,6 @@
   </button>
 
   <button
-    id='douban'
     class='inline-flex items-center rounded-md border p-1 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800 [&_svg]:text-zinc-500 [&_svg]:hover:text-zinc-900 [&_svg]:dark:hover:text-zinc-100'
     aria-label='Douban'
     onclick="window.open('https://douban.com/people/141874159/', '_blank')"
@@ -62,7 +59,6 @@
   </button>
 
   <button
-    id='github'
     class='inline-flex items-center rounded-md border p-1 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800 [&_svg]:text-zinc-500 [&_svg]:hover:text-zinc-900 [&_svg]:dark:hover:text-zinc-100'
     aria-label='GitHub'
     onclick="window.open('https://github.com/ZindexYG/z-index.me', '_blank')"
@@ -82,45 +78,193 @@
   </button>
 
   <button
-    id='theme-toggle'
-    class='inline-flex items-center rounded-md border p-1 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800 [&_svg]:text-zinc-500 [&_svg]:hover:text-zinc-900 [&_svg]:dark:hover:text-zinc-100'
-    aria-label='Toggle theme'
+    class='theme-toggle inline-flex items-center rounded-md border p-1 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800 [&_svg]:text-zinc-500 [&_svg]:hover:text-zinc-900 [&_svg]:dark:hover:text-zinc-100 disabled:cursor-wait'
+    aria-label='Switch to dark theme'
+    aria-pressed='false'
+    data-theme-toggle
     data-umami-event='Button-Theme'
     type='button'>
-    <span class='sr-only'>Toggle theme</span>
-    <svg
-      id='sun'
-      xmlns='http://www.w3.org/2000/svg'
-      viewBox='0 0 16 16'
-      fill='currentColor'
-      class='hidden size-4 dark:block'>
-      <path
-        d='M8 1a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 1ZM10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM12.95 4.11a.75.75 0 1 0-1.06-1.06l-1.062 1.06a.75.75 0 0 0 1.061 1.062l1.06-1.061ZM15 8a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 15 8ZM11.89 12.95a.75.75 0 0 0 1.06-1.06l-1.06-1.062a.75.75 0 0 0-1.062 1.061l1.061 1.06ZM8 12a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 12ZM5.172 11.89a.75.75 0 0 0-1.061-1.062L3.05 11.89a.75.75 0 1 0 1.06 1.06l1.06-1.06ZM4 8a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 4 8ZM4.11 5.172A.75.75 0 0 0 5.173 4.11L4.11 3.05a.75.75 0 1 0-1.06 1.06l1.06 1.06Z'
-      ></path>
-    </svg>
-    <svg
-      id='moon'
-      xmlns='http://www.w3.org/2000/svg'
-      viewBox='0 0 16 16'
-      fill='currentColor'
-      class='size-4 dark:hidden'>
-      <path
-        d='M14.438 10.148c.19-.425-.321-.787-.748-.601A5.5 5.5 0 0 1 6.453 2.31c.186-.427-.176-.938-.6-.748a6.501 6.501 0 1 0 8.585 8.586Z'
-      ></path>
-    </svg>
+    <span class='sr-only' data-theme-label>Switch to dark theme</span>
+    <span class='theme-icon-stage grid size-4' aria-hidden='true'>
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        viewBox='0 0 16 16'
+        fill='currentColor'
+        class='theme-icon theme-icon-sun size-4'>
+        <path
+          d='M8 1a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 1ZM10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM12.95 4.11a.75.75 0 1 0-1.06-1.06l-1.062 1.06a.75.75 0 0 0 1.061 1.062l1.06-1.061ZM15 8a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 15 8ZM11.89 12.95a.75.75 0 0 0 1.06-1.06l-1.06-1.062a.75.75 0 0 0-1.062 1.061l1.061 1.06ZM8 12a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 12ZM5.172 11.89a.75.75 0 0 0-1.061-1.062L3.05 11.89a.75.75 0 1 0 1.06 1.06l1.06-1.06ZM4 8a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 4 8ZM4.11 5.172A.75.75 0 0 0 5.173 4.11L4.11 3.05a.75.75 0 1 0-1.06 1.06l1.06 1.06Z'
+        ></path>
+      </svg>
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        viewBox='0 0 16 16'
+        fill='currentColor'
+        class='theme-icon theme-icon-moon size-4'>
+        <path
+          d='M14.438 10.148c.19-.425-.321-.787-.748-.601A5.5 5.5 0 0 1 6.453 2.31c.186-.427-.176-.938-.6-.748a6.501 6.501 0 1 0 8.585 8.586Z'
+        ></path>
+      </svg>
+    </span>
   </button>
 </div>
 
 <script>
-  function setListener() {
-    const button = document.getElementById('theme-toggle')
+  type Theme = 'light' | 'dark'
 
-    button?.addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark')
+  const THEME_KEY = 'theme'
+  const root = document.documentElement
+  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+  let isTransitioning = false
+
+  function storedTheme(): Theme | null {
+    try {
+      const value = localStorage.getItem(THEME_KEY)
+      return value === 'light' || value === 'dark' ? value : null
+    }
+    catch {
+      return null
+    }
+  }
+
+  function currentTheme(): Theme {
+    return root.classList.contains('dark') ? 'dark' : 'light'
+  }
+
+  function syncControls(theme: Theme) {
+    const targetTheme = theme === 'dark' ? 'light' : 'dark'
+    const label = `Switch to ${targetTheme} theme`
+
+    document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((button) => {
+      button.disabled = isTransitioning
+      button.setAttribute('aria-label', label)
+      button.setAttribute('aria-pressed', String(theme === 'dark'))
+      button.title = label
+
+      const accessibleLabel = button.querySelector<HTMLElement>('[data-theme-label]')
+      if (accessibleLabel)
+        accessibleLabel.textContent = label
     })
   }
 
-  setListener()
+  function applyTheme(theme: Theme, persist = false) {
+    root.classList.toggle('dark', theme === 'dark')
+    root.dataset.theme = theme
 
-  document.addEventListener('astro:after-swap', setListener)
+    if (persist) {
+      try {
+        localStorage.setItem(THEME_KEY, theme)
+      }
+      catch {
+        // Theme switching still works when storage is unavailable.
+      }
+    }
+
+    syncControls(theme)
+  }
+
+  function transitionRadius(x: number, y: number) {
+    const farthestX = Math.max(x, window.innerWidth - x)
+    const farthestY = Math.max(y, window.innerHeight - y)
+    return Math.hypot(farthestX, farthestY)
+  }
+
+  function finishTransition(button: HTMLButtonElement) {
+    isTransitioning = false
+    delete root.dataset.themeTransition
+    button.removeAttribute('data-theme-transition-trigger')
+    root.style.removeProperty('--theme-transition-x')
+    root.style.removeProperty('--theme-transition-y')
+    root.style.removeProperty('--theme-transition-radius')
+    syncControls(currentTheme())
+  }
+
+  async function toggleTheme(button: HTMLButtonElement) {
+    if (isTransitioning)
+      return
+
+    const nextTheme: Theme = currentTheme() === 'dark' ? 'light' : 'dark'
+    const rect = button.getBoundingClientRect()
+    const x = rect.left + rect.width / 2
+    const y = rect.top + rect.height / 2
+    const radius = transitionRadius(x, y)
+    const startViewTransition = document.startViewTransition?.bind(document)
+
+    isTransitioning = true
+    syncControls(currentTheme())
+
+    if (reducedMotion.matches || !startViewTransition) {
+      applyTheme(nextTheme, true)
+      window.setTimeout(finishTransition, reducedMotion.matches ? 0 : 400, button)
+      return
+    }
+
+    root.dataset.themeTransition = `to-${nextTheme}`
+    root.style.setProperty('--theme-transition-x', `${x}px`)
+    root.style.setProperty('--theme-transition-y', `${y}px`)
+    root.style.setProperty('--theme-transition-radius', `${radius}px`)
+    button.setAttribute('data-theme-transition-trigger', '')
+
+    const transition = startViewTransition(() => applyTheme(nextTheme, true))
+
+    await transition.finished.catch(() => undefined)
+    finishTransition(button)
+  }
+
+  document.addEventListener('click', (event) => {
+    const target = event.target
+    if (!(target instanceof Element))
+      return
+
+    const button = target.closest<HTMLButtonElement>('[data-theme-toggle]')
+    if (button)
+      void toggleTheme(button)
+  })
+
+  systemTheme.addEventListener('change', (event) => {
+    if (!storedTheme())
+      applyTheme(event.matches ? 'dark' : 'light')
+  })
+
+  applyTheme(currentTheme())
 </script>
+
+<style>
+  .theme-icon {
+    grid-area: 1 / 1;
+    transition:
+      opacity 400ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .theme-icon-sun {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.35);
+  }
+
+  .theme-icon-moon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+
+  :global(.dark) .theme-icon-sun {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+
+  :global(.dark) .theme-icon-moon {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.35);
+  }
+
+  [data-theme-transition-trigger] .theme-icon-stage {
+    view-transition-name: theme-icon;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .theme-toggle,
+    .theme-icon {
+      transition: none;
+    }
+  }
+</style>
