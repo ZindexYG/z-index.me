@@ -115,6 +115,15 @@ const getLink = (entry: any) => {
       return `https://douban.com/subject/${id}`
   }
 }
+
+const getShortTitle = (title: string) => title.split(' / ')[0].trim()
+
+const categoryLabels: Record<string, string> = {
+  movie: '影视',
+  tv: '剧集',
+  book: '阅读',
+  game: '游戏',
+}
 ---
 
 <Layout title='书影游档案' description='YG 的精神食粮'>
@@ -152,21 +161,21 @@ const getLink = (entry: any) => {
           tabs.map(tab => (
             <section id={`panel-${tab.id}`} class='tab-panel'>
               {tab.items?.length ? (
-                <div class='grid grid-cols-2 md:grid-cols-5 gap-3'>
-                  {tab.items.map(entry => (
-                    <div class='block group relative'>
+                <div class='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-6'>
+                  {tab.items.map((entry, entryIndex) => (
+                    <div class='library-card group relative'>
                       <a
                         href={getLink(entry)}
                         target='_blank'
                         rel='noopener noreferrer'
-                        class='block'>
-                        <div class='relative rounded overflow-hidden bg-zinc-100 dark:bg-zinc-800 aspect-[2/3]'>
+                        class='block rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500'>
+                        <div class='relative aspect-[2/3] overflow-hidden rounded-md bg-zinc-100 shadow-sm ring-1 ring-black/5 dark:bg-zinc-800 dark:ring-white/10'>
                           <img
                             src={entry._cover}
                             alt={entry._title}
                             loading='lazy'
                             decoding='async'
-                            class='w-full h-full object-cover block transition-opacity duration-300'
+                            class='library-cover block h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.025] motion-reduce:transition-none'
                             onerror="this.style.opacity='0'; this.nextElementSibling.style.display='flex';"
                           />
                           <div
@@ -177,18 +186,35 @@ const getLink = (entry: any) => {
                           </div>
                         </div>
                         <p
-                          class='mt-2 text-sm text-center text-gray-500 dark:text-gray-500 truncate w-full px-1'
+                          class='mt-2 w-full truncate text-sm font-medium text-zinc-800 dark:text-zinc-100'
                           title={entry._title}>
-                          {entry._title}
+                          {getShortTitle(entry._title)}
                         </p>
                       </a>
+                      <button
+                        type='button'
+                        class='note-toggle absolute right-2 top-2 z-30 rounded-full border border-white/30 bg-black/45 px-2.5 py-1 font-mono text-[10px] tracking-wide text-white shadow-sm backdrop-blur transition hover:bg-black/65 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400'
+                        aria-expanded='false'
+                        aria-controls={`note-${tab.id}-${entryIndex}`}
+                        data-note-toggle>
+                        手记
+                      </button>
                       <div
-                        class='pointer-events-none absolute inset-x-2 top-2 z-20 rounded bg-black/85 p-3 text-white opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100'>
-                        <p class='text-sm font-medium'>
-                          评分：{entry._rating > 0 ? `${entry._rating} / 5` : '暂无评分'}
-                        </p>
-                        <p class='mt-2 text-xs leading-relaxed whitespace-pre-line break-words'>
-                          {entry._comment || '暂无评价'}
+                        id={`note-${tab.id}-${entryIndex}`}
+                        class='library-note invisible pointer-events-none absolute inset-x-2 bottom-10 z-20 flex max-h-[calc(100%-3rem)] translate-y-2 flex-col overflow-y-auto rounded-md border border-black/10 bg-[#f4efe9]/95 p-3 text-[#26231f] opacity-0 shadow-xl backdrop-blur-sm transition duration-200 ease-out group-hover:visible group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 dark:border-white/10 dark:bg-[#23242a]/95 dark:text-[#e6e1dc] motion-reduce:transition-none'>
+                        <div class='mb-2 flex items-center justify-between gap-2 border-b border-black/10 pb-2 dark:border-white/10'>
+                          <span class='font-mono text-[10px] uppercase tracking-[0.12em] text-zinc-500 dark:text-zinc-400'>
+                            {categoryLabels[entry.category] || '收藏'} · {entry._created}
+                          </span>
+                          <span class='shrink-0 font-mono text-xs tabular-nums text-amber-700 dark:text-amber-300'>
+                            {entry._rating > 0 ? `★ ${entry._rating}/5` : '未评分'}
+                          </span>
+                        </div>
+                        <h2 class='mb-2 text-sm font-semibold leading-snug'>
+                          {getShortTitle(entry._title)}
+                        </h2>
+                        <p class='whitespace-pre-line break-words text-sm leading-relaxed text-zinc-700 dark:text-zinc-300'>
+                          {entry._comment || '还没有写下短评。'}
                         </p>
                       </div>
                     </div>
@@ -212,6 +238,40 @@ const getLink = (entry: any) => {
   </div>
 
   <style>
+    .library-card a:focus-visible ~ .library-note {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .library-card a:focus-visible .library-cover {
+      transform: scale(1.025);
+    }
+
+    .library-card.is-open .library-note {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .library-card.is-open .library-cover {
+      transform: scale(1.025);
+    }
+
+    .library-card.is-open .note-toggle {
+      background-color: rgb(0 0 0 / 0.72);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .library-note,
+      .library-cover,
+      .note-toggle {
+        transition-duration: 0ms;
+      }
+    }
+
     /* 隐藏 radio */
     .tab-input {
       position: absolute;
@@ -239,4 +299,42 @@ const getLink = (entry: any) => {
       display: block;
     }
   </style>
+
+  <script>
+    const closeNotes = (except?: HTMLElement) => {
+      document.querySelectorAll<HTMLElement>('.library-card.is-open').forEach((card) => {
+        if (card === except) return
+        card.classList.remove('is-open')
+        card.querySelector<HTMLButtonElement>('[data-note-toggle]')?.setAttribute('aria-expanded', 'false')
+      })
+    }
+
+    document.addEventListener('click', (event) => {
+      if (!(event.target instanceof Element)) return
+
+      const button = event.target.closest<HTMLButtonElement>('[data-note-toggle]')
+      if (button) {
+        const card = button.closest<HTMLElement>('.library-card')
+        if (!card) return
+
+        const shouldOpen = !card.classList.contains('is-open')
+        closeNotes(card)
+        card.classList.toggle('is-open', shouldOpen)
+        button.setAttribute('aria-expanded', String(shouldOpen))
+        return
+      }
+
+      if (!event.target.closest('.library-card')) closeNotes()
+    })
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return
+
+      const card = event.target instanceof Element
+        ? event.target.closest<HTMLElement>('.library-card.is-open')
+        : null
+      closeNotes()
+      card?.querySelector<HTMLButtonElement>('[data-note-toggle]')?.focus()
+    })
+  </script>
 </Layout>
