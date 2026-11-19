@@ -64,6 +64,8 @@ function normalizeRows(cat: string, jsonData: any) {
       _title: title,
       _cover: cover,
       _uuid: uuid,
+      _rating: raw?.rating ?? item?.rating ?? raw?.rate ?? item?.rate ?? null,
+      _comment: raw?.comment ?? item?.comment ?? raw?.notes ?? item?.notes ?? '',
       category: raw.category || cat,
     }
   })
@@ -77,14 +79,14 @@ const grouped = {
   game: normalizeRows('game', gameData),
 }
 
-// 使用 normalizeRows 处理最近一个月的数据，并按时间排序
+// 使用 normalizeRows 处理最近 30 条数据，并按时间排序
 const mergedRecentItems = normalizeRows('recent', recentData)
   .sort((a, b) => (new Date(b._created) as any) - (new Date(a._created) as any))
 
 const tabs = [
   {
     id: 'recent',
-    label: 'Last Month',
+    label: 'Latest 30',
     items: mergedRecentItems,
     checked: true,
   },
@@ -152,7 +154,7 @@ const getLink = (entry: any) => {
               {tab.items?.length ? (
                 <div class='grid grid-cols-2 md:grid-cols-5 gap-3'>
                   {tab.items.map(entry => (
-                    <div class='block group'>
+                    <div class='block group relative'>
                       <a
                         href={getLink(entry)}
                         target='_blank'
@@ -180,12 +182,21 @@ const getLink = (entry: any) => {
                           {entry._title}
                         </p>
                       </a>
+                      <div
+                        class='pointer-events-none absolute inset-x-2 top-2 z-20 rounded bg-black/85 p-3 text-white opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100'>
+                        <p class='text-sm font-medium'>
+                          评分：{entry._rating > 0 ? `${entry._rating} / 5` : '暂无评分'}
+                        </p>
+                        <p class='mt-2 text-xs leading-relaxed whitespace-pre-line break-words'>
+                          {entry._comment || '暂无评价'}
+                        </p>
+                      </div>
                     </div>
                   ))}
                 </div>
               ) : (
                 <p class='text-gray-500'>
-                  {tab.id === 'recent' ? '最近 1 个月暂无数据' : '暂无数据'}
+                  {tab.id === 'recent' ? '暂无最近记录' : '暂无数据'}
                 </p>
               )}
               {tab.id === 'recent' && (
