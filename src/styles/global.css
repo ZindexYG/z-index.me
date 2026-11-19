@@ -4,8 +4,14 @@
 /* 新增：在 @theme 中定义自定义颜色和字体 */
 @theme {
   /* 定义颜色，Tailwind 会自动生成 bg-bgdefault, border-bgdefault 等 */
-  --color-bgdefault: #1d1e24;
+  --color-bgdefault: #2c2c2c;
   --color-fontdefault: #e6e1dc;
+  --color-surface-dark: #353432;
+  --color-surface-hover-dark: #43403d;
+  --color-border-dark: #55514c;
+  --color-muted-dark: #b8b0a8;
+  --color-link-dark: #a8c7e4;
+  --color-accent-dark: #e5b879;
 
   /* 定义字体，覆盖默认的 sans 和 mono */
   --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -115,14 +121,14 @@
 }
 
 :root.dark {
-  --background-color: #1d1e24;
-  --card-bg: #1d1e24;
-  --text-color: #eeeeee;
-  --link-color: #82b1ff;
-  --subtext-color: #aaaaaa;
-  --highlight-color: #ffc107;
-  --text-color-secondary: #bbbbbb;
-  --border-color: #0000000b;
+  --background-color: var(--color-bgdefault);
+  --card-bg: var(--color-surface-dark);
+  --text-color: #e6e1dc;
+  --link-color: var(--color-link-dark);
+  --subtext-color: var(--color-muted-dark);
+  --highlight-color: var(--color-accent-dark);
+  --text-color-secondary: var(--color-muted-dark);
+  --border-color: var(--color-border-dark);
 }
 
 /* =========================================
@@ -157,7 +163,7 @@ html {
   color-scheme: light;
   filter: blur(0);
   transition: filter .3s cubic-bezier(0, 0, 0.8, 1);
-  background-color: #1d1e23;
+  background-color: var(--background-color);
 }
 
 html.dark {
@@ -226,7 +232,7 @@ html::before {
   bottom: -100vh;
   left: 0;
   right: 0;
-  background-color: #1d1e23;
+  background-color: var(--background-color);
   z-index: -1;
   pointer-events: none;
 }
@@ -243,53 +249,53 @@ html::before {
     }
 
     h1 {
-      @apply my-2 text-xl font-medium dark:text-white;
+      @apply my-2 text-xl font-medium dark:text-fontdefault;
     }
 
     h2 {
-      @apply my-4 text-lg font-medium dark:text-white;
+      @apply my-4 text-lg font-medium dark:text-fontdefault;
     }
 
     h3,
     h4,
     h5,
     h6 {
-      @apply my-4 font-medium dark:text-white;
+      @apply my-4 font-medium dark:text-fontdefault;
     }
 
     :not(pre)>code {
-      @apply whitespace-nowrap rounded border bg-gray-500/10 px-1 py-0.5 font-mono text-sm font-medium text-black dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-white;
+      @apply whitespace-nowrap rounded border bg-gray-500/10 px-1 py-0.5 font-mono text-sm font-medium text-black dark:border-border-dark dark:bg-surface-dark/50 dark:text-fontdefault;
     }
 
     pre:has(code) {
-      @apply my-4 max-h-[600px] overflow-auto rounded-lg border p-4 font-mono text-sm font-medium dark:border-zinc-700;
+      @apply my-4 max-h-[600px] overflow-auto rounded-lg border p-4 font-mono text-sm font-medium dark:border-border-dark;
     }
 
     img {
-      @apply my-4 rounded-lg border dark:border-zinc-700 max-h-96 mx-auto;
+      @apply my-4 rounded-lg border dark:border-border-dark max-h-96 mx-auto;
     }
 
     video {
-      @apply my-4 rounded-lg border dark:border-zinc-700;
+      @apply my-4 rounded-lg border dark:border-border-dark;
     }
 
     blockquote {
-      @apply my-4 border-l-2 pl-4 border-bgdefault dark:border-fontdefault;
+      @apply my-4 border-l-2 pl-4 border-bgdefault dark:border-border-dark;
     }
 
     a {
-      @apply dark:text-blue-200 text-orange-600 hover:outline-dotted;
+      @apply dark:text-link-dark text-orange-600 hover:outline-dotted;
     }
 
     table {
       @apply my-4 w-full table-auto border-collapse text-sm;
 
       th {
-        @apply border-b p-4 text-left font-medium dark:border-zinc-700;
+        @apply border-b p-4 text-left font-medium dark:border-border-dark;
       }
 
       td {
-        @apply border-b bg-zinc-50 p-4 dark:border-zinc-700 dark:bg-zinc-800;
+        @apply border-b bg-zinc-50 p-4 dark:border-border-dark dark:bg-surface-dark;
       }
     }
 
@@ -302,7 +308,7 @@ html::before {
     }
 
     kbd {
-      @apply rounded border border-b-2 bg-zinc-100 px-1 py-0.5 font-mono text-xs font-medium text-black dark:border-zinc-700 dark:bg-zinc-800 dark:text-white;
+      @apply rounded border border-b-2 bg-zinc-100 px-1 py-0.5 font-mono text-xs font-medium text-black dark:border-border-dark dark:bg-surface-dark dark:text-fontdefault;
     }
 
     mark {
@@ -335,8 +341,8 @@ figcaption {
 }
 
 .dark .db-card {
-  border: 1px solid #3f3f46;
-  background-color: #24262d;
+  border: 1px solid var(--color-border-dark);
+  background-color: var(--color-surface-dark);
 }
 
 a.db-card-subject:hover {

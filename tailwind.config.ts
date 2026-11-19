@@ -11,7 +11,7 @@ const config: Config = {
         mono: ['\'Geist Mono\'', ...defaultTheme.fontFamily.mono],
       },
       colors: {
-        bgdefault: '#1d1e24',
+        bgdefault: '#2c2c2c',
         fontdefault: '#e6e1dc',
       },
     },

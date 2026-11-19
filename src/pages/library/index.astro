@@ -169,7 +169,7 @@ const categoryLabels: Record<string, string> = {
                         target='_blank'
                         rel='noopener noreferrer'
                         class='block rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500'>
-                        <div class='relative aspect-[2/3] overflow-hidden rounded-md bg-zinc-100 shadow-sm ring-1 ring-black/5 dark:bg-zinc-800 dark:ring-white/10'>
+                        <div class='relative aspect-[2/3] overflow-hidden rounded-md bg-zinc-100 shadow-sm ring-1 ring-black/5 dark:bg-surface-dark dark:ring-white/10'>
                           <img
                             src={entry._cover}
                             alt={entry._title}
@@ -179,14 +179,14 @@ const categoryLabels: Record<string, string> = {
                             onerror="this.style.opacity='0'; this.nextElementSibling.style.display='flex';"
                           />
                           <div
-                            class='hidden absolute inset-0 flex-col items-center justify-center bg-zinc-100 dark:bg-zinc-800 cursor-pointer'
+                            class='hidden absolute inset-0 flex-col items-center justify-center bg-zinc-100 dark:bg-surface-dark cursor-pointer'
                             onclick="event.preventDefault(); const img = this.previousElementSibling; img.src = img.src.split('?')[0] + '?t=' + Date.now(); img.style.opacity='1'; this.style.display='none';">
                             <span class='text-xs text-gray-400'>加载失败</span>
                             <span class='text-xs text-blue-500'>点击重试</span>
                           </div>
                         </div>
                         <p
-                          class='mt-2 w-full truncate text-sm font-medium text-zinc-800 dark:text-zinc-100'
+                          class='mt-2 w-full truncate text-sm font-medium text-zinc-800 dark:text-fontdefault'
                           title={entry._title}>
                           {getShortTitle(entry._title)}
                         </p>
@@ -201,19 +201,19 @@ const categoryLabels: Record<string, string> = {
                       </button>
                       <div
                         id={`note-${tab.id}-${entryIndex}`}
-                        class='library-note invisible pointer-events-none absolute inset-x-2 bottom-10 z-20 flex max-h-[calc(100%-3rem)] translate-y-2 flex-col overflow-y-auto rounded-md border border-black/10 bg-[#f4efe9]/95 p-3 text-[#26231f] opacity-0 shadow-xl backdrop-blur-sm transition duration-200 ease-out group-hover:visible group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 dark:border-white/10 dark:bg-[#23242a]/95 dark:text-[#e6e1dc] motion-reduce:transition-none'>
-                        <div class='mb-2 flex items-center justify-between gap-2 border-b border-black/10 pb-2 dark:border-white/10'>
-                          <span class='font-mono text-[10px] uppercase tracking-[0.12em] text-zinc-500 dark:text-zinc-400'>
+                        class='library-note invisible pointer-events-none absolute inset-x-2 bottom-10 z-20 flex max-h-[calc(100%-3rem)] translate-y-2 flex-col overflow-y-auto rounded-md border border-black/10 bg-[#f4efe9]/95 p-3 text-[#26231f] opacity-0 shadow-xl backdrop-blur-sm transition duration-200 ease-out group-hover:visible group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 dark:border-border-dark dark:bg-surface-dark dark:text-fontdefault motion-reduce:transition-none'>
+                        <div class='mb-2 flex items-center justify-between gap-2 border-b border-black/10 pb-2 dark:border-border-dark'>
+                          <span class='font-mono text-[10px] uppercase tracking-[0.12em] text-zinc-500 dark:text-muted-dark'>
                             {categoryLabels[entry.category] || '收藏'} · {entry._created}
                           </span>
-                          <span class='shrink-0 font-mono text-xs tabular-nums text-amber-700 dark:text-amber-300'>
+                          <span class='shrink-0 font-mono text-xs tabular-nums text-amber-700 dark:text-accent-dark'>
                             {entry._rating > 0 ? `★ ${entry._rating}/5` : '未评分'}
                           </span>
                         </div>
                         <h2 class='mb-2 text-sm font-semibold leading-snug'>
                           {getShortTitle(entry._title)}
                         </h2>
-                        <p class='whitespace-pre-line break-words text-sm leading-relaxed text-zinc-700 dark:text-zinc-300'>
+                        <p class='whitespace-pre-line break-words text-sm leading-relaxed text-zinc-700 dark:text-muted-dark'>
                           {entry._comment || '还没有写下短评。'}
                         </p>
                       </div>

@@ -22,11 +22,11 @@ import PageSearch from 'astro-pagefind/components/Search.astro'
     }
     /* 适配深色模式 */
     .dark {
-      --pagefind-ui-primary: #60a5fa;
-      --pagefind-ui-text: #d4d4d8;
-      --pagefind-ui-background: #18181b;
-      --pagefind-ui-border: #27272a;
-      --pagefind-ui-tag: #27272a;
+      --pagefind-ui-primary: var(--color-link-dark);
+      --pagefind-ui-text: var(--color-fontdefault);
+      --pagefind-ui-background: var(--color-surface-dark);
+      --pagefind-ui-border: var(--color-border-dark);
+      --pagefind-ui-tag: var(--color-surface-hover-dark);
     }
     .pagefind-ui {
       width: 100%;
