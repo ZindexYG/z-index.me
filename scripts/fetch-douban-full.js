@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
+import { mergeLibraryEntries, selectLatestLibraryEntries } from '../src/lib/library-archive.js';
 
 const DOUBAN_ID = '141874159'; // 你的 ID
 const DATA_DIR = path.join(process.cwd(), 'src/data/douban');
@@ -108,12 +109,12 @@ async function fetchPage(category, start = 0) {
 
     return items;
   } catch (error) {
-    if (error.response && error.response.status === 403) {
+    if (error?.response?.status === 403) {
       console.error(`⚠️ 触发豆瓣反爬 (403 Forbidden)，停止抓取 ${category}`);
-      throw error;
+    } else {
+      console.error(`抓取失败: ${url}`, error.message);
     }
-    console.error(`抓取失败: ${url}`, error.message);
-    return [];
+    throw error;
   }
 }
 
@@ -154,10 +155,13 @@ async function fetchCategory(category, mode = 'full') {
       if (start > 2000) hasMore = false;
 
     } catch (error) {
+      if (error?.response?.status === 403)
+        throw error;
+
       errorCount++;
       if (errorCount >= 3) {
         console.error('❌ 连续失败 3 次，放弃当前分类剩余数据');
-        hasMore = false;
+        throw error;
       } else {
         console.log('⏳ 等待 10 秒后重试...');
         await sleep(10000);
@@ -166,9 +170,7 @@ async function fetchCategory(category, mode = 'full') {
   }
 
   return mode === 'recent'
-    ? allItems
-      .sort((a, b) => new Date(b.date) - new Date(a.date))
-      .slice(0, RECENT_LIMIT)
+    ? selectLatestLibraryEntries(allItems, RECENT_LIMIT)
     : allItems;
 }
 
@@ -220,17 +222,6 @@ async function downloadImage(url, category, filenamePrefix = '') {
   }
 }
 
-// 合并新旧数据 (去重)
-function mergeData(oldData, newData) {
-  const map = new Map();
-  oldData.forEach(item => map.set(item.link, item));
-  // 新数据覆盖旧数据
-  newData.forEach(item => map.set(item.link, item));
-
-  // 转回数组并按时间倒序
-  return Array.from(map.values()).sort((a, b) => new Date(b.date) - new Date(a.date));
-}
-
 async function main() {
   const args = process.argv.slice(2);
   const mode = args.includes('recent') ? 'recent' : 'full';
@@ -251,6 +242,8 @@ async function main() {
   if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
   if (!fs.existsSync(IMAGE_DIR)) fs.mkdirSync(IMAGE_DIR, { recursive: true });
 
+  const updatedArchives = new Map();
+
   for (const category of targets) {
     console.log(`\n=== 开始处理 ${category} ===`);
     const newItems = await fetchCategory(category, mode);
@@ -268,47 +261,51 @@ async function main() {
       try {
         const oldItems = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
         console.log(`📥 读取旧数据 ${oldItems.length} 条，合并新数据 ${newItems.length} 条...`);
-        finalItems = mergeData(oldItems, newItems);
-      } catch (e) {
-        console.error('读取旧文件失败，将只保存新数据');
+        finalItems = mergeLibraryEntries(oldItems, newItems);
+      } catch (error) {
+        console.error(`读取 ${category} 旧档失败，停止更新`, error.message);
+        throw error;
       }
     }
 
-    // 下载图片
-    if (finalItems.length > 0) {
-      console.log(`📥 正在下载 ${category} 图片 (${finalItems.length} 张)...`);
-      // 使用 Promise.all 并限制并发，避免请求过快
-      // 也可以简单地串行
-      for (let i = 0; i < finalItems.length; i++) {
-        // 更新封面路径
-        finalItems[i].cover = await downloadImage(finalItems[i].cover, category);
-        if ((i + 1) % 50 === 0) process.stdout.write('.');
-      }
-      console.log(''); // 换行
-
-      fs.writeFileSync(filePath, JSON.stringify(finalItems, null, 2));
-      console.log(`✅ ${category} 处理完成，当前共 ${finalItems.length} 条`);
-    } else {
+    if (finalItems.length > 0)
+      updatedArchives.set(category, finalItems);
+    else
       console.log(`⚠️ ${category} 未获取到数据`);
+  }
+
+  for (const [category, items] of updatedArchives) {
+    console.log(`📥 正在下载 ${category} 图片 (${items.length} 张)...`);
+    for (let i = 0; i < items.length; i++) {
+      items[i].cover = await downloadImage(items[i].cover, category);
+      if ((i + 1) % 50 === 0) process.stdout.write('.');
     }
+    console.log('');
+  }
+
+  for (const [category, items] of updatedArchives) {
+    const filePath = path.join(DATA_DIR, `${category}.json`);
+    fs.writeFileSync(filePath, `${JSON.stringify(items, null, 2)}\n`);
+    console.log(`✅ ${category} 处理完成，当前共 ${items.length} 条`);
   }
 
   // 从完整分类档案中选取跨分类时间最新的 30 条
-  const recentFilePath = path.join(DATA_DIR, 'recent.json');
   const categories = ['movie', 'book', 'game'];
   const allItems = categories.flatMap(category => {
     const filePath = path.join(DATA_DIR, `${category}.json`);
     if (!fs.existsSync(filePath)) return [];
 
-    return JSON.parse(fs.readFileSync(filePath, 'utf-8')).map(item => ({
+    const archivedItems = updatedArchives.get(category)
+      ?? JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+
+    return archivedItems.map(item => ({
       ...item,
       category: item.category || category,
     }));
   });
 
-  const finalRecentItems = allItems
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, RECENT_LIMIT);
+  const finalRecentItems = selectLatestLibraryEntries(allItems, RECENT_LIMIT);
+  const recentFilePath = path.join(DATA_DIR, 'recent.json');
 
   // 下载 recent 图片 (虽然大部分可能已经在上面处理过了，但如果是从旧 recent.json 读出来的可能还没有下载)
   if (finalRecentItems.length > 0) {
@@ -319,8 +316,11 @@ async function main() {
     }
   }
 
-  fs.writeFileSync(recentFilePath, JSON.stringify(finalRecentItems, null, 2));
+  fs.writeFileSync(recentFilePath, `${JSON.stringify(finalRecentItems, null, 2)}\n`);
   console.log(`\n✅ 最近 ${RECENT_LIMIT} 条数据已保存至 recent.json，共 ${finalRecentItems.length} 条`);
 }
 
-main();
+main().catch((error) => {
+  console.error('❌ Library 更新失败，归档未完成', error.message);
+  process.exitCode = 1;
+});
