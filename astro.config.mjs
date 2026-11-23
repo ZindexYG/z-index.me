@@ -1,5 +1,6 @@
 import sitemap from '@astrojs/sitemap'
 import pagefind from "astro-pagefind";
+import { unified } from '@astrojs/markdown-remark'
 
 import { defineConfig } from 'astro/config'
 
@@ -34,18 +35,20 @@ export default defineConfig({
     pagefind()
   ],
   markdown: {
-    // shikiConfig: {
-    //   themes: {
-    //     light: 'catppuccin-latte',
-    //     dark: 'catppuccin-mocha',
-    //   },
-    // },
-    remarkPlugins: [
-      remarkFigureCaption,
-      remarkNeoDB,
-      remarkDirective,
-      remarkCalloutDirectives,
-      remarkModifiedTime
-    ],
+    processor: unified({
+      // shikiConfig: {
+      //   themes: {
+      //     light: 'catppuccin-latte',
+      //     dark: 'catppuccin-mocha',
+      //   },
+      // },
+      remarkPlugins: [
+        remarkFigureCaption,
+        remarkNeoDB,
+        remarkDirective,
+        remarkCalloutDirectives,
+        remarkModifiedTime,
+      ],
+    }),
   },
 })
