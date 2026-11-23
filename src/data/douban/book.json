@@ -1,5 +1,59 @@
 [
   {
+    "title": "蓝溪镇 6 : 罗小黑战记·君清篇",
+    "link": "https://book.douban.com/subject/38410832/",
+    "cover": "/library/book/s35568694.webp",
+    "date": "2026-11-23",
+    "rating": 5,
+    "comment": "",
+    "category": "book"
+  },
+  {
+    "title": "蓝溪镇.5",
+    "link": "https://book.douban.com/subject/37177999/",
+    "cover": "/library/book/s35112178.webp",
+    "date": "2026-11-23",
+    "rating": 5,
+    "comment": "",
+    "category": "book"
+  },
+  {
+    "title": "蓝溪镇 4 : 罗小黑战记·君清篇",
+    "link": "https://book.douban.com/subject/36237960/",
+    "cover": "/library/book/s34493501.webp",
+    "date": "2026-11-23",
+    "rating": 5,
+    "comment": "",
+    "category": "book"
+  },
+  {
+    "title": "蓝溪镇 3 : 罗小黑战记·君清篇",
+    "link": "https://book.douban.com/subject/35618366/",
+    "cover": "/library/book/s34032645.webp",
+    "date": "2026-11-23",
+    "rating": 5,
+    "comment": "",
+    "category": "book"
+  },
+  {
+    "title": "蓝溪镇 2 : 罗小黑战记·君清篇",
+    "link": "https://book.douban.com/subject/35272760/",
+    "cover": "/library/book/s33859764.webp",
+    "date": "2026-11-23",
+    "rating": 5,
+    "comment": "",
+    "category": "book"
+  },
+  {
+    "title": "蓝溪镇 1 : 罗小黑战记·君清篇",
+    "link": "https://book.douban.com/subject/35034666/",
+    "cover": "/library/book/s33638266.webp",
+    "date": "2026-11-23",
+    "rating": 5,
+    "comment": "",
+    "category": "book"
+  },
+  {
     "title": "被讨厌的勇气 : “自我启发之父”阿德勒的哲学课",
     "link": "https://book.douban.com/subject/26369699/",
     "cover": "/library/book/s33828853.webp",
@@ -11,7 +65,7 @@
   {
     "title": "我在北京送快递",
     "link": "https://book.douban.com/subject/36150423/",
-    "cover": "/library/book/s34522268.jpg",
+    "cover": "/library/book/s34522268.webp",
     "date": "2026-07-17",
     "rating": 5,
     "comment": "这本书很有趣，文笔流畅，就像作者说的，他写得很开心，读者读得也很开心。",
@@ -20,7 +74,7 @@
   {
     "title": "冰鉴",
     "link": "https://book.douban.com/subject/1968882/",
-    "cover": "/library/book/s5804582.jpg",
+    "cover": "/library/book/s5804582.webp",
     "date": "2026-07-03",
     "rating": 3,
     "comment": "",
@@ -29,27 +83,47 @@
   {
     "title": "Claude Code橙皮书 : AI编程实战",
     "link": "https://book.douban.com/subject/38532607/",
-    "cover": "/library/book/s35546689.jpg",
+    "cover": "/library/book/s35546689.webp",
     "date": "2026-06-29",
     "rating": 3,
     "comment": "",
     "category": "book"
   },
   {
+    "title": "共情式对话 : 揭示人际关系的底层逻辑",
+    "link": "https://book.douban.com/subject/36848535/",
+    "cover": "/library/book/s34832928.webp",
+    "date": "2026-06-13",
+    "rating": 4,
+    "comment": "画图很有意思",
+    "category": "book"
+  },
+  {
+    "title": "弱传播 : 舆论世界的哲学",
+    "link": "https://book.douban.com/subject/30383755/",
+    "cover": "/library/book/s29952950.webp",
+    "date": "2026-04-20",
+    "rating": 4,
+    "comment": "值得自己细读的舆论学读物。\n成书于 2018 年，书中援引的叶良辰、王石 “王十”、台湾地区选战等案例，在当下自媒体狂飙、短视频席卷舆论场的时代，已显得有些陈旧，没能覆盖近年新兴的传播现象，时效性上有所欠缺。同时，全书以理论推演为核心，围绕弱定理、情感律、轻规则、次理论层层拆解，虽逻辑严谨、体系完整，却少了通俗读物的轻松趣味，读起来难免有些枯燥。\n但这并不妨碍它的价值。对于刚刚意识到舆论无处不在、想摸清其底层逻辑的读者而言，这本书的见解极具启发性。它戳破了舆论世界与现实世界的核心反差 —— 现实强者往往是舆论弱者，情感永远压倒道理，轻量表象更容易引爆传播，用直白的规律拆解了面试、公关、公共事件中的传播本质，帮人建立起对舆论的基础认知。",
+    "category": "book"
+  },
+  {
     "title": "如何了解一个人 : 看见与被看见的艺术",
     "link": "https://book.douban.com/subject/37568143/",
-    "cover": "/library/book/s35277700.jpg",
+    "cover": "/library/book/s35277700.webp",
     "date": "2026-01-22",
     "rating": 2,
-    "comment": "大约不太可能去看第二次的书，老套的作者，引用多过内容的书籍，阅读体验实在很一般。\n\n“作者庞大的阅读量，竟然只写出这些引用他人的话语，老套的例子描述，不成框架的理论体系，反复赘述那些曾经的记忆，令人感动可惜”"
+    "comment": "大约不太可能去看第二次的书，老套的作者，引用多过内容的书籍，阅读体验实在很一般。\n\n“作者庞大的阅读量，竟然只写出这些引用他人的话语，老套的例子描述，不成框架的理论体系，反复赘述那些曾经的记忆，令人感动可惜”",
+    "category": "book"
   },
   {
     "title": "大力出奇迹 : 张一鸣的创业心路与算法思维",
     "link": "https://book.douban.com/subject/36452668/",
-    "cover": "/library/book/s34902959.jpg",
+    "cover": "/library/book/s34902959.webp",
     "date": "2026-01-18",
     "rating": 4,
-    "comment": "这本书最有意思的地方，是作者在前半部分对张一鸣思维模式形成过程的描摹。"
+    "comment": "这本书最有意思的地方，是作者在前半部分对张一鸣思维模式形成过程的描摹。",
+    "category": "book"
   },
   {
     "title": "邓小平（一部平民视角的伟人全传！写尽90余年精彩人生，纵览20世纪历史风云！）",
@@ -57,127 +131,143 @@
     "cover": "/library/book/book-default-lpic.gif",
     "date": "2025-12-23",
     "rating": 3,
-    "comment": ""
+    "comment": "",
+    "category": "book"
   },
   {
     "title": "桃花源没事儿",
     "link": "https://book.douban.com/subject/37339619/",
-    "cover": "/library/book/s35162221.jpg",
+    "cover": "/library/book/s35162221.webp",
     "date": "2025-08-22",
     "rating": 4,
-    "comment": ""
+    "comment": "",
+    "category": "book"
   },
   {
     "title": "现代JavaScript库开发：原理、技术与实战",
     "link": "https://book.douban.com/subject/36162488/",
-    "cover": "/library/book/s34357293.jpg",
+    "cover": "/library/book/s34357293.webp",
     "date": "2025-07-13",
     "rating": 4,
-    "comment": "当前而言，相当 old school"
+    "comment": "当前而言，相当 old school",
+    "category": "book"
   },
   {
     "title": "百年孤独",
     "link": "https://book.douban.com/subject/6082808/",
-    "cover": "/library/book/s27237850.jpg",
+    "cover": "/library/book/s27237850.webp",
     "date": "2025-03-21",
     "rating": 5,
-    "comment": ""
+    "comment": "",
+    "category": "book"
   },
   {
     "title": "利他主义的生意 : 偏爱“非理性”的市场",
     "link": "https://book.douban.com/subject/37016747/",
-    "cover": "/library/book/s34942800.jpg",
+    "cover": "/library/book/s34942800.webp",
     "date": "2025-03-07",
     "rating": 4,
-    "comment": "对非经济学专业读者而言有难度。观点理解起来较慢，像读这本书断断续续用了大概两个月时间。\n它引用诸多名家观点，剖析理性人在市场获益差异原因，指出利他主义者渐受青睐趋势。\n关于伪装者和背叛者行为的阐述具启发性。\n\n虽阅读有障碍，但其提供开放视角，值得一读。"
+    "comment": "对非经济学专业读者而言有难度。观点理解起来较慢，像读这本书断断续续用了大概两个月时间。\n它引用诸多名家观点，剖析理性人在市场获益差异原因，指出利他主义者渐受青睐趋势。\n关于伪装者和背叛者行为的阐述具启发性。\n\n虽阅读有障碍，但其提供开放视角，值得一读。",
+    "category": "book"
   },
   {
     "title": "沙丘3 : 沙丘之子",
     "link": "https://book.douban.com/subject/27130074/",
-    "cover": "/library/book/s29550760.jpg",
+    "cover": "/library/book/s29550760.webp",
     "date": "2025-03-03",
     "rating": 4,
-    "comment": "造神和成神相辅相成"
+    "comment": "造神和成神相辅相成",
+    "category": "book"
   },
   {
     "title": "沙丘2 : 沙丘救世主",
     "link": "https://book.douban.com/subject/27098887/",
-    "cover": "/library/book/s29519663.jpg",
+    "cover": "/library/book/s29519663.webp",
     "date": "2025-03-03",
     "rating": 4,
-    "comment": ""
+    "comment": "",
+    "category": "book"
   },
   {
     "title": "沙丘 : 2024增补修订版",
     "link": "https://book.douban.com/subject/36497590/",
-    "cover": "/library/book/s34794338.jpg",
+    "cover": "/library/book/s34794338.webp",
     "date": "2025-03-03",
     "rating": 4,
-    "comment": "瞅着原著还行，电影真别拍了..."
+    "comment": "瞅着原著还行，电影真别拍了...",
+    "category": "book"
   },
   {
     "title": "长安的荔枝",
     "link": "https://book.douban.com/subject/36104107/",
-    "cover": "/library/book/s34327482.jpg",
+    "cover": "/library/book/s34327482.webp",
     "date": "2025-02-28",
     "rating": 5,
-    "comment": "作者写的酣畅，读者读的也淋漓"
+    "comment": "作者写的酣畅，读者读的也淋漓",
+    "category": "book"
   },
   {
     "title": "太白金星有点烦",
     "link": "https://book.douban.com/subject/36328704/",
-    "cover": "/library/book/s34544956.jpg",
+    "cover": "/library/book/s34544956.webp",
     "date": "2025-02-24",
     "rating": 5,
-    "comment": ""
+    "comment": "",
+    "category": "book"
   },
   {
     "title": "食南之徒",
     "link": "https://book.douban.com/subject/36900338/",
-    "cover": "/library/book/s34869158.jpg",
+    "cover": "/library/book/s34869158.webp",
     "date": "2025-02-24",
     "rating": 5,
-    "comment": ""
+    "comment": "",
+    "category": "book"
   },
   {
     "title": "食南之徒",
     "link": "https://book.douban.com/subject/36710597/",
-    "cover": "/library/book/s34823157.jpg",
+    "cover": "/library/book/s34823157.webp",
     "date": "2024-11-15",
     "rating": 5,
-    "comment": ""
+    "comment": "",
+    "category": "book"
   },
   {
     "title": "翦商 : 殷周之变与华夏新生",
     "link": "https://book.douban.com/subject/36096304/",
-    "cover": "/library/book/s34385069.jpg",
+    "cover": "/library/book/s34385069.webp",
     "date": "2024-10-13",
     "rating": 5,
-    "comment": "很有意思的一本书，没想象中那么难读"
+    "comment": "很有意思的一本书，没想象中那么难读",
+    "category": "book"
   },
   {
-    "title": "精灵宝钻",
+    "title": "精灵宝钻 : 精装插图本",
     "link": "https://book.douban.com/subject/25957852/",
-    "cover": "/library/book/s28000347.jpg",
+    "cover": "/library/book/s28000347.webp",
     "date": "2024-10-08",
     "rating": 5,
-    "comment": ""
+    "comment": "",
+    "category": "book"
   },
   {
     "title": "GPT图解 : 大模型是怎样构建的",
     "link": "https://book.douban.com/subject/36668702/",
-    "cover": "/library/book/s34713534.jpg",
+    "cover": "/library/book/s34713534.webp",
     "date": "2024-09-18",
     "rating": 3,
-    "comment": "总的来说，这本书可以作为 GPT 模型的入门书籍，帮助读者初步了解模型的构建和相关知识。但它在趣味性和对不同读者群体的适应性方面还有待提高。"
+    "comment": "总的来说，这本书可以作为 GPT 模型的入门书籍，帮助读者初步了解模型的构建和相关知识。但它在趣味性和对不同读者群体的适应性方面还有待提高。",
+    "category": "book"
   },
   {
     "title": "如何开一家小而美的店",
     "link": "https://book.douban.com/subject/35714434/",
-    "cover": "/library/book/s34085418.jpg",
+    "cover": "/library/book/s34085418.webp",
     "date": "2024-08-15",
     "rating": 5,
-    "comment": ""
+    "comment": "",
+    "category": "book"
   },
   {
     "title": "你不懂咖啡",
