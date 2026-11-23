@@ -1,11 +1,14 @@
 ---
-import Layout from '../../layouts/Layout.astro'
+import { readFile } from 'node:fs/promises'
+import { Sparkles } from '@lucide/astro'
+import { imageMetadata } from 'astro/assets/utils'
 
 // 本地 JSON
 import movieData from '../../data/douban/movie.json'
 import bookData from '../../data/douban/book.json'
 import gameData from '../../data/douban/game.json'
 import recentData from '../../data/douban/recent.json'
+import Layout from '../../layouts/Layout.astro'
 import { normalizeLibraryRows, selectLatestLibraryEntries } from '../../lib/library-archive.js'
 
 // 处理本地数据
@@ -34,6 +37,23 @@ const tabs = [
   { id: 'book', label: '书', items: grouped.book },
   { id: 'game', label: '游', items: grouped.game },
 ]
+
+const coverSizes = new Map<string, { width: number, height: number }>()
+const localCovers = new Set<string>(
+  tabs.flatMap(tab => tab.items.map(entry => entry._cover))
+    .filter(cover => typeof cover === 'string' && /^\/library\/[\w-]+\/[\w.-]+\.[a-z\d]+$/i.test(cover)),
+)
+
+// Reserve the actual cover size before the browser loads the image.
+for (const cover of localCovers) {
+  try {
+    const { width, height } = await imageMetadata(await readFile(`public${cover}`))
+    coverSizes.set(cover, { width, height })
+  }
+  catch {
+    // Missing or unreadable assets use the standard cover placeholder.
+  }
+}
 
 // 跳转链接（优先使用原始 link；否则构建到豆瓣的对应页面）
 const getLink = (entry: any) => {
@@ -100,64 +120,68 @@ const categoryLabels: Record<string, string> = {
           tabs.map(tab => (
             <section id={`panel-${tab.id}`} class='tab-panel'>
               {tab.items?.length ? (
-                <div class='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-6'>
-                  {tab.items.map((entry, entryIndex) => (
-                    <div class='library-card group relative'>
-                      <a
-                        href={getLink(entry)}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        class='block rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500'>
-                        <div class='relative aspect-[2/3] overflow-hidden rounded-md bg-zinc-100 shadow-sm ring-1 ring-black/5 dark:bg-surface-dark dark:ring-white/10'>
-                          <img
-                            src={entry._cover}
-                            alt={entry._title}
-                            loading='lazy'
-                            decoding='async'
-                            class='library-cover block h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.025] motion-reduce:transition-none'
-                            onerror="this.style.opacity='0'; this.nextElementSibling.style.display='flex';"
-                          />
-                          <div
-                            class='hidden absolute inset-0 flex-col items-center justify-center bg-zinc-100 dark:bg-surface-dark cursor-pointer'
-                            onclick="event.preventDefault(); const img = this.previousElementSibling; img.src = img.src.split('?')[0] + '?t=' + Date.now(); img.style.opacity='1'; this.style.display='none';">
-                            <span class='text-xs text-gray-400'>加载失败</span>
-                            <span class='text-xs text-blue-500'>点击重试</span>
+                <div class='library-grid'>
+                  {tab.items.map((entry, index) => {
+                    const comment = entry._comment?.trim()
+                    const noteId = comment ? `library-note-${tab.id}-${index}` : undefined
+                    const { width, height } = coverSizes.get(entry._cover) ?? { width: 300, height: 450 }
+
+                    return (
+                      <div class:list={['library-card', Number(entry._rating) === 5 && 'is-five-star']}>
+                        <a
+                          href={getLink(entry)}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          class='library-link focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500'
+                          aria-describedby={noteId}>
+                          <div class='library-artwork relative overflow-hidden rounded-md bg-zinc-100 shadow-sm ring-1 ring-black/5 dark:bg-surface-dark dark:ring-white/10'>
+                            <img
+                              src={entry._cover}
+                              alt={entry._title}
+                              width={width}
+                              height={height}
+                              loading='lazy'
+                              decoding='async'
+                              class='library-cover block w-full object-cover'
+                              onerror="this.style.opacity='0'; this.nextElementSibling.style.display='flex';"
+                            />
+                            <div
+                              class='hidden absolute inset-0 z-10 flex-col items-center justify-center bg-zinc-100 dark:bg-surface-dark cursor-pointer'
+                              onclick="event.preventDefault(); const img = this.previousElementSibling; img.src = img.src.split('?')[0] + '?t=' + Date.now(); img.style.opacity='1'; this.style.display='none';">
+                              <span class='text-xs text-gray-400'>加载失败</span>
+                              <span class='text-xs text-blue-500'>点击重试</span>
+                            </div>
+                            <div class='library-caption absolute inset-0 flex flex-col justify-end p-3 sm:p-4'>
+                              <span class='mb-1 text-[10px] font-medium uppercase tracking-[0.16em] text-white/75'>
+                                {categoryLabels[entry.category] || '收藏'}
+                              </span>
+                              <p class='line-clamp-2 text-sm font-semibold leading-snug text-white sm:text-base' title={entry._title}>
+                                {getShortTitle(entry._title)}
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                        <p
-                          class='mt-2 w-full truncate text-sm font-medium text-zinc-800 dark:text-fontdefault'
-                          title={entry._title}>
-                          {getShortTitle(entry._title)}
-                        </p>
-                      </a>
-                      <button
-                        type='button'
-                        class='note-toggle absolute right-2 top-2 z-30 rounded-full border border-white/30 bg-black/45 px-2.5 py-1 font-mono text-[10px] tracking-wide text-white shadow-sm backdrop-blur transition hover:bg-black/65 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400'
-                        aria-expanded='false'
-                        aria-controls={`note-${tab.id}-${entryIndex}`}
-                        data-note-toggle>
-                        手记
-                      </button>
-                      <div
-                        id={`note-${tab.id}-${entryIndex}`}
-                        class='library-note invisible pointer-events-none absolute inset-x-2 bottom-10 z-20 flex max-h-[calc(100%-3rem)] translate-y-2 flex-col overflow-y-auto rounded-md border border-black/10 bg-[#f4efe9]/95 p-3 text-[#26231f] opacity-0 shadow-xl backdrop-blur-sm transition duration-200 ease-out group-hover:visible group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 dark:border-border-dark dark:bg-surface-dark dark:text-fontdefault motion-reduce:transition-none'>
-                        <div class='mb-2 flex items-center justify-between gap-2 border-b border-black/10 pb-2 dark:border-border-dark'>
-                          <span class='font-mono text-[10px] uppercase tracking-[0.12em] text-zinc-500 dark:text-muted-dark'>
-                            {categoryLabels[entry.category] || '收藏'} · {entry._created}
-                          </span>
-                          <span class='shrink-0 font-mono text-xs tabular-nums text-amber-700 dark:text-accent-dark'>
-                            {entry._rating > 0 ? `★ ${entry._rating}/5` : '未评分'}
-                          </span>
-                        </div>
-                        <h2 class='mb-2 text-sm font-semibold leading-snug'>
-                          {getShortTitle(entry._title)}
-                        </h2>
-                        <p class='whitespace-pre-line break-words text-sm leading-relaxed text-zinc-700 dark:text-muted-dark'>
-                          {entry._comment || '还没有写下短评。'}
-                        </p>
+                        </a>
+                        {comment && (
+                          <aside id={noteId} class='library-note' role='tooltip' hidden>
+                            <div class='mb-2 flex items-center justify-between gap-2 border-b border-black/10 pb-2 dark:border-border-dark'>
+                              <span class='font-mono text-[10px] tracking-[0.12em] text-zinc-600 dark:text-muted-dark'>
+                                {categoryLabels[entry.category] || '收藏'} · {entry._created}
+                              </span>
+                              <span class='note-rating inline-flex shrink-0 items-center gap-1 font-mono text-xs tabular-nums text-amber-700 dark:text-accent-dark'>
+                                {entry._rating > 0 ? <><Sparkles class='size-3.5' aria-hidden='true' /><span>{entry._rating}/5</span></> : '未评分'}
+                              </span>
+                            </div>
+                            <h2 class='mb-2 text-sm font-semibold leading-snug'>
+                              {getShortTitle(entry._title)}
+                            </h2>
+                            <p class='whitespace-pre-line break-words text-sm leading-relaxed text-zinc-700 dark:text-muted-dark'>
+                              {comment}
+                            </p>
+                          </aside>
+                        )}
                       </div>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
               ) : (
                 <p class='text-gray-500'>
@@ -177,37 +201,163 @@ const categoryLabels: Record<string, string> = {
   </div>
 
   <style>
-    .library-card a:focus-visible ~ .library-note {
-      visibility: visible;
+    .library-grid {
+      --library-columns: 3;
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(var(--library-columns), minmax(0, 1fr));
+      align-items: start;
+      gap: 1rem;
+    }
+
+    .library-grid[data-masonry] {
+      height: var(--masonry-height);
+    }
+
+    .library-grid[data-masonry] > .library-card {
+      position: absolute;
+      grid-column: var(--masonry-column) / span 1;
+      inset-inline: 0;
+      top: var(--masonry-top);
+    }
+
+    .library-link,
+    .library-artwork {
+      display: block;
+    }
+
+    @property --library-cover-zoom {
+      syntax: '<number>';
+      inherits: false;
+      initial-value: 0;
+    }
+
+    @property --library-cover-pulse {
+      syntax: '<number>';
+      inherits: false;
+      initial-value: 0.012;
+    }
+
+    @property --library-rainbow-angle {
+      syntax: '<angle>';
+      inherits: false;
+      initial-value: 0deg;
+    }
+
+    .library-cover {
+      height: auto;
+      filter: brightness(0.78) saturate(0.88);
+      scale: calc(1 + var(--library-cover-zoom, 0) * var(--library-cover-pulse, 0.012));
+      transition: filter 500ms ease, --library-cover-zoom 650ms ease;
+      animation: library-cover-breathe 6s ease-in-out infinite alternate paused;
+    }
+
+    .library-caption {
+      background: linear-gradient(180deg, transparent 45%, rgb(0 0 0 / 0.72));
+    }
+
+    .library-card:is(:hover, :focus-within) .library-cover {
+      filter: brightness(1.04) saturate(1.08);
+      --library-cover-zoom: 1;
+      animation-play-state: running;
+    }
+
+    @keyframes library-cover-breathe {
+      to { --library-cover-pulse: 0.052; }
+    }
+
+    .is-five-star {
+      --spectrum: #f28c9e, #fbd58d, #8fe2b8, #82d8ed, #ac9bed, #f1a3ce, #f28c9e;
+    }
+
+    .is-five-star .library-artwork::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      padding: 2px;
+      border-radius: inherit;
+      background: conic-gradient(from var(--library-rainbow-angle, 0deg), var(--spectrum));
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 350ms ease;
+      animation: library-rainbow 8s linear infinite paused;
+    }
+
+    .is-five-star:is(:hover, :focus-within) .library-artwork::after {
       opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
+      animation-play-state: running;
     }
 
-    .library-card a:focus-visible .library-cover {
-      transform: scale(1.025);
+    @keyframes library-rainbow {
+      to { --library-rainbow-angle: 1turn; }
     }
 
-    .library-card.is-open .library-note {
-      visibility: visible;
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
+    .is-five-star .note-rating {
+      padding-bottom: 2px;
+      background: linear-gradient(90deg, var(--spectrum)) left bottom / 190% 2px no-repeat;
+      animation: library-spectrum 4s ease-in-out infinite alternate;
     }
 
-    .library-card.is-open .library-cover {
-      transform: scale(1.025);
+    @keyframes library-spectrum {
+      from { background-position-x: 100%; }
+      to { background-position-x: 0%; }
     }
 
-    .library-card.is-open .note-toggle {
-      background-color: rgb(0 0 0 / 0.72);
+    .library-note {
+      position: fixed;
+      z-index: 45;
+      inset-inline: 0;
+      bottom: max(1rem, env(safe-area-inset-bottom));
+      width: min(19rem, calc(100% - 2rem));
+      max-height: 40dvh;
+      margin-inline: auto;
+      overflow: auto;
+      overscroll-behavior: contain;
+      overflow-wrap: anywhere;
+      padding: 1rem 1.125rem;
+      border: 1px solid var(--border-color);
+      border-radius: 0.65rem;
+      background: #fbf9f5;
+      box-shadow: 0 8px 24px rgb(35 28 20 / 0.12);
+    }
+
+    :global(.dark) .library-note {
+      background: var(--color-surface-dark);
+    }
+
+    /* Place the note in the margin beside the same 48rem shell used by the header. */
+    @media (min-width: 80rem) {
+      .library-note {
+        inset: var(--note-top, 5rem) auto auto calc(50% + 24rem);
+        width: min(18rem, calc(50% - 25rem));
+        max-height: calc(100dvh - 6rem);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .library-note,
+      .library-cover {
+        scale: none;
+      }
+
       .library-cover,
-      .note-toggle {
-        transition-duration: 0ms;
+      .is-five-star .library-artwork::after,
+      .is-five-star .note-rating {
+        animation: none;
+        transition: none;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .library-grid {
+        --library-columns: 2;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .library-grid {
+        --library-columns: 1;
       }
     }
 
@@ -240,40 +390,126 @@ const categoryLabels: Record<string, string> = {
   </style>
 
   <script>
-    const closeNotes = (except?: HTMLElement) => {
-      document.querySelectorAll<HTMLElement>('.library-card.is-open').forEach((card) => {
-        if (card === except) return
-        card.classList.remove('is-open')
-        card.querySelector<HTMLButtonElement>('[data-note-toggle]')?.setAttribute('aria-expanded', 'false')
-      })
+    let activeCard: HTMLElement | null = null
+    let activeNote: HTMLElement | null = null
+    let closeTimer: number | undefined
+    const wideGutter = window.matchMedia('(min-width: 80rem)')
+
+    function closeNote() {
+      window.clearTimeout(closeTimer)
+      if (activeNote) activeNote.hidden = true
+      activeNote = null
+      activeCard = null
     }
 
-    document.addEventListener('click', (event) => {
-      if (!(event.target instanceof Element)) return
+    function positionNote() {
+      if (!activeNote || !activeCard || !wideGutter.matches) return
+      const cardTop = activeCard.getBoundingClientRect().top
+      const lastTop = window.innerHeight - activeNote.offsetHeight - 16
+      activeNote.style.setProperty('--note-top', `${Math.max(16, Math.min(cardTop, lastTop))}px`)
+    }
 
-      const button = event.target.closest<HTMLButtonElement>('[data-note-toggle]')
-      if (button) {
-        const card = button.closest<HTMLElement>('.library-card')
-        if (!card) return
+    function showNote(card: HTMLElement) {
+      window.clearTimeout(closeTimer)
+      if (card === activeCard) return
+      closeNote()
+      const note = card.querySelector<HTMLElement>('.library-note')
+      if (!note) return
+      activeCard = card
+      activeNote = note
+      note.hidden = false
+      positionNote()
+    }
 
-        const shouldOpen = !card.classList.contains('is-open')
-        closeNotes(card)
-        card.classList.toggle('is-open', shouldOpen)
-        button.setAttribute('aria-expanded', String(shouldOpen))
-        return
+    document.querySelectorAll<HTMLElement>('.library-grid').forEach((grid) => {
+      const covers = [...grid.querySelectorAll<HTMLImageElement>('.library-cover')]
+      let arrangedWidth = 0
+
+      function arrangeCards(width: number) {
+        const style = getComputedStyle(grid)
+        const columnCount = Number(style.getPropertyValue('--library-columns'))
+        if (columnCount <= 1) {
+          grid.removeAttribute('data-masonry')
+          return
+        }
+
+        const gap = Number.parseFloat(style.columnGap)
+        const cardWidth = (width - gap * (columnCount - 1)) / columnCount
+        const nextTop = Array.from({ length: columnCount }, () => 0)
+
+        // Keep DOM order for keyboard navigation. Equal columns fill left to right.
+        for (const cover of covers) {
+          const card = cover.closest<HTMLElement>('.library-card')
+          if (!card) continue
+
+          const column = nextTop.indexOf(Math.min(...nextTop))
+          const coverWidth = cover.naturalWidth || Number(cover.getAttribute('width'))
+          const coverHeight = cover.naturalHeight || Number(cover.getAttribute('height'))
+          card.style.setProperty('--masonry-column', String(column + 1))
+          card.style.setProperty('--masonry-top', `${nextTop[column]}px`)
+          nextTop[column] += cardWidth * coverHeight / coverWidth + gap
+        }
+
+        grid.style.setProperty('--masonry-height', `${Math.max(...nextTop) - gap}px`)
+        grid.setAttribute('data-masonry', '')
+        positionNote()
       }
 
-      if (!event.target.closest('.library-card')) closeNotes()
+      if (typeof ResizeObserver !== 'undefined') {
+        const resize = new ResizeObserver(([entry]) => {
+          const { width } = entry.contentRect
+          if (width === arrangedWidth) return
+          arrangedWidth = width
+          if (width > 0) arrangeCards(width)
+        })
+        resize.observe(grid)
+      }
+
+      grid.addEventListener('load', (event) => {
+        const cover = event.target
+        if (!(cover instanceof HTMLImageElement) || arrangedWidth === 0) return
+        const width = Number(cover.getAttribute('width'))
+        const height = Number(cover.getAttribute('height'))
+        if (cover.naturalWidth * height !== cover.naturalHeight * width) arrangeCards(arrangedWidth)
+      }, true)
+
+      grid.addEventListener('pointerover', (event) => {
+        if (event.pointerType === 'touch' || !(event.target instanceof Element)) return
+        if (activeNote?.contains(event.target)) {
+          window.clearTimeout(closeTimer)
+          return
+        }
+        const card = event.target.closest<HTMLElement>('.library-card')
+        if (card && !(event.relatedTarget instanceof Node && card.contains(event.relatedTarget))) showNote(card)
+      })
+
+      grid.addEventListener('pointerout', (event) => {
+        if (!(event.target instanceof Node) || !activeCard?.contains(event.target)) return
+        if (event.relatedTarget instanceof Node && activeCard.contains(event.relatedTarget)) return
+        if (activeCard.querySelector(':focus-visible')) return
+        // Allow the pointer to cross the small gutter and read or scroll the note.
+        closeTimer = window.setTimeout(closeNote, 150)
+      })
+
+      grid.addEventListener('focusin', (event) => {
+        if (!(event.target instanceof Element) || !event.target.matches(':focus-visible')) return
+        const card = event.target.closest<HTMLElement>('.library-card')
+        if (card) showNote(card)
+      })
+
+      grid.addEventListener('focusout', (event) => {
+        if (event.relatedTarget instanceof Node && activeCard?.contains(event.relatedTarget)) return
+        closeNote()
+      })
     })
 
     document.addEventListener('keydown', (event) => {
-      if (event.key !== 'Escape') return
-
-      const card = event.target instanceof Element
-        ? event.target.closest<HTMLElement>('.library-card.is-open')
-        : null
-      closeNotes()
-      card?.querySelector<HTMLButtonElement>('[data-note-toggle]')?.focus()
+      if (event.key === 'Escape') closeNote()
     })
+    document.addEventListener('change', (event) => {
+      if (event.target instanceof Element && event.target.matches('.tab-input')) closeNote()
+    })
+    window.addEventListener('resize', positionNote)
+    window.addEventListener('scroll', positionNote, { passive: true })
   </script>
 </Layout>
